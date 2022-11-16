@@ -1,20 +1,51 @@
-import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, View } from 'react-native';
+import 'react-native-reanimated'
+import './src/Utils/functions'
+
+import { useCallback, useEffect } from 'react'
+import { LogBox, View } from 'react-native'
+import { useFonts } from 'expo-font';
+import * as SplashScreen from 'expo-splash-screen';
+
+import AppAlerts from './src/Components/AppAlerts';
+
+import { AlertProvider } from './src/Contexts/AlertContext'
+
+import Routes from "./src/Routes"
+
+// Previne a tela de carregamento inicial de esconder automaticamente
+SplashScreen.preventAutoHideAsync();
 
 export default function App() {
-  return (
-    <View style={styles.container}>
-      <Text>Open up App.js to start working on your app!</Text>
-      <StatusBar style="auto" />
-    </View>
-  );
-}
+	// Carrega as fontes do app de forma assíncrona
+	const [fontsLoaded] = useFonts({
+		'KellySlab': require('./assets/fonts/KellySlab-Regular.ttf'),
+	});
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-});
+	// Esconde a tela de carregamento se as fontes estiverem carregadas
+	const onLayoutRootView = useCallback(async () => {
+		if (fontsLoaded) {
+			await SplashScreen.hideAsync()
+		}
+	}, [fontsLoaded])
+
+	useEffect(() => {
+		LogBox.ignoreLogs([
+			"Can't perform"
+		])
+	}, [])
+
+	// Se ainda não carregou as fontes, retorna um componente vazio,
+	// pois a tela de carregamento ainda está sendo mostrada
+	if (!fontsLoaded) return null
+
+	// Ao carregar as fontes e renderizar a View, o método onLayoutRootView
+	// será chamado e a tela de carregamento será escondida
+	return (
+		<View style={{ flex: 1 }} onLayout={onLayoutRootView}>
+			<AlertProvider>
+				<Routes/>
+				<AppAlerts/>
+			</AlertProvider>
+		</View>
+	)
+}
