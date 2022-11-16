@@ -2,7 +2,7 @@ import { useCallback } from 'react';
 import * as SecureStorage from 'expo-secure-store';
 import useCancelablePromise from './useCancelablePromise';
 
-const appPrefixStorage = '__nagumo_naap';
+const appPrefixStorage = '__rep_munchkin';
 
 const useSecureStorage = () => {
 	const { cancelablePromise } = useCancelablePromise()

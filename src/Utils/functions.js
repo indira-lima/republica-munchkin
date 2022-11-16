@@ -65,3 +65,10 @@ export function isResetingToMenu(action) {
 export function numeroVirgulaParaPonto(numero) {
 	return +String(numero).replace(/,/, '.')
 }
+
+/**
+ * Import all resources from a require.context
+ */
+export function importAll(r) {
+	r.keys().forEach(r)
+}

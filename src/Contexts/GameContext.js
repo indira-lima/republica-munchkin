@@ -18,16 +18,26 @@ export default GameContext;
  *    avatar: image,
  *  }
  */
-
 export const GameProvider = ({ children }) => {
   const [playerList, setPlayerList] = useState([])
   const { secureSave, getFromStorage } = useSecureStorage()
 
   useEffect(() => {
-    getFromStorage('playerList')
-      .then(players => {
-        setPlayerList(players || [])
-      })
+		async function initState () {
+			const players = await getFromStorage('playerList')
+			setPlayerList(players || [])
+			// addPlayer({
+			// 	id: 1,
+			// 	name: 'Tanbohe',
+			// 	level: 3,
+			// 	items: 39,
+			// 	gender: Genders.AGENDER,
+			// 	theme: 'purple',
+			// 	avatar: 'avatar_2',
+			// })
+		}
+
+		initState()
   },[])
 
   useEffect(() => {
@@ -53,6 +63,7 @@ export const GameProvider = ({ children }) => {
     setPlayerList(list => [ 
       ...list.splice(index, 1)
 		])
+
   }, [playerList])
 
   const editPlayer = useCallback((id, data) => {
