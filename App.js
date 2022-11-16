@@ -9,6 +9,7 @@ import * as SplashScreen from 'expo-splash-screen';
 import AppAlerts from './src/Components/AppAlerts';
 
 import { AlertProvider } from './src/Contexts/AlertContext'
+import { GameProvider } from './src/Contexts/GameContext'
 
 import Routes from "./src/Routes"
 
@@ -43,8 +44,10 @@ export default function App() {
 	return (
 		<View style={{ flex: 1 }} onLayout={onLayoutRootView}>
 			<AlertProvider>
-				<Routes/>
-				<AppAlerts/>
+				<GameProvider>
+					<Routes/>
+					<AppAlerts/>
+				</GameProvider>
 			</AlertProvider>
 		</View>
 	)

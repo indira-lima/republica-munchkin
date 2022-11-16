@@ -1,16 +1,26 @@
+import { useCallback} from "react";
 import { StyleSheet, View } from "react-native"
 
 import MainContainer from "../../Components/MainContainer";
+import PanelPlayer from "../../Components/PanelPlayer";
+
+import useGame from '../../Hooks/useGame'
 
 import globalStyles, { circulo, fonts } from "../../Utils/styles"
 
 //const { easVersion } = require('../../../config.json')
 
 const HomeScreen = () => {
+  const { playerList } = useGame() 
+
+  const renderItemPlayer = useCallback(( item ) => {
+      return <PanelPlayer key={item.id} player={item} />
+  }, [])
 
 	return (
 		<MainContainer>
 			<View style={styles.container}>
+        {playerList.map(renderItemPlayer)}
       </View>
 		</MainContainer>
 	)
