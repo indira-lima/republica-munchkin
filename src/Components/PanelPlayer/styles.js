@@ -39,6 +39,7 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
     flex: 1,
+		marginHorizontal: 6,
   },
   name: {
     ...globalStyles.text,

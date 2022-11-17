@@ -1,12 +1,12 @@
 import { View, Text } from 'react-native'
 import FastImage  from 'react-native-fast-image'
 
-import { vw }  from '../../Utils/styles'
 import styles, { themes }  from './styles'
 
 import Avatar  from '../PlayerAvatar'
 import Gender  from '../PlayerGender'
-import LevelCounter  from '../PlayerLevelCounter'
+import StrengthCounter  from '../PlayerStrengthCounter'
+import PlayerLevelBars from '../PlayerLevelBars'
 
 const PanelPlayer = ({
   player
@@ -20,7 +20,8 @@ const PanelPlayer = ({
           <Avatar player={player} theme={theme} />
           <View style={styles.nameAndLevel}>
             <Text style={styles.name}>{player.name}</Text>
-            <LevelCounter player={player} theme={theme} />
+            <StrengthCounter player={player} theme={theme} />
+						<PlayerLevelBars player={player} theme={theme} />
           </View>
           <Gender player={player} theme={theme} />
         </View>
