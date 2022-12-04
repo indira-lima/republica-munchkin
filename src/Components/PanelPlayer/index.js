@@ -1,33 +1,33 @@
-import { View, Text } from 'react-native'
-import FastImage  from 'react-native-fast-image'
+import { Text, View } from "react-native";
+import FastImage from "react-native-fast-image";
 
-import styles, { themes }  from './styles'
+import Avatar from "../PlayerAvatar";
+import Gender from "../PlayerGender";
+import PlayerLevelBars from "../PlayerLevelBars";
+import StrengthCounter from "../PlayerStrengthCounter";
+import ChangePlayerLevel from "../SwipeableActions/ChangePlayerLevel";
 
-import Avatar  from '../PlayerAvatar'
-import Gender  from '../PlayerGender'
-import StrengthCounter  from '../PlayerStrengthCounter'
-import PlayerLevelBars from '../PlayerLevelBars'
+import styles, { themes } from "./styles";
 
-const PanelPlayer = ({
-  player
-}) => {
-  const theme = themes[player.theme] || themes.default
+const PanelPlayer = ({ player }) => {
+  const theme = themes[player.theme] || themes.default;
 
   return (
-    <View style={styles.container}>
-      <FastImage source={theme.frame} style={styles.frame}/>
+    <ChangePlayerLevel player={player}>
+      <View style={styles.container}>
+        <FastImage source={theme.frame} style={styles.frame} />
         <View style={styles.content}>
           <Avatar player={player} theme={theme} />
           <View style={styles.nameAndLevel}>
             <Text style={styles.name}>{player.name}</Text>
             <StrengthCounter player={player} theme={theme} />
-						<PlayerLevelBars player={player} theme={theme} />
+            <PlayerLevelBars player={player} theme={theme} />
           </View>
           <Gender player={player} theme={theme} />
         </View>
-    </View>
-  )
-}
+      </View>
+    </ChangePlayerLevel>
+  );
+};
 
-export default PanelPlayer
-
+export default PanelPlayer;
