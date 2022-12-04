@@ -45,7 +45,24 @@ const styles = StyleSheet.create({
     ...globalStyles.text,
     fontSize: 20,
     color: '#fff',
-  }
+  },
+	swipeActionContainer: {
+		height: frameHeight,
+		backgroundColor: 'magenta',
+		borderWidth: 1,
+		borderColor: 'red',
+	},
+	swipeContainer: {
+    width: 80,
+    backgroundColor: "transparent",
+    justifyContent: "center",
+    alignItems: "center",
+		flexDirection: "row",
+  },
+  swipeIcon: {
+    width: 64,
+    height: 64,
+  },
 })
 
 export default styles
