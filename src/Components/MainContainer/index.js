@@ -56,7 +56,7 @@ const MainContainer = ({
           <View style={styles.body}>{children}</View>
         )}
       </SafeAreaView>
-      {/*<FooterComponent setFooterHeight={setFooterHeight} />*/}
+      <FooterComponent />
     </Container>
   );
 };

@@ -4,56 +4,54 @@ import { useNavigation, useRoute } from '@react-navigation/native'
 import IonIcons from '@expo/vector-icons/Ionicons'
 
 import { circulo, colors } from '../../Utils/styles'
-import { resetNavigationToMenu } from '../../Utils/functions'
 
-const Footer = ({ setFooterHeight = () => {} }) => {
+const Footer = () => {
 	// navigation
 	const navigation = useNavigation()
 	const route = useRoute()
-	
-	const itensRodape = useMemo(() => [
-		{ 
-			ordem: 1,
-			nome: 'Voltar',
-			icone: 'chevron-back',
-			disabled: !navigation.canGoBack(),
-			onPress: () => {
-				navigation.canGoBack() && navigation.goBack()
-			}
-		},
-		{
-			ordem: 2,
-			nome: 'Menu Inicial',
-			icone: 'home',
-			disabled: route.name === 'Menu',
-			onPress: () => {
-				resetNavigationToMenu(navigation)
-			}
-		},
-	], [navigation])
 
 	/**
-	 * Compartilha o tamanho do footer para calcular o tamanho do conteúdo
-	 * no MainContainer e habilitar o scroll caso necessário
+	 * Return an object to configure a footer item with navigation action
 	 */
-	const handleOnLayout = useCallback((e) => {
-		setFooterHeight(e.nativeEvent.layout.height);
-	}, [setFooterHeight])
+	const getLinkConfig = useCallback((routeName, params = {}) => {
+		return {
+			active: route.name === routeName,
+			onPress: () => {
+				navigation.navigate(routeName, params)
+			}
+		}
+	}, [route, navigation])
+	
+	const footerItems = useMemo(() => [
+		{ 
+			order: 1,
+			label: 'Game',
+			icon: 'game-controller',
+			...getLinkConfig('Game')
+		},
+		{
+			order: 2,
+			label: 'Players',
+			icon: 'people',
+			...getLinkConfig('Players')
+		},
+	], [navigation, getLinkConfig])
+
 
   	return (
-		<View style={styles.tabBar} onLayout={handleOnLayout}>
-			{itensRodape
-				.sortBy('ordem')
-				.map(({ nome, icone, onPress, disabled = false }) => (
+		<View style={styles.tabBar}>
+			{footerItems
+				.sortBy('order')
+				.map(({ label, icon, onPress, active = false }) => (
 					<TouchableOpacity
-						key={nome}
+						key={label}
 						accessibilityRole="button"
-						accessibilityLabel={nome}
-						style={[styles.tabBarButton, disabled ? styles.btnDisabled : {}]}
+						accessibilityLabel={label}
+						style={[styles.tabBarButton]}
 						onPress={onPress}
-						disabled={disabled}
+						disabled={active}
 					>
-						<IonIcons name={icone} size={iconeSize} color={colors.text} />
+						<IonIcons name={icon} size={iconSize} color={active ? colors.primary : colors.text} />
 					</TouchableOpacity>
 				))
 			}
@@ -61,22 +59,16 @@ const Footer = ({ setFooterHeight = () => {} }) => {
 	)
 };
 
-const iconeSize = 28
-const containerIconeSize = iconeSize * 1.5
+const iconSize = 36
 const styles = StyleSheet.create({
 	tabBar: {
 		flexDirection: 'row',
 		justifyContent: 'space-around',
 		paddingVertical: 8,
-		backgroundColor: colors.primary,
+		backgroundColor: `${colors.primary}50`,
 	},
 	tabBarButton: {
 		alignItems: 'center',
-		backgroundColor: 'white',
-		...circulo(containerIconeSize),
-	},
-	btnDisabled: {
-		backgroundColor: '#E1DBDB',
 	},
 	tabBarButtonLabel: {
 		color: '#fff',
