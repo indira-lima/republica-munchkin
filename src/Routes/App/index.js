@@ -1,20 +1,40 @@
-import { createNativeStackNavigator } from '@react-navigation/native-stack';
+import { createStackNavigator } from '@react-navigation/stack';
 
-import HomeScreen from '../../Screens/Home';
+import GameScreen from '../../Screens/Game';
+import PlayersScreen from '../../Screens/Players';
 import Header from '../../Components/Header';
 
-const AppStack = createNativeStackNavigator();
+const fade = ({ current, next }) => {
+  return {
+		cardStyle: {
+			opacity: current.progress,
+		},
+	}
+};
+
+const AppStack = createStackNavigator();
 export default function AppRoutes() {
 	return (
 		<AppStack.Navigator
-			initialRouteName='Home'
+			initialRouteName='Game'
 			screenOptions={{
-				headerShown: false
+				headerShown: false,
+				animationEnabled: true,
+				cardStyleInterpolator: fade
 			}}
 		>
 			<AppStack.Screen
-				name="Home"
-				component={HomeScreen}
+				name="Game"
+				component={GameScreen}
+				options={{
+					headerShown: true,
+          headerTransparent: true,
+					header: () => <Header />,
+				}}
+			/>
+			<AppStack.Screen
+				name="Players"
+				component={PlayersScreen}
 				options={{
 					headerShown: true,
           headerTransparent: true,
