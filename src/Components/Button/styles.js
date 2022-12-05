@@ -48,32 +48,19 @@ export const themes = {
 
 const styles = StyleSheet.create({
 	btn: {
-		height: 40,
-		paddingHorizontal: 16,
-		width: '100%',
-		
+		height: 65,
+		width: 310,
 		alignSelf: 'center',
 		alignItems: "center",
 		justifyContent: 'center',
-
-		borderWidth: 2,
-		borderRadius: 4,
-
-		shadowColor: "#000",
-		shadowOffset: {
-			width: 0,
-			height: 2,
-		},
-		shadowOpacity: 0.25,
-		shadowRadius: 3.84,
-		
-		elevation: 5,
+		position: 'relative',
+	},
+	imgBg: {
+		...StyleSheet.absoluteFillObject,
 	},
 	textBtn: {
 		...globalStyles.text,
 		color: '#fff',
-		padding: 7,
-		textTransform: 'capitalize',
 		textAlign: 'center',
 	},
 	btnDisabled: {

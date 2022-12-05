@@ -1,28 +1,19 @@
-import { useMemo } from "react";
 import { ActivityIndicator, Text, TouchableOpacity } from "react-native";
 
-import styles, { themes } from "./styles";
+import backgroundImg from "../../../assets/button-large-default.png";
+import FastImage from "react-native-fast-image";
+
+import styles from "./styles";
 
 const Button = ({
 	text = "",
 	onPress = () => {},
 	loading = false,
 	disabled = false,
-	rect = false,
-	theme = 'default',
-	margin = [],
 }) => {
-
-	const _theme = !!themes[theme] ? themes[theme] : themes['default']
-	const _btnStyle = [styles.btn, _theme.btn]
-
 	const _disabled = disabled || loading
+	const _btnStyle = [styles.btn]
 	_disabled && _btnStyle.push(styles.btnDisabled)
-
-	margin.includes('top') && _btnStyle.push({ marginTop: 20 })
-	margin.includes('bottom') && _btnStyle.push({ marginBottom: 20 })
-
-	rect && _btnStyle.push({ borderRadius: 0 })
 
 	return (
 		<TouchableOpacity
@@ -31,14 +22,15 @@ const Button = ({
 			disabled={_disabled}
 			activeOpacity={0.75}
 		>
+			<FastImage source={backgroundImg} style={styles.imgBg}/>
 			{loading
 				?
 					<ActivityIndicator
-						size={rect ? "large" : "small"}
+						size="small"
 						color="#FFFFFF"
 					/>
 				:
-					<Text style={[styles.textBtn, _theme.txt]}>
+					<Text style={styles.textBtn}>
 						{text}
 					</Text>
 			}
