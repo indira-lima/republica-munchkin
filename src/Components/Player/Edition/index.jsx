@@ -3,10 +3,10 @@ import Name from "../Name";
 
 import styles from "./styles";
 
-const Edition = ({ player }) => {
+const Edition = ({ ...playerThemeProps }) => {
   return (
     <View style={styles.container}>
-      <Name player={player} />
+      <Name {...playerThemeProps} />
       <Text style={styles.txtEdit}>Edit</Text>
     </View>
   );

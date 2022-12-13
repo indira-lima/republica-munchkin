@@ -2,7 +2,7 @@ import {useMemo} from 'react'
 import {StyleSheet, View} from 'react-native'
 import FastImage from 'react-native-fast-image'
 
-import {circulo} from '../../Utils/styles'
+import {circulo} from '../../../Utils/styles'
 
 import avatarImages from './avatars'
 

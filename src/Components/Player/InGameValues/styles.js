@@ -1,5 +1,4 @@
 import {StyleSheet} from "react-native";
-import globalStyles from "../../../Utils/styles";
 
 const styles = StyleSheet.create({
   container: {
@@ -7,11 +6,6 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     flex: 1,
 		marginHorizontal: 6,
-  },
-  name: {
-    ...globalStyles.text,
-    fontSize: 20,
-    color: '#fff',
   },
 })
 

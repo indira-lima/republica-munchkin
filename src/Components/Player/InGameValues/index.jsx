@@ -6,10 +6,10 @@ import StrengthCounter from "../StrengthCounter";
 
 import styles from "./styles";
 
-const InGameValues = ({ player }) => {
+const InGameValues = ({ ...playerThemeProps }) => {
   return (
     <View style={styles.container}>
-			<Name player={player}/>
+			<Name {...playerThemeProps}/>
       <StrengthCounter {...playerThemeProps} />
       <LevelIndicatorBars {...playerThemeProps} />
     </View>

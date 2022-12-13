@@ -1,6 +1,6 @@
 import { StyleSheet } from 'react-native'
 
-import { vw }  from '../../Utils/styles'
+import { vw }  from '../../../Utils/styles'
 
 export const frameWidth = vw(90)
 export const frameHeight = frameWidth * 0.37

@@ -2,13 +2,13 @@ import { useCallback} from "react";
 import {FlatList} from "react-native-gesture-handler";
 
 import MainContainer from "../../Components/MainContainer";
-import PanelPlayer from "../../Components/PanelPlayer";
+import PanelPlayer from "../../Components/Player/Panel";
 
 import useGame from '../../Hooks/useGame'
 
 //const { easVersion } = require('../../../config.json')
 
-const HomeScreen = () => {
+const GameScreen = () => {
   const { playerList } = useGame() 
 
   const renderItemPlayer = useCallback(({ item }) => {
@@ -27,4 +27,4 @@ const HomeScreen = () => {
 	)
 }
 
-export default HomeScreen
+export default GameScreen
