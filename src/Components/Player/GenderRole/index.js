@@ -1,13 +1,13 @@
 import { View, StyleSheet } from 'react-native'
 import FastImage from 'react-native-fast-image'
 
-import { circulo } from '../../Utils/styles' 
-import { Genders } from '../../Utils/static' 
+import { circulo } from '../../../Utils/styles' 
+import { Genders } from '../../../Utils/static' 
 
-import genderMasc from '../../../assets/genders/masc.png'
-import genderFem from '../../../assets/genders/fem.png'
-import genderAgender from '../../../assets/genders/agender.png'
-import genderPan from '../../../assets/genders/pangender.png'
+import genderMasc from '../../../../assets/genders/masc.png'
+import genderFem from '../../../../assets/genders/fem.png'
+import genderAgender from '../../../../assets/genders/agender.png'
+import genderPan from '../../../../assets/genders/pangender.png'
 
 const genderIcons = {
   [Genders.MASC]: genderMasc,

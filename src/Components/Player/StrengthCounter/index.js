@@ -1,8 +1,8 @@
 import { useEffect, useCallback } from 'react'
 import { View, TouchableOpacity, Text, StyleSheet } from 'react-native'
 
-import useGame from '../../Hooks/useGame' 
-import globalStyles from '../../Utils/styles' 
+import useGame from '../../../Hooks/useGame' 
+import globalStyles from '../../../Utils/styles' 
 
 const PlayerLevelCounter = ({ player, theme }) => {
 
