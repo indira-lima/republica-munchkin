@@ -1,6 +1,6 @@
 import { StyleSheet } from 'react-native'
 
-import globalStyles, { vw }  from '../../Utils/styles'
+import { vw }  from '../../Utils/styles'
 
 export const frameWidth = vw(90)
 export const frameHeight = frameWidth * 0.37
@@ -98,17 +98,6 @@ const styles = StyleSheet.create({
     height: frameHeight - 36,
     flexDirection: 'row',
     alignItems: 'center',
-  },
-  nameAndLevel: {
-    justifyContent: 'center',
-    alignItems: 'center',
-    flex: 1,
-		marginHorizontal: 6,
-  },
-  name: {
-    ...globalStyles.text,
-    fontSize: 20,
-    color: '#fff',
   },
 	swipeActionContainer: {
 		height: frameHeight,
