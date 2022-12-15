@@ -36,7 +36,7 @@ export const globalStyles = StyleSheet.create({
 		flex: 1,
 		paddingHorizontal: 15,
 		paddingTop: 15,
-		backgroundColor: colors.background,
+		backgroundColor: 'transparent',
 		justifyContent: 'center',
 		alignItems: 'center'
 	},

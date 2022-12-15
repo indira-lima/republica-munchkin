@@ -8,9 +8,13 @@ const styles = StyleSheet.create({
     flex: 1,
 		marginHorizontal: 6,
   },
+	btnEdit: {
+		flex: 1,
+		justifyContent: 'center',
+	},
   txtEdit: {
     ...globalStyles.text,
-    fontSize: 26,
+    fontSize: 30,
     color: '#fff',
   },
 })
