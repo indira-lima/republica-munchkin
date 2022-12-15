@@ -1,11 +1,17 @@
-import { useCallback } from "react";
+import { useCallback, useContext } from "react";
 import { Text, TouchableOpacity, View } from "react-native";
+import PlayerModalContext from "../../../Contexts/PlayerModalContext";
 import Name from "../Name";
 
 import styles from "./styles";
 
 const Edition = ({ player, theme }) => {
-  const handleEditPlayer = useCallback(() => {}, [player]);
+  const { setCurrentPlayer, setIsModalOpen } = useContext(PlayerModalContext);
+
+  const handleEditPlayer = useCallback(() => {
+    setCurrentPlayer(player);
+    setIsModalOpen(true);
+  }, [player]);
 
   return (
     <View style={styles.container}>
