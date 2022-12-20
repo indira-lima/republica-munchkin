@@ -2,7 +2,6 @@ import { useCallback, useContext } from "react";
 import { View } from "react-native";
 import { FlatList } from "react-native-gesture-handler";
 
-import Button from "../../Components/Button";
 import MainContainer from "../../Components/MainContainer";
 import PanelPlayer from "../../Components/Player/Panel";
 import PlayerModal from "../../Components/Player/Modal";
@@ -13,6 +12,7 @@ import PlayerModalContext, {
 import useGame from "../../Hooks/useGame";
 
 import styles from "./styles";
+import Button from "../../Components/Button";
 
 const PlayersScreen = ({}) => {
   const { playerList } = useGame();
