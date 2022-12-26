@@ -1,21 +1,28 @@
 import { View } from "react-native";
 import FastImage from "react-native-fast-image";
 
+import ChangePlayerLevel from "../../SwipeableActions/ChangePlayerLevel";
 import Avatar from "../Avatar";
 import GenderRole from "../GenderRole";
-import ChangePlayerLevel from "../../SwipeableActions/ChangePlayerLevel";
 
-import styles, { themes } from "./styles";
-import InGameValues from "../InGameValues";
+import { useMemo } from "react";
 import Edition from "../Edition";
-import {useMemo} from "react";
+import InGameValues from "../InGameValues";
+import { themes } from "../utils/themes";
+import styles from "./styles";
 
 const PanelPlayer = ({ player, enableEdit = false }) => {
   const theme = themes[player.theme] || themes.default;
   const playerThemeProps = { player, theme };
 
-  const Container = useMemo(() => enableEdit ? View : ChangePlayerLevel, [enableEdit]);
-  const MiddleContent = useMemo(() => enableEdit ? Edition : InGameValues, [enableEdit]);
+  const Container = useMemo(
+    () => (enableEdit ? View : ChangePlayerLevel),
+    [enableEdit]
+  );
+  const MiddleContent = useMemo(
+    () => (enableEdit ? Edition : InGameValues),
+    [enableEdit]
+  );
 
   return (
     <Container {...playerThemeProps}>
