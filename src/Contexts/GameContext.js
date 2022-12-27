@@ -3,6 +3,7 @@ import { createContext, useEffect, useCallback, useState } from "react";
 import { Genders } from "../Utils/static";
 
 import useSecureStorage from "../Hooks/useSecureStorage";
+import avatarImages from "../Components/Player/utils/avatars";
 
 const GameContext = createContext({});
 export default GameContext;
@@ -51,13 +52,32 @@ export const GameProvider = ({ children }) => {
     [playerList]
   );
 
+	/**
+	 * Validate some props of the player object before saving it
+		*/
+	const _validatePlayerData = useCallback(
+		(data) => {
+			console.log(data)
+
+			const foundGender = Object.values(Genders).find(value => value === data.gender)
+			data.gender = foundGender === undefined ? Genders.PAN : foundGender
+
+			const foundAvatar = avatarImages[data.avatar]
+			data.avatar = foundAvatar === undefined ? 0 : data.avatar
+
+			console.log(data)
+		},
+		[]
+	)
+
   const addPlayer = useCallback((player) => {
     setPlayerList((list) => {
       // define o ID do player baseado no ID do último cadastrado
-      player.id = list.length > 0 ? Number(list.last()) + 1 : 1;
+      player.id = list.length > 0 ? Number(list.last().id) + 1 : 1;
       player.level = 1;
       player.items = 0;
 
+			_validatePlayerData(player)
       return [...list, player];
     });
   }, []);
@@ -76,6 +96,8 @@ export const GameProvider = ({ children }) => {
     (id, data) => {
       const index = _getPlayerIndexById(id);
       if (index < 0) return;
+
+			_validatePlayerData(data)
 
       setPlayerList((items) => [
         ...items.slice(0, index),
