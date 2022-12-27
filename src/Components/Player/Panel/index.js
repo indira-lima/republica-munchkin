@@ -8,7 +8,7 @@ import GenderRole from "../GenderRole";
 import { useMemo } from "react";
 import Edition from "../Edition";
 import InGameValues from "../InGameValues";
-import { themes } from "../utils/themes";
+import themes from "../../../Utils/themes";
 import styles from "./styles";
 
 const PanelPlayer = ({ player, enableEdit = false }) => {

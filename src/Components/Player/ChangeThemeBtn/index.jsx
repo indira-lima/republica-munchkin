@@ -1,12 +1,11 @@
 import { useCallback, useMemo } from "react";
 import Button from "../../Button";
-import { themes } from "../utils/themes";
+import themes from "../../../Utils/themes";
 
 const ChangeThemeBtn = ({ player, onChange = () => {} }) => {
-
   const [theme, currentThemeIndex] = useMemo(() => {
-    const _theme = themes[player?.theme] || themes[0]
-    const index = themes.findIndex(t => t.name === _theme.name)
+    const _theme = themes[player?.theme] || themes[0];
+    const index = themes.findIndex((t) => t.name === _theme.name);
 
     return [_theme, index];
   }, [player?.theme]);
