@@ -1,10 +1,15 @@
-import { ActivityIndicator, Modal, TouchableOpacity, View } from "react-native";
-import FastImage from "react-native-fast-image";
+import {
+  ActivityIndicator,
+  Modal,
+  StyleSheet,
+  TouchableOpacity,
+  View,
+} from "react-native";
 
 import DefaultStatusBar from "../DefaultStatusBar";
 
-import styles from "./styles";
-import modalSquaredBg from '../../../assets/modal-squared.png'
+import styles, { modalSize } from "./styles";
+import ModalSquaredBg from "../../../assets/modal-squared.svg";
 
 const ModalContainer = ({
   openModal = false,
@@ -12,6 +17,7 @@ const ModalContainer = ({
   modalViewProps = {},
   modalViewStyle = {},
   loading = false,
+  theme = {},
   children,
 }) => {
   return (
@@ -27,13 +33,17 @@ const ModalContainer = ({
           style={[styles.modalView, modalViewStyle]}
           {...modalViewProps}
         >
-					<FastImage source={modalSquaredBg} style={styles.imgBg} />
+          <ModalSquaredBg
+            width={modalSize}
+            height={modalSize}
+            style={[StyleSheet.absoluteFillObject, { opacity: 0.95 }]}
+            primaryColor={theme?.colors?.primary}
+            secondaryColor={theme?.colors?.secondary}
+          />
           {loading ? (
             <ActivityIndicator style={{ flex: 1 }} size="large" color="#f00" />
           ) : (
-						<View style={styles.contentWrapper}>
-							{children}
-						</View>
+            <View style={styles.contentWrapper}>{children}</View>
           )}
         </TouchableOpacity>
       </TouchableOpacity>
@@ -42,4 +52,3 @@ const ModalContainer = ({
 };
 
 export default ModalContainer;
-

@@ -10,7 +10,7 @@ import TextInput from "../../Input/TextInput";
 import PlayerAvatar from "../Avatar";
 import ChangeGenderBtn from "../ChangeGenderBtn";
 import ChangeThemeBtn from "../ChangeThemeBtn";
-import { themes } from "../utils/themes";
+import themes from "../../../Utils/themes";
 
 /**
  * Modal that opens a form to edit the player's data or to create a new one
@@ -66,7 +66,7 @@ const PlayerModal = ({
   }, [playerData]);
 
   return (
-    <ModalContainer {...modalProps}>
+    <ModalContainer {...modalProps} theme={theme}>
       <View style={styles.container}>
         <View style={styles.formContent}>
           <View style={[globalStyles.row]}>

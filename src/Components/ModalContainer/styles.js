@@ -1,7 +1,7 @@
 import { Dimensions, StyleSheet } from "react-native";
 
 const vw = Dimensions.get('screen').width / 100
-const modalSize = 100 * vw
+export const modalSize = 100 * vw
 
 const styles = StyleSheet.create({
 	backdrop: {
@@ -18,9 +18,6 @@ const styles = StyleSheet.create({
 		height: modalSize,
 		paddingVertical: 60,
 		paddingHorizontal: 55,
-	},
-	imgBg: {
-		...StyleSheet.absoluteFillObject
 	},
 	contentWrapper: {
 		flex: 1,
