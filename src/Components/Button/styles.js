@@ -17,21 +17,30 @@ export const themes = {
       squared: require("../../../assets/buttons/squared/cancel.png"),
       hexagon: require("../../../assets/buttons/hexagon/cancel.png"),
     },
-	},
+  },
 };
 
 export const dimensions = {
   large: {
-    height: 65,
-    width: 310,
+    container: {
+      height: 65,
+      width: 310,
+    },
+		icon: 36,
   },
   squared: {
-    height: 48,
-    width: 48,
+    container: {
+      height: 48,
+      width: 48,
+    },
+		icon: 36,
   },
   hexagon: {
-    height: 48,
-    width: 48,
+    container: {
+      height: 48,
+      width: 48,
+    },
+		icon: 24,
   },
 };
 

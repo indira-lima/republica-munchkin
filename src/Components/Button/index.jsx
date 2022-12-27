@@ -1,5 +1,5 @@
 import { MaterialCommunityIcons } from "@expo/vector-icons";
-import { Fragment } from "react";
+import { Fragment, useCallback } from "react";
 import { ActivityIndicator, Text, TouchableOpacity } from "react-native";
 import FastImage from "react-native-fast-image";
 import styles, { dimensions, themes } from "./styles";
@@ -22,8 +22,27 @@ const Button = ({
   const _themeImg = _theme.img[type] || _theme.img.large;
   const _typeDimensions = dimensions[type] || dimensions.large;
 
-  const _btnStyle = [styles.btn, _typeDimensions, btnStyle];
+  const _btnStyle = [styles.btn, _typeDimensions.container, btnStyle];
   _disabled && _btnStyle.push(btnStyleDisabled);
+
+  const renderIcon = useCallback(() => {
+    if (typeof icon === "string") {
+      return (
+        <MaterialCommunityIcons
+          name={icon}
+          color={_theme.text}
+          size={_typeDimensions.icon}
+        />
+      );
+    } else {
+      return (
+        <FastImage
+          source={icon}
+          style={{ width: _typeDimensions.icon, height: _typeDimensions.icon }}
+        />
+      );
+    }
+  }, [icon]);
 
   return (
     <TouchableOpacity
@@ -32,14 +51,15 @@ const Button = ({
       disabled={_disabled}
       activeOpacity={0.75}
     >
-      <FastImage source={_themeImg} style={[styles.imgBg, _typeDimensions]} />
+      <FastImage
+        source={_themeImg}
+        style={[styles.imgBg, _typeDimensions.container]}
+      />
       {loading ? (
         <ActivityIndicator size="small" color={_theme.text} />
       ) : (
         <Fragment>
-          {!!icon && (
-            <MaterialCommunityIcons name={icon} color={_theme.text} size={36} />
-          )}
+          {!!icon && renderIcon()}
           {!!text && (
             <Text style={[styles.textBtn, _theme.text, textStyle]}>{text}</Text>
           )}
