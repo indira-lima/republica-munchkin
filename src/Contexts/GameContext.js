@@ -57,15 +57,13 @@ export const GameProvider = ({ children }) => {
 		*/
 	const _validatePlayerData = useCallback(
 		(data) => {
-			console.log(data)
-
+			// validate the gender value
 			const foundGender = Object.values(Genders).find(value => value === data.gender)
 			data.gender = foundGender === undefined ? Genders.PAN : foundGender
 
+			// validate the avatar value
 			const foundAvatar = avatarImages[data.avatar]
 			data.avatar = foundAvatar === undefined ? 0 : data.avatar
-
-			console.log(data)
 		},
 		[]
 	)

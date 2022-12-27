@@ -12,7 +12,7 @@ import { themes } from "../utils/themes";
 import styles from "./styles";
 
 const PanelPlayer = ({ player, enableEdit = false }) => {
-  const theme = themes[player.theme] || themes.default;
+  const theme = themes[player.theme] || themes[0];
   const playerThemeProps = { player, theme };
 
   const Container = useMemo(
