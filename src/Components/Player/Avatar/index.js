@@ -4,8 +4,7 @@ import { StyleSheet, TouchableWithoutFeedback, View } from "react-native";
 import FastImage from "react-native-fast-image";
 
 import globalStyles, { circulo } from "../../../Utils/styles";
-
-import avatarImages, { lastAvatarIndex } from "./avatars";
+import avatarImages from "../utils/avatars";
 
 const PlayerAvatar = ({
   player,
@@ -13,45 +12,61 @@ const PlayerAvatar = ({
   enableEdit = false,
   onChange = () => {},
 }) => {
+  /**
+   * Gets the avatar image source and index in the `avatarImages` list
+   * from the player's avatar
+   * If the source is not found, gets the first one in the list
+   */
   const [avatarSource, currentAvatarIndex] = useMemo(() => {
     const avatar = avatarImages[player?.avatar];
-    const source = avatar || avatarImages.avatar_0;
-    const index = Object.entries(avatarImages).findIndex(
-      ([, img]) => img === source
-    );
+    const source = avatar || avatarImages[0];
+    const index = avatarImages.findIndex((img) => img === source);
 
     return [source, index];
-  }, [player]);
+  }, [player?.avatar]);
 
+  /**
+   * Changes the avatar to the previous one in the `avatarImages` list
+   *
+   * Emit the onChange event passing the index of the previous avatar
+   * in the list from the current defined avatar
+   */
   const handlePrevAvatar = useCallback(() => {
     if (!enableEdit) return;
 
     let newAvatarIndex;
     if (currentAvatarIndex === 0) {
-      newAvatarIndex = lastAvatarIndex;
+      newAvatarIndex = avatarImages.length - 1;
     } else {
       newAvatarIndex = currentAvatarIndex - 1;
     }
 
-    onChange(`avatar_${newAvatarIndex}`);
+    onChange(newAvatarIndex);
   }, [currentAvatarIndex]);
 
+  /**
+   * Changes the avatar to the next one in the `avatarImages` list
+   *
+   * Emit the onChange event passing the index of the next avatar
+   * in the list from the current defined avatar
+   */
   const handleNextAvatar = useCallback(() => {
     if (!enableEdit) return;
 
     let newAvatarIndex;
 
-    if (currentAvatarIndex === lastAvatarIndex) {
+    if (currentAvatarIndex === avatarImages.length - 1) {
       newAvatarIndex = 0;
     } else {
       newAvatarIndex = currentAvatarIndex + 1;
     }
 
-    onChange(`avatar_${newAvatarIndex}`);
+    onChange(newAvatarIndex);
   }, [currentAvatarIndex]);
 
   return (
     <View style={styles.container}>
+      {/* If edition is enabled, renders two buttons on the side to change the avatar */}
       {enableEdit && (
         <TouchableWithoutFeedback onPress={handlePrevAvatar}>
           <MaterialCommunityIcons color="#fff" name="chevron-left" size={24} />
