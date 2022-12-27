@@ -1,6 +1,6 @@
 export const Genders = {
-  AGENDER: 'agender',
-  MASC: 'masculine',
-  FEM: 'feminine',
-  PAN: 'pangender',
+  AGENDER: 0,
+  MASC: 1,
+  FEM: 2,
+  PAN: 3,
 }
