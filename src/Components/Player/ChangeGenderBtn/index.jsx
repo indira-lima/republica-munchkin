@@ -36,7 +36,7 @@ const ChangeGenderBtn = ({ player, onChange = () => {}, theme }) => {
   return (
     <Button
       type="hexagon"
-      theme="default"
+      theme={theme?.name}
       icon={genderImgSource}
       onPress={handleChangeGender}
     />

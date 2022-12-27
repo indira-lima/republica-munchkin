@@ -1,8 +1,9 @@
 import { MaterialCommunityIcons } from "@expo/vector-icons";
-import { Fragment, useCallback } from "react";
+import { Fragment, useCallback, useMemo } from "react";
+import { StyleSheet } from "react-native";
 import { ActivityIndicator, Text, TouchableOpacity } from "react-native";
 import FastImage from "react-native-fast-image";
-import styles, { dimensions, themes } from "./styles";
+import styles, { buttonThemes, dimensions, sources } from "./styles";
 
 const Button = ({
   text = "",
@@ -18,11 +19,14 @@ const Button = ({
 }) => {
   const _disabled = disabled || loading;
 
-  const _theme = themes[theme] || themes.default;
-  const _themeImg = _theme.img[type] || _theme.img.large;
-  const _typeDimensions = dimensions[type] || dimensions.large;
+  const themeObject = useMemo(
+    () => buttonThemes.find((t) => t.name === theme) || buttonThemes[0],
+    [theme]
+  );
+  const typeDimensions = dimensions[type] || dimensions.large;
+  const SvgSource = sources[type] || sources.large;
 
-  const _btnStyle = [styles.btn, _typeDimensions.container, btnStyle];
+  const _btnStyle = [styles.btn, typeDimensions.container, btnStyle];
   _disabled && _btnStyle.push(btnStyleDisabled);
 
   const renderIcon = useCallback(() => {
@@ -30,15 +34,15 @@ const Button = ({
       return (
         <MaterialCommunityIcons
           name={icon}
-          color={_theme.text}
-          size={_typeDimensions.icon}
+          color={themeObject.colors.text}
+          size={typeDimensions.icon}
         />
       );
     } else {
       return (
         <FastImage
           source={icon}
-          style={{ width: _typeDimensions.icon, height: _typeDimensions.icon }}
+          style={{ width: typeDimensions.icon, height: typeDimensions.icon }}
         />
       );
     }
@@ -51,17 +55,22 @@ const Button = ({
       disabled={_disabled}
       activeOpacity={0.75}
     >
-      <FastImage
-        source={_themeImg}
-        style={[styles.imgBg, _typeDimensions.container]}
+      <SvgSource
+        style={StyleSheet.absoluteFill}
+        width={typeDimensions.container.width}
+        height={typeDimensions.container.height}
+        primaryColor={themeObject?.colors?.primary}
+        secondaryColor={themeObject?.colors?.secondary}
       />
       {loading ? (
-        <ActivityIndicator size="small" color={_theme.text} />
+        <ActivityIndicator size="small" color={themeObject.colors.text} />
       ) : (
         <Fragment>
           {!!icon && renderIcon()}
           {!!text && (
-            <Text style={[styles.textBtn, _theme.text, textStyle]}>{text}</Text>
+            <Text style={[styles.textBtn, themeObject.colors.text, textStyle]}>
+              {text}
+            </Text>
           )}
         </Fragment>
       )}

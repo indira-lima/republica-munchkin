@@ -104,7 +104,7 @@ const PlayerModal = ({
             onPress={onClose}
           />
           <Button
-            theme="default"
+            theme={theme?.name}
             type="squared"
             icon="check"
             style={{ marginLeft: 5 }}

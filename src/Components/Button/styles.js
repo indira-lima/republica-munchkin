@@ -1,23 +1,15 @@
 import { StyleSheet } from "react-native";
 import globalStyles, { colors } from "../../Utils/styles";
 
-export const themes = {
-  default: {
-    text: "#fff",
-    img: {
-      large: require("../../../assets/buttons/large/default.png"),
-      squared: require("../../../assets/buttons/squared/default.png"),
-      hexagon: require("../../../assets/buttons/hexagon/default.png"),
-    },
-  },
-  cancel: {
-    text: "#fff",
-    img: {
-      large: require("../../../assets/buttons/large/cancel.png"),
-      squared: require("../../../assets/buttons/squared/cancel.png"),
-      hexagon: require("../../../assets/buttons/hexagon/cancel.png"),
-    },
-  },
+import BtnLarge from "../../../assets/buttons/large.svg";
+import BtnSquared from "../../../assets/buttons/squared.svg";
+import BtnHexagon from "../../../assets/buttons/hexagon.svg";
+import themes from "../../Utils/themes";
+
+export const sources = {
+  large: BtnLarge,
+  squared: BtnSquared,
+  hexagon: BtnHexagon,
 };
 
 export const dimensions = {
@@ -26,23 +18,35 @@ export const dimensions = {
       height: 65,
       width: 310,
     },
-		icon: 36,
+    icon: 36,
   },
   squared: {
     container: {
       height: 48,
       width: 48,
     },
-		icon: 36,
+    icon: 36,
   },
   hexagon: {
     container: {
       height: 48,
       width: 48,
     },
-		icon: 24,
+    icon: 24,
   },
 };
+
+export const buttonThemes = [
+  ...themes,
+  {
+    name: "cancel",
+    colors: {
+      text: "#fff",
+      primary: "#ADADAD",
+      secondary: "#fff",
+    },
+  },
+];
 
 const styles = StyleSheet.create({
   btn: {
