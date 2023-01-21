@@ -40,7 +40,7 @@ const PlayerGender = ({ player, theme, onChange = () => {} }) => {
     }
 
     editPlayer(player.id, { ...player, gender: newGenderIndex });
-  }, [currentGenderIndex]);
+  }, [player, currentGenderIndex]);
 
   return (
     <TouchableWithoutFeedback onPress={handleChangeGender}>
