@@ -1,6 +1,18 @@
 {
   "replaceAttrValues": {
     "#0C3845": "{props.primaryColor}",
-    "#3BC7F4": "{props.secondaryColor}"
+    "#3BC7F4": "{props.secondaryColor}",
+    "#77B7CF": "{props.secondaryColor}50",
+    "#D7F1EF": "{props.terciaryColor}",
+		"level-1": "{props.level1FillColor}",
+		"level-2": "{props.level2FillColor}",
+		"level-3": "{props.level3FillColor}",
+		"level-4": "{props.level4FillColor}",
+		"level-5": "{props.level5FillColor}",
+		"level-6": "{props.level6FillColor}",
+		"level-7": "{props.level7FillColor}",
+		"level-8": "{props.level8FillColor}",
+		"level-9": "{props.level9FillColor}",
+		"level-10": "{props.level10FillColor}",
   }
 }
