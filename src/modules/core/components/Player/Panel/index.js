@@ -1,7 +1,7 @@
 import { View } from "react-native";
 import FastImage from "react-native-fast-image";
 
-import ChangePlayerLevel from "../../SwipeableActions/ChangePlayerLevel";
+import ChangePlayerLevel from "./ChangePlayerLevel";
 import Avatar from "../Avatar";
 import GenderRole from "../GenderRole";
 

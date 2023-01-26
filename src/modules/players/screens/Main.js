@@ -1,5 +1,5 @@
 import { useCallback, useContext } from "react";
-import { View } from "react-native";
+import { View, StyleSheet } from "react-native";
 import { FlatList } from "react-native-gesture-handler";
 
 import MainContainer from "../../Components/MainContainer";
@@ -11,8 +11,9 @@ import PlayerModalContext, {
 
 import useGame from "../../Hooks/useGame";
 
-import styles from "./styles";
 import Button from "../../Components/Button";
+
+import globalStyles from "../../core/utils/styles";
 
 const PlayersScreen = ({}) => {
   const { playerList } = useGame();
@@ -25,6 +26,7 @@ const PlayersScreen = ({}) => {
   }, []);
 
   return (
+		// TODO: transformar a View em um componente
     <MainContainer>
       <View style={styles.container}>
         <Button text="ADD PLAYER" onPress={handleAddPlayer} />
@@ -49,5 +51,12 @@ const PlayersWithModalContext = ({ navigation }) => {
     </PlayerModalProvider>
   );
 };
+
+const styles = StyleSheet.create({
+	container: {
+		...globalStyles.containerBody,	
+		justifyContent: 'flex-start',
+	}
+})
 
 export default PlayersWithModalContext;

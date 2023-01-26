@@ -1,4 +1,4 @@
-import { useEffect, useCallback } from 'react'
+import { useCallback } from 'react'
 import { View, TouchableOpacity, Text, StyleSheet } from 'react-native'
 
 import useGame from '../../../Hooks/useGame' 
@@ -8,10 +8,6 @@ const PlayerLevelCounter = ({ player, theme }) => {
 
 	const { editPlayer } = useGame()
 	
-	useEffect(() => {
-		// console.log(player)
-	}, [player])
-
 	const handleDecreaseItems = useCallback(() => {
 		 	editPlayer(player.id, {
 				...player,

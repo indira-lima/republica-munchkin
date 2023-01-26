@@ -1,6 +1,6 @@
 import { createContext, useState } from "react";
 
-const PlayerModalContext = createContext({});
+const ModalNewPlayerContext = createContext({});
 export default PlayerModalContext;
 
 export const PlayerModalProvider = ({ children }) => {
