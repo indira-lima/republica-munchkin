@@ -1,17 +1,17 @@
 import { useCallback, useMemo } from "react";
 import { StyleSheet, TouchableWithoutFeedback, View } from "react-native";
 import FastImage from "react-native-fast-image";
-import useGame from "../../../Hooks/useGame";
+import useGame from "../../../hooks/useGame";
 import { Genders } from "../../../utils/static";
 
 import { circulo } from "../../../utils/styles";
-import genderIcons from "../utils/genders";
+import genderIcons from "../../../imports/genders";
 
 /**
  * Very similar to the ChangeGenderBtn, but it's a circle
  * I'm gonna refactor this later
  */
-const PlayerGender = ({ player, theme, onChange = () => {} }) => {
+const PlayerGender = ({ player, theme }) => {
   const { editPlayer } = useGame();
 
   /**
