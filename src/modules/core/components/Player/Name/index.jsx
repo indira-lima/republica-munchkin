@@ -1,6 +1,6 @@
 import { StyleSheet, Text } from "react-native";
 
-import globalStyles from "../../../Utils/styles";
+import globalStyles from "../../../utils/styles";
 
 const Name = ({ player }) => {
   return <Text style={styles.name}>{player.name}</Text>;

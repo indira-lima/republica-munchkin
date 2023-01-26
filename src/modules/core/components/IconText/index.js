@@ -1,7 +1,7 @@
 import { Text } from "react-native";
 import MaterialCommunityIcons from "@expo/vector-icons/MaterialCommunityIcons"
 
-import globalStyles, { colors, fonts } from "../../Utils/styles";
+import globalStyles, { colors, fonts } from "../../utils/styles";
 
 const IconText = ({ children, size = fonts.medium, icon, title, iconColor, style = {} }) => {
 	return (

@@ -1,7 +1,8 @@
 import { useCallback, useContext } from "react";
 import { Text, TouchableOpacity, View } from "react-native";
-import PlayerModalContext from "../../../Contexts/PlayerModalContext";
-import Name from "../Name";
+
+import PlayerModalContext from "../../contexts/ModalNewPlayerContext";
+import Name from "../../../core/components/Player/Name";
 
 import styles from "./styles";
 

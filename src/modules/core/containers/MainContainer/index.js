@@ -1,4 +1,4 @@
-import { useMemo } from "react";
+import { useMemo, Fragment } from "react";
 import {
   ActivityIndicator,
   StyleSheet,
@@ -8,14 +8,15 @@ import {
 import { useIsFocused } from "@react-navigation/native";
 import { SafeAreaView } from "react-native-safe-area-context";
 
-import DefaultStatusBar from "../DefaultStatusBar";
-import Footer from "../Footer";
-import ScaledImage from "../ScaledImage";
-import { HEADER_HEIGHT } from "../Header";
+import DefaultStatusBar from "../../components/DefaultStatusBar";
+import ScaledImage from "../../components/ScaledImage";
 
-import backgroundSpace from "../../../assets/background.png";
+import Footer from "./Footer";
+import { HEADER_HEIGHT } from "./Header";
 
-import { colors } from "../../Utils/styles";
+import backgroundSpace from "../../../../../assets/background.png";
+
+import { colors } from "../../utils/styles";
 
 const screenWidth = Dimensions.get("screen").width;
 
@@ -30,7 +31,7 @@ const MainContainer = ({
   const Container = useMemo(() => {
     return showBackgroundImage
       ? ({ children }) => <View style={styles.imageContainer}>{children}</View>
-      : ({ children }) => <>{children}</>;
+      : ({ children }) => <Fragment>{children}</Fragment>;
   }, []);
 
   return (

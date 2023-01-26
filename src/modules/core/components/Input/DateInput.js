@@ -7,8 +7,8 @@ import { useField } from 'formik'
 import ErrorMessage from './ErrorMessage'
 import Label from './Label'
 
-import { colors } from '../../Utils/styles'
-import { momentTz } from '../../Utils/moment'
+import { colors } from '../../utils/styles'
+import { momentTz } from '../../utils/moment'
 
 import styles from './styles'
 

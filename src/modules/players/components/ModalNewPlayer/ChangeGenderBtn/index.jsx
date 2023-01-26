@@ -1,7 +1,8 @@
 import { useCallback, useMemo } from "react";
-import { Genders } from "../../../Utils/static";
-import Button from "../../Button";
-import genderIcons from "../utils/genders";
+
+import Button from "../../../../core/components/Button";
+import { Genders } from "../../../../core/utils/static";
+import genderIcons from "../../../../core/imports/genders";
 
 /**
  * Button to change the player's gender
