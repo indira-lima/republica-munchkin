@@ -1,6 +1,6 @@
 import { StyleSheet } from 'react-native'
 
-import { vw }  from '../../../Utils/styles'
+import { vw }  from '../../utils/styles'
 
 export const frameWidth = vw(90)
 export const frameHeight = frameWidth * 0.37
@@ -25,19 +25,6 @@ const styles = StyleSheet.create({
     height: frameHeight - 36,
     flexDirection: 'row',
     alignItems: 'center',
-  },
-	swipeActionContainer: {
-		height: frameHeight,
-		backgroundColor: 'magenta',
-		borderWidth: 1,
-		borderColor: 'red',
-	},
-	swipeContainer: {
-    width: 80,
-    backgroundColor: "transparent",
-    justifyContent: "center",
-    alignItems: "center",
-		flexDirection: "row",
   },
   swipeIcon: {
     width: 64,

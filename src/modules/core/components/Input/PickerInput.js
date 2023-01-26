@@ -4,8 +4,7 @@ import DropDownPicker from 'react-native-dropdown-picker';
 
 import Button from "../Button";
 
-import globalStyles from "../../Utils/styles";
-import inputStyles from "../Input/styles";
+import globalStyles from "../../utils/styles";
 import styles from "./styles";
 
 const PickerInput = ({
@@ -38,7 +37,7 @@ const PickerInput = ({
 				style={{ borderWidth: 0, paddingHorizontal: 0, paddingVertical: 0 }}
 				containerStyle={[styles.input, error ? styles.error : { }]}
 				textStyle={globalStyles.text}
-				searchTextInputStyle={inputStyles.input}
+				searchTextInputStyle={styles.input}
 				ListEmptyComponent={({
 					listMessageContainerStyle, listMessageTextStyle, ActivityIndicatorComponent, loading
 				  }) => (

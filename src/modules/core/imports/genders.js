@@ -1,4 +1,4 @@
-import { Genders } from '../../../Utils/static' 
+import { Genders } from '../utils/static' 
 
 import genderMasc from '../../../../assets/genders/masc.png'
 import genderFem from '../../../../assets/genders/fem.png'

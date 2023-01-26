@@ -1,8 +1,8 @@
 import { createStackNavigator } from '@react-navigation/stack';
 
-import GameScreen from '../../Screens/Game';
-import PlayersScreen from '../../Screens/Players';
-import Header from '../../Components/Header';
+import GameScreen from '../../../game/screens/Main';
+import PlayersScreen from '../../../players/screens/Main';
+import Header from '../../containers/Header';
 
 const fade = ({ current, next }) => {
   return {

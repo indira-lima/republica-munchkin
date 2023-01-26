@@ -6,10 +6,10 @@ import {
   View,
 } from "react-native";
 
-import DefaultStatusBar from "../DefaultStatusBar";
+import DefaultStatusBar from "../../components/DefaultStatusBar";
 
 import styles, { modalSize } from "./styles";
-import ModalSquaredBg from "../../../assets/modal-squared.svg";
+import ModalSquaredBg from "../../../../../assets/modal-squared.svg";
 
 const ModalContainer = ({
   openModal = false,

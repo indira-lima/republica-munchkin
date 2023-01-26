@@ -1,17 +1,17 @@
 import { createContext, useState } from "react";
 
 const ModalNewPlayerContext = createContext({});
-export default PlayerModalContext;
+export default ModalNewPlayerContext;
 
 export const PlayerModalProvider = ({ children }) => {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [currentPlayer, setCurrentPlayer] = useState(null);
 
   return (
-    <PlayerModalContext.Provider
+    <ModalNewPlayerContext.Provider
       value={{ isModalOpen, setIsModalOpen, currentPlayer, setCurrentPlayer }}
     >
       {children}
-    </PlayerModalContext.Provider>
+    </ModalNewPlayerContext.Provider>
   );
 };

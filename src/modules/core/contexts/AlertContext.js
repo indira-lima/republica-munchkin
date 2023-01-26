@@ -3,7 +3,6 @@ import { createContext, useCallback, useState } from "react";
 const AlertContext = createContext({});
 export default AlertContext;
 
-
 export const AlertProvider = ({ children }) => {
 
 	const [currentAlert, setCurrentAlert] = useState(null)

@@ -1,16 +1,19 @@
-import { View } from "react-native";
-import ModalContainer from "../../ModalContainer";
-import styles from "./styles";
-
 import { useCallback, useEffect, useMemo, useState } from "react";
-import useGame from "../../../Hooks/useGame";
-import globalStyles from "../../../Utils/styles";
-import Button from "../../Button";
-import TextInput from "../../Input/TextInput";
-import PlayerAvatar from "../Avatar";
-import ChangeGenderBtn from "../ChangeGenderBtn";
-import ChangeThemeBtn from "../ChangeThemeBtn";
-import themes from "../../../Utils/themes";
+import { View } from "react-native";
+
+import useGame from "../../../core/hooks/useGame";
+import Button from "../../../core/components/Button";
+import TextInput from "../../../core/components/Input/TextInput";
+import PlayerAvatar from "../../../core/containers/PlayerPanel/Avatar";
+import ModalContainer from "../../../core/containers/ModalContainer";
+
+import ChangeGenderBtn from "./ChangeGenderBtn";
+import ChangeThemeBtn from "./ChangeThemeBtn";
+
+import globalStyles from "../../../core/utils/styles";
+import themes from "../../../core/utils/themes";
+
+import styles from "./styles";
 
 /**
  * Modal that opens a form to edit the player's data or to create a new one

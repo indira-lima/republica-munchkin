@@ -1,12 +1,10 @@
 import { useCallback} from "react";
 import {FlatList} from "react-native-gesture-handler";
 
-import MainContainer from "../../Components/MainContainer";
-import PanelPlayer from "../../Components/Player/Panel";
+import MainContainer from "../../core/containers/MainContainer";
+import PanelPlayer from "../../core/containers/PlayerPanel";
 
-import useGame from '../../Hooks/useGame'
-
-//const { easVersion } = require('../../../config.json')
+import useGame from '../../core/hooks/useGame'
 
 const GameScreen = () => {
   const { playerList } = useGame() 

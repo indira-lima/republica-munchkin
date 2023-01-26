@@ -1,9 +1,9 @@
 import { createContext, useEffect, useCallback, useState } from "react";
 
-import { Genders } from "../Utils/static";
+import useSecureStorage from "../hooks/useSecureStorage";
 
-import useSecureStorage from "../Hooks/useSecureStorage";
-import avatarImages from "../Components/Player/utils/avatars";
+import { Genders } from "../utils/static";
+import avatarImages from "../imports/avatars";
 
 const GameContext = createContext({});
 export default GameContext;

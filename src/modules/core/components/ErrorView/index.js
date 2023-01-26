@@ -1,10 +1,10 @@
 import { StyleSheet, Text, View } from "react-native"
 import MaterialCommunityIcons from '@expo/vector-icons/MaterialCommunityIcons';
 
-import globalStyles, { circulo } from "../../Utils/styles"
+import globalStyles, { circulo } from "../../utils/styles"
 
 import Button from "../Button"
-import MainContainer from "../MainContainer"
+import MainContainer from "../../containers/MainContainer"
 
 const ErrorView = ({ message, action, actionText, icon = "close" }) => {
 	return (

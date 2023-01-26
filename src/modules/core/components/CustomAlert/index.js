@@ -1,7 +1,7 @@
 import { StyleSheet } from 'react-native';
 import AwesomeAlert from 'react-native-awesome-alerts';
-import useAlerts from '../../Hooks/useAlerts';
-import globalStyles, { colors, fonts } from '../../Utils/styles';
+import useAlerts from '../../hooks/useAlerts';
+import globalStyles, { colors, fonts } from '../../utils/styles';
 
 const DefaultCustomAlert = ({
 	show = false,

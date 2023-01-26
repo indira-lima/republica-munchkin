@@ -1,17 +1,17 @@
 import 'react-native-reanimated'
-import './src/Utils/functions'
+import './modules/core/utils/functions'
 
 import { useCallback, useEffect } from 'react'
 import { LogBox, View } from 'react-native'
 import { useFonts } from 'expo-font';
 import * as SplashScreen from 'expo-splash-screen';
 
-import AppAlerts from './src/Components/AppAlerts';
+import AppAlerts from './modules/core/containers/AppAlerts';
 
-import { AlertProvider } from './src/Contexts/AlertContext'
-import { GameProvider } from './src/Contexts/GameContext'
+import { AlertProvider } from './modules/core/contexts/AlertContext'
+import { GameProvider } from './modules/core/contexts/GameContext'
 
-import Routes from "./src/Routes"
+import Routes from "./modules/core/routes"
 
 // Previne a tela de carregamento inicial de esconder automaticamente
 SplashScreen.preventAutoHideAsync();
@@ -19,7 +19,7 @@ SplashScreen.preventAutoHideAsync();
 export default function App() {
 	// Carrega as fontes do app de forma assíncrona
 	const [fontsLoaded] = useFonts({
-		'KellySlab': require('./assets/fonts/KellySlab-Regular.ttf'),
+		'KellySlab': require('../assets/fonts/KellySlab-Regular.ttf'),
 	});
 
 	// Esconde a tela de carregamento se as fontes estiverem carregadas
