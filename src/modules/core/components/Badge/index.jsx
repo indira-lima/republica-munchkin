@@ -1,6 +1,6 @@
 import React from "react";
 import { StyleSheet, Text } from "react-native";
-import globalStyles, { colors } from "../../Utils/styles";
+import globalStyles, { colors } from "../../utils/styles";
 import IconText from "../IconText";
 
 const Badge = React.memo(({ children, theme, icon, ...textProps }) => {

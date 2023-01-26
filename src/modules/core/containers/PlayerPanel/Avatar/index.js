@@ -3,7 +3,7 @@ import { useCallback, useMemo } from "react";
 import { StyleSheet, TouchableWithoutFeedback, View } from "react-native";
 import FastImage from "react-native-fast-image";
 
-import globalStyles, { circulo } from "../../../Utils/styles";
+import globalStyles, { circulo } from "../../../utils/styles";
 import avatarImages from "../utils/avatars";
 
 const PlayerAvatar = ({

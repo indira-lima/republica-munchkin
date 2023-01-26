@@ -1,5 +1,6 @@
 import { StyleSheet } from "react-native";
-import globalStyles from "../../../Utils/styles";
+
+import globalStyles from "../../../core/utils/styles";
 
 const styles = StyleSheet.create({
   title: {

@@ -1,10 +1,10 @@
 import { useField, useFormikContext } from "formik"
 import { ScrollView, StyleSheet, Text, TouchableOpacity, View } from "react-native"
 
-import ErrorMessage from "../Input/ErrorMessage"
-import Label from "../Input/Label"
+import ErrorMessage from "./ErrorMessage"
+import Label from "./Label"
 
-import globalStyles, { colors, fonts } from "../../Utils/styles"
+import globalStyles, { colors, fonts } from "../../utils/styles"
 
 const SelectInput = ({ label, items, readOnly = false, name, ...props }) => {
 	const {

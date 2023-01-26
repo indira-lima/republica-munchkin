@@ -2,9 +2,9 @@ import { useCallback, useMemo } from "react";
 import { StyleSheet, TouchableWithoutFeedback, View } from "react-native";
 import FastImage from "react-native-fast-image";
 import useGame from "../../../Hooks/useGame";
-import { Genders } from "../../../Utils/static";
+import { Genders } from "../../../utils/static";
 
-import { circulo } from "../../../Utils/styles";
+import { circulo } from "../../../utils/styles";
 import genderIcons from "../utils/genders";
 
 /**

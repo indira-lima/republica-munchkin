@@ -1,8 +1,8 @@
 import { Fragment } from "react"
 
-import CustomAlert from "../CustomAlert"
+import CustomAlert from "../../components/CustomAlert"
 
-import useAlerts from "../../Hooks/useAlerts"
+import useAlerts from "../../hooks/useAlerts"
 
 export default function AppAlerts() {
 	const { currentAlert, isAlertOpen } = useAlerts()

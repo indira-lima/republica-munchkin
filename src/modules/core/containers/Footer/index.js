@@ -3,7 +3,7 @@ import { StyleSheet, TouchableOpacity, View} from 'react-native'
 import { useNavigation, useRoute } from '@react-navigation/native'
 import IonIcons from '@expo/vector-icons/Ionicons'
 
-import { circulo, colors } from '../../Utils/styles'
+import { circulo, colors } from '../../utils/styles'
 
 const Footer = () => {
 	// navigation

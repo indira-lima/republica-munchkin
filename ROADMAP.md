@@ -1,7 +1,6 @@
 # Roadmap
 
 - [ ] CRUD de players
-	- [x] Listagem
-	- [x] Cadastro
-	- [ ] Deleção
-	- [x] Edição
+- [ ] Tela de jogo
+- [ ] Batalha
+- [ ] Dados

@@ -1,5 +1,5 @@
 import 'react-native-reanimated'
-import './src/Utils/functions'
+import './src/utils/functions'
 
 import { useCallback, useEffect } from 'react'
 import { LogBox, View } from 'react-native'

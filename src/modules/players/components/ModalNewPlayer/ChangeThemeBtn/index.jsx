@@ -1,6 +1,7 @@
 import { useCallback, useMemo } from "react";
-import Button from "../../Button";
-import themes from "../../../Utils/themes";
+
+import Button from "../../../../core/components/Button";
+import themes from "../../../../core/utils/themes";
 
 const ChangeThemeBtn = ({ player, onChange = () => {} }) => {
   const [theme, currentThemeIndex] = useMemo(() => {

@@ -1,8 +1,8 @@
 import { StyleSheet, View } from "react-native"
 
-import ScaledImage from '../ScaledImage'
+import ScaledImage from '../../components/ScaledImage'
 
-import logo from '../../../assets/logo.png'
+import logo from '../../../../../assets/logo.png'
 
 const Header = () => {
 	return (

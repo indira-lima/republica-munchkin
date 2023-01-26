@@ -1,19 +1,16 @@
 import { useCallback, useContext } from "react";
-import { View, StyleSheet } from "react-native";
-import { FlatList } from "react-native-gesture-handler";
+import { StyleSheet } from "react-native";
+import MainContainer from "../../core/containers/MainContainer";
+import PlayerModal from "../components/ModalNewPlayer";
 
-import MainContainer from "../../Components/MainContainer";
-import PanelPlayer from "../../Components/Player/Panel";
-import PlayerModal from "../../Components/Player/Modal";
 import PlayerModalContext, {
   PlayerModalProvider,
-} from "../../Contexts/PlayerModalContext";
+} from "../contexts/ModalNewPlayerContext";
 
-import useGame from "../../Hooks/useGame";
-
-import Button from "../../Components/Button";
+import useGame from "../../core/hooks/useGame";
 
 import globalStyles from "../../core/utils/styles";
+import PlayerList from "../components/PlayerList";
 
 const PlayersScreen = ({}) => {
   const { playerList } = useGame();
@@ -26,15 +23,8 @@ const PlayersScreen = ({}) => {
   }, []);
 
   return (
-		// TODO: transformar a View em um componente
     <MainContainer>
-      <View style={styles.container}>
-        <Button text="ADD PLAYER" onPress={handleAddPlayer} />
-        <FlatList
-          data={playerList}
-          renderItem={({ item }) => <PanelPlayer player={item} enableEdit />}
-        />
-      </View>
+      <PlayerList data={playerList} handleAddPlayer={handleAddPlayer} />
       <PlayerModal
         currentPlayer={currentPlayer}
         openModal={isModalOpen}
