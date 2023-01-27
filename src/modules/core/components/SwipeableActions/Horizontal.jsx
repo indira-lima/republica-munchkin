@@ -1,7 +1,9 @@
-import React from "react";
+import React, { useCallback } from "react";
+import FastImage from "react-native-fast-image";
 
 import {
   GestureHandlerRootView,
+  RectButton,
   Swipeable,
 } from "react-native-gesture-handler";
 import styles from "./styles";
@@ -11,17 +13,16 @@ import styles from "./styles";
  * Can configure swipe actions for horizontal moving with a predefined layout
  * Just pass the image to show and the onPress callback for the desired swipe
  * direction
- * 
+ *
  * @param left  `{ image: <source>, onPress: function, onOpen?: function }`
  * @param right `{ image: <source>, onPress: function, onOpen?: function }`
  */
 const HorizontalSwipeableActions = (
-  { children, left = null, right = null},
+  { children, left = null, right = null },
   swipeableRef
 ) => {
-
   const renderLeftActions = useCallback(() => {
-    if (!left?.icon || !left?.onPress) return
+    if (!left?.image || !left?.onPress) return;
 
     return (
       <RectButton
@@ -31,10 +32,10 @@ const HorizontalSwipeableActions = (
         <FastImage source={left.image} style={styles.swipeIcon} />
       </RectButton>
     );
-  }, [levelUpPlayer]);
+  }, [left]);
 
   const renderRightActions = useCallback(() => {
-    if (!right?.icon || !right?.onPress) return
+    if (!right?.image || !right?.onPress) return;
 
     return (
       <RectButton
@@ -44,8 +45,7 @@ const HorizontalSwipeableActions = (
         <FastImage source={right.image} style={styles.swipeIcon} />
       </RectButton>
     );
-  }, [levelDownPlayer]);
-
+  }, [right]);
 
   return (
     <GestureHandlerRootView>

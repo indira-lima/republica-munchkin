@@ -6,7 +6,7 @@ import {
   View,
 } from "react-native";
 
-import DefaultStatusBar from "../..components/DefaultStatusBar";
+import DefaultStatusBar from "../../components/DefaultStatusBar";
 
 import styles, { modalSize } from "./styles";
 import ModalSquaredBg from "../../../../../assets/modal-squared.svg";

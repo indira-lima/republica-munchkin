@@ -1,9 +1,9 @@
 import { StyleSheet } from "react-native";
-import globalStyles from "../../utils/styles";
+import globalStyles from "../../../core/utils/styles";
 
 import BtnLarge from "../../../../../assets/buttons/large.svg";
-import BtnSquared from "../../../../assets/buttons/squared.svg";
-import BtnHexagon from "../../../../assets/buttons/hexagon.svg";
+import BtnSquared from "../../../../../assets/buttons/squared.svg";
+import BtnHexagon from "../../../../../assets/buttons/hexagon.svg";
 import themes from "../../utils/themes";
 
 export const sources = {

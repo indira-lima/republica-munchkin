@@ -4,7 +4,7 @@ import {FlatList} from "react-native-gesture-handler";
 import MainContainer from "../../core/containers/MainContainer";
 import PanelPlayer from "../../core/containers/PlayerPanel";
 
-import useGame from '../../hooks/useGame'
+import useGame from '../../core/hooks/useGame'
 
 const GameScreen = () => {
   const { playerList } = useGame() 

@@ -5,7 +5,7 @@ import useGame from "../../../core/hooks/useGame";
 import Button from "../../../core/components/Button";
 import TextInput from "../../../core/components/Input/TextInput";
 import PlayerAvatar from "../../../core/containers/PlayerPanel/Avatar";
-import ModalContainer from "../../../core/ModalContainer";
+import ModalContainer from "../../../core/containers/ModalContainer";
 
 import ChangeGenderBtn from "./ChangeGenderBtn";
 import ChangeThemeBtn from "./ChangeThemeBtn";

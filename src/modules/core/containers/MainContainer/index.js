@@ -11,8 +11,8 @@ import { SafeAreaView } from "react-native-safe-area-context";
 import DefaultStatusBar from "../../components/DefaultStatusBar";
 import ScaledImage from "../../components/ScaledImage";
 
-import Footer from "./Footer";
-import { HEADER_HEIGHT } from "./Header";
+import Footer from "../Footer";
+import { HEADER_HEIGHT } from "../Header";
 
 import backgroundSpace from "../../../../../assets/background.png";
 

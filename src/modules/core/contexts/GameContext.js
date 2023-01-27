@@ -40,7 +40,7 @@ export const GameProvider = ({ children }) => {
   }, []);
 
   useEffect(() => {
-    // console.log('saving', playerList[0])
+    // console.log("saving", playerList[0]);
     secureSave("playerList", playerList);
   }, [playerList]);
 
@@ -52,21 +52,24 @@ export const GameProvider = ({ children }) => {
     [playerList]
   );
 
-	/**
-	 * Validate some props of the player object before saving it
-		*/
-	const _validatePlayerData = useCallback(
-		(data) => {
-			// validate the gender value
-			const foundGender = Object.values(Genders).find(value => value === data.gender)
-			data.gender = foundGender === undefined ? Genders.PAN : foundGender
+  /**
+   * Validate some props of the player object before saving it
+   */
+  const _validatePlayerData = useCallback((data) => {
+    // validate the gender value, if defined
+		if (data.gender !== undefined) {
+			const foundGender = Object.values(Genders).find(
+				(value) => value === data.gender
+			);
+			data.gender = foundGender === undefined ? Genders.PAN : foundGender;
+		}
 
-			// validate the avatar value
-			const foundAvatar = avatarImages[data.avatar]
-			data.avatar = foundAvatar === undefined ? 0 : data.avatar
-		},
-		[]
-	)
+    // validate the avatar value, if defined
+		if (data.avatar !== undefined) {
+			const foundAvatar = avatarImages[data.avatar];
+			data.avatar = foundAvatar === undefined ? 0 : data.avatar;
+		}
+  }, []);
 
   const addPlayer = useCallback((player) => {
     setPlayerList((list) => {
@@ -75,7 +78,7 @@ export const GameProvider = ({ children }) => {
       player.level = 1;
       player.items = 0;
 
-			_validatePlayerData(player)
+      _validatePlayerData(player);
       return [...list, player];
     });
   }, []);
@@ -85,9 +88,12 @@ export const GameProvider = ({ children }) => {
       const index = _getPlayerIndexById(id);
       if (index < 0) return;
 
-      setPlayerList((list) => [...list.splice(index, 1)]);
+      setPlayerList((list) => {
+        list.splice(index, 1);
+        return [...list];
+      });
     },
-    [playerList]
+    [_getPlayerIndexById]
   );
 
   const editPlayer = useCallback(
@@ -95,15 +101,17 @@ export const GameProvider = ({ children }) => {
       const index = _getPlayerIndexById(id);
       if (index < 0) return;
 
-			_validatePlayerData(data)
+      _validatePlayerData(data);
 
-      setPlayerList((items) => [
-        ...items.slice(0, index),
-        { ...items[index], ...data },
-        ...items.slice(index + 1),
-      ]);
+      setPlayerList((items) => {
+        return [
+          ...items.slice(0, index),
+          { ...items[index], ...data },
+          ...items.slice(index + 1),
+        ];
+      });
     },
-    [playerList]
+    [_getPlayerIndexById]
   );
 
   const levelUpPlayer = useCallback(
@@ -122,7 +130,7 @@ export const GameProvider = ({ children }) => {
 
       editPlayer(id, { level });
     },
-    [playerList, editPlayer]
+    [playerList, editPlayer, _getPlayerIndexById]
   );
 
   const levelDownPlayer = useCallback(
@@ -139,7 +147,7 @@ export const GameProvider = ({ children }) => {
 
       editPlayer(id, { level });
     },
-    [playerList, editPlayer]
+    [playerList, editPlayer, _getPlayerIndexById]
   );
 
   return (
