@@ -6,7 +6,12 @@ import globalStyles, { circulo } from "../../utils/styles"
 import Button from "../Button"
 import MainContainer from "../../containers/MainContainer"
 
-const ErrorView = ({ message, action, actionText, icon = "close" }) => {
+const ErrorView = ({
+    message,
+    action,
+    actionText,
+    icon = "close"
+}: any) => {
 	return (
 		<MainContainer>
 			<View style={styles.body}>

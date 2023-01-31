@@ -5,6 +5,7 @@ import CustomAlert from "../../components/CustomAlert"
 import useAlerts from "../../hooks/useAlerts"
 
 export default function AppAlerts() {
+// @ts-expect-error TS(2339): Property 'currentAlert' does not exist on type '{}... Remove this comment to see the full error message
 	const { currentAlert, isAlertOpen } = useAlerts()
 	if (!isAlertOpen) return null
 

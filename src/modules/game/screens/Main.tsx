@@ -7,9 +7,12 @@ import PanelPlayer from "../../core/containers/PlayerPanel";
 import useGame from '../../core/hooks/useGame'
 
 const GameScreen = () => {
+  // @ts-expect-error TS(2339): Property 'playerList' does not exist on type '{}'.
   const { playerList } = useGame() 
 
-  const renderItemPlayer = useCallback(({ item }) => {
+  const renderItemPlayer = useCallback(({
+      item
+  }: any) => {
       return <PanelPlayer key={item.id} player={item} />
   }, [])
 

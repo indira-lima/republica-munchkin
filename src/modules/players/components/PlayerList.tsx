@@ -4,7 +4,10 @@ import globalStyles from "../../core/utils/styles";
 import PanelPlayer from "../../core/containers/PlayerPanel";
 import Button from "../../core/components/Button";
 
-const PlayerList = ({ data, handleAddPlayer }) => {
+const PlayerList = ({
+  data,
+  handleAddPlayer
+}: any) => {
   return (
     <View style={styles.container}>
       <Button text="ADD PLAYER" onPress={handleAddPlayer} />

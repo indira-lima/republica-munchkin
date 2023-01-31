@@ -2,6 +2,7 @@ import { StyleSheet, View } from "react-native"
 
 import ScaledImage from '../../components/ScaledImage'
 
+// @ts-expect-error TS(2307): Cannot find module '../../../../../assets/logo.png... Remove this comment to see the full error message
 import logo from '../../../../../assets/logo.png'
 
 const Header = () => {

@@ -11,7 +11,11 @@ import genderIcons from "../../../imports/genders";
  * Very similar to the ChangeGenderBtn, but it's a circle
  * I'm gonna refactor this later
  */
-const PlayerGender = ({ player, theme }) => {
+const PlayerGender = ({
+  player,
+  theme
+}: any) => {
+  // @ts-expect-error TS(2339): Property 'editPlayer' does not exist on type '{}'.
   const { editPlayer } = useGame();
 
   /**

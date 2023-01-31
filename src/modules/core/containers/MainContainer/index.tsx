@@ -14,6 +14,7 @@ import ScaledImage from "../../components/ScaledImage";
 import Footer from "../Footer";
 import { HEADER_HEIGHT } from "../Header";
 
+// @ts-expect-error TS(2307): Cannot find module '../../../../../assets/backgrou... Remove this comment to see the full error message
 import backgroundSpace from "../../../../../assets/background.png";
 
 import { colors } from "../../utils/styles";
@@ -24,14 +25,18 @@ const MainContainer = ({
   loading = false,
   showBackgroundImage = true,
   children,
-  FooterComponent = Footer,
-}) => {
+  FooterComponent = Footer
+}: any) => {
   const isFocused = useIsFocused();
 
   const Container = useMemo(() => {
     return showBackgroundImage
-      ? ({ children }) => <View style={styles.imageContainer}>{children}</View>
-      : ({ children }) => <Fragment>{children}</Fragment>;
+      ? ({
+      children
+    }: any) => <View style={styles.imageContainer}>{children}</View>
+      : ({
+      children
+    }: any) => <Fragment>{children}</Fragment>;
   }, []);
 
   return (

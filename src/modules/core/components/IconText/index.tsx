@@ -3,7 +3,14 @@ import MaterialCommunityIcons from "@expo/vector-icons/MaterialCommunityIcons"
 
 import globalStyles, { colors, fonts } from "../../utils/styles";
 
-const IconText = ({ children, size = fonts.medium, icon, title, iconColor, style = {} }) => {
+const IconText = ({
+    children,
+    size = fonts.medium,
+    icon,
+    title,
+    iconColor,
+    style = {}
+}: any) => {
 	return (
 		<Text
 			style={[

@@ -76,7 +76,7 @@ export const globalStyles = StyleSheet.create({
  * @param {number} size o tamanho do círculo em pixels
  * @returns { width: number; height: number; borderRadius: number }
  */
-export const circulo = (size, center = true) => {
+export const circulo = (size: any, center = true) => {
   const centerStyle = center ? globalStyles.flexCenter : {};
 
   return {

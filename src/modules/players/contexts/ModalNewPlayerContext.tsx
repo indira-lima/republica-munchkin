@@ -3,7 +3,9 @@ import { createContext, useState } from "react";
 const ModalNewPlayerContext = createContext({});
 export default ModalNewPlayerContext;
 
-export const PlayerModalProvider = ({ children }) => {
+export const PlayerModalProvider = ({
+  children
+}: any) => {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [currentPlayer, setCurrentPlayer] = useState(null);
 

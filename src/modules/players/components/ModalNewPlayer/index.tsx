@@ -24,6 +24,7 @@ const PlayerModal = ({
   ...modalProps
 }) => {
   // gets the functions to add/edit players from the context
+  // @ts-expect-error TS(2339): Property 'addPlayer' does not exist on type '{}'.
   const { addPlayer, editPlayer } = useGame();
 
   // stores the form data in a separate state
@@ -31,6 +32,7 @@ const PlayerModal = ({
 
   // gets the theme from the playerData
   const theme = useMemo(
+    // @ts-expect-error TS(2339): Property 'theme' does not exist on type 'never'.
     () => themes[playerData?.theme] || themes[0],
     [playerData]
   );
@@ -40,6 +42,7 @@ const PlayerModal = ({
    * when the modal opens, and clear the state when the modal closes
    */
   useEffect(() => {
+    // @ts-expect-error TS(2345): Argument of type '{} | null' is not assignable to ... Remove this comment to see the full error message
     setPlayerData(modalProps?.openModal ? currentPlayer : null);
   }, [modalProps?.openModal]);
 
@@ -47,8 +50,9 @@ const PlayerModal = ({
    * Function to update one prop of the playerData state
    * Used in each field of the form
    */
-  const handleSetPlayerValue = useCallback((propName, value) => {
+  const handleSetPlayerValue = useCallback((propName: any, value: any) => {
     setPlayerData((data) => ({
+      // @ts-expect-error TS(2698): Spread types may only be created from object types... Remove this comment to see the full error message
       ...data,
       [propName]: value,
     }));
@@ -59,7 +63,9 @@ const PlayerModal = ({
    * and then closes the modal
    */
   const handleSavePlayer = useCallback(() => {
+    // @ts-expect-error TS(2531): Object is possibly 'null'.
     if (playerData.id) {
+      // @ts-expect-error TS(2531): Object is possibly 'null'.
       editPlayer(playerData.id, playerData);
     } else {
       addPlayer(playerData);
@@ -76,25 +82,26 @@ const PlayerModal = ({
             <ChangeThemeBtn
               player={playerData}
               theme={theme}
-              onChange={(value) => handleSetPlayerValue("theme", value)}
+              onChange={(value: any) => handleSetPlayerValue("theme", value)}
             />
             <PlayerAvatar
               enableEdit
               theme={theme}
               player={playerData}
-              onChange={(value) => handleSetPlayerValue("avatar", value)}
+              onChange={(value: any) => handleSetPlayerValue("avatar", value)}
             />
             <ChangeGenderBtn
               player={playerData}
               theme={theme}
-              onChange={(value) => handleSetPlayerValue("gender", value)}
+              onChange={(value: any) => handleSetPlayerValue("gender", value)}
             />
           </View>
           <View style={styles.inputSession}>
             <TextInput
               label={">"}
+              // @ts-expect-error TS(2339): Property 'name' does not exist on type 'never'.
               value={playerData?.name}
-              onChangeText={(value) => handleSetPlayerValue("name", value)}
+              onChangeText={(value: any) => handleSetPlayerValue("name", value)}
               placeholder="Username"
             />
           </View>
@@ -103,12 +110,14 @@ const PlayerModal = ({
           <Button
             theme="cancel"
             type="squared"
+            // @ts-expect-error TS(2322): Type 'string' is not assignable to type 'null | un... Remove this comment to see the full error message
             icon="close"
             onPress={onClose}
           />
           <Button
             theme={theme?.name}
             type="squared"
+            // @ts-expect-error TS(2322): Type 'string' is not assignable to type 'null | un... Remove this comment to see the full error message
             icon="check"
             style={{ marginLeft: 5 }}
             onPress={handleSavePlayer}

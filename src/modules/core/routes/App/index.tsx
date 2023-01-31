@@ -4,7 +4,10 @@ import GameScreen from '../../../game/screens/Main';
 import PlayersScreen from '../../../players/screens/Main';
 import Header from '../../containers/Header';
 
-const fade = ({ current, next }) => {
+const fade = ({
+    current,
+    next
+}: any) => {
   return {
 		cardStyle: {
 			opacity: current.progress,

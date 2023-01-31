@@ -18,13 +18,18 @@ import styles from "./styles";
  * @param right `{ image: <source>, onPress: function, onOpen?: function }`
  */
 const HorizontalSwipeableActions = (
-  { children, left = null, right = null },
-  swipeableRef
+  {
+    children,
+    left = null,
+    right = null
+  }: any,
+  swipeableRef: any
 ) => {
   const renderLeftActions = useCallback(() => {
     if (!left?.image || !left?.onPress) return;
 
     return (
+      // @ts-expect-error TS(2322): Type '{ children: Element; style: ({ width: number... Remove this comment to see the full error message
       <RectButton
         style={[styles.swipeContainer, { flexDirection: "row-reverse" }]}
         onPress={left.onPress}
@@ -38,6 +43,7 @@ const HorizontalSwipeableActions = (
     if (!right?.image || !right?.onPress) return;
 
     return (
+      // @ts-expect-error TS(2322): Type '{ children: Element; style: ({ width: number... Remove this comment to see the full error message
       <RectButton
         style={[styles.swipeContainer, { flexDirection: "row-reverse" }]}
         onPress={right.onPress}
@@ -49,6 +55,7 @@ const HorizontalSwipeableActions = (
 
   return (
     <GestureHandlerRootView>
+      // @ts-expect-error TS(2322): Type '{ children: any; ref: any; friction: number;... Remove this comment to see the full error message
       <Swipeable
         ref={swipeableRef}
         friction={2}

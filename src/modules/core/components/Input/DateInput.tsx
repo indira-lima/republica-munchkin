@@ -1,5 +1,6 @@
 import React, { useMemo, useRef, useState } from 'react'
 import { TextInput as RNTextInput, View, TouchableOpacity } from 'react-native'
+// @ts-expect-error TS(2307): Cannot find module 'react-native-date-picker' or i... Remove this comment to see the full error message
 import DatePicker from 'react-native-date-picker'
 import MaterialCommunityIcons from '@expo/vector-icons/MaterialCommunityIcons'
 import { useField } from 'formik'
@@ -14,7 +15,10 @@ import styles from './styles'
 
 const DATA_MINIMA = new Date('2010-01-01')
 
-const DateInput = ({ label, ...props }) => {
+const DateInput = ({
+    label,
+    ...props
+}: any) => {
 
 	const today = useRef(momentTz().toDate()).current
 
@@ -44,6 +48,7 @@ const DateInput = ({ label, ...props }) => {
 
 		try {
 			const date = momentTz(field.value, 'DD/MM/YYYY')
+// @ts-expect-error TS(2345): Argument of type 'string' is not assignable to par... Remove this comment to see the full error message
 			if (isNaN(`${date}`) || !date.isValid) {
 				return today
 			}
@@ -57,6 +62,7 @@ const DateInput = ({ label, ...props }) => {
 
 	return (
 		<View style={styles.container}>
+// @ts-expect-error TS(2322): Type '{ text: any; }' is not assignable to type 'I... Remove this comment to see the full error message
 			{label && <Label text={label}/>}
 			<View style={[styles.iconInput, meta.touched && meta.error ? styles.error : {}]}>
 				<RNTextInput
@@ -72,6 +78,7 @@ const DateInput = ({ label, ...props }) => {
 					<MaterialCommunityIcons name='calendar-outline' size={28} color={colors.action}/>
 				</TouchableOpacity>
 			</View>
+// @ts-expect-error TS(2322): Type '{ message: string; }' is not assignable to t... Remove this comment to see the full error message
 			{meta.touched && meta.error && <ErrorMessage message={meta.error} />}
 
 			<DatePicker
@@ -81,6 +88,7 @@ const DateInput = ({ label, ...props }) => {
 				locale='pt_BR'
 				date={datePickerValue || today}
 				minimumDate={DATA_MINIMA}
+// @ts-expect-error TS(7006): Parameter 'date' implicitly has an 'any' type.
 				onConfirm={(date) => {
 					setOpen(false)
 					helpers.setTouched(true)

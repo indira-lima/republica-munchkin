@@ -10,8 +10,8 @@ const PlayerAvatar = ({
   player,
   theme,
   enableEdit = false,
-  onChange = () => {},
-}) => {
+  onChange = () => {}
+}: any) => {
   /**
    * Gets the avatar image source and index in the `avatarImages` list
    * from the player's avatar

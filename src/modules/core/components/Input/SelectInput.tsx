@@ -6,8 +6,15 @@ import Label from "./Label"
 
 import globalStyles, { colors, fonts } from "../../utils/styles"
 
-const SelectInput = ({ label, items, readOnly = false, name, ...props }) => {
+const SelectInput = ({
+    label,
+    items,
+    readOnly = false,
+    name,
+    ...props
+}: any) => {
 	const {
+// @ts-expect-error TS(2538): Type 'any' cannot be used as an index type.
 		values: { [name]: selectedValue },
 	} = useFormikContext()
 
@@ -15,12 +22,14 @@ const SelectInput = ({ label, items, readOnly = false, name, ...props }) => {
 
 	return (
 		<View style={styles.container}>
+// @ts-expect-error TS(2322): Type '{ text: any; }' is not assignable to type 'I... Remove this comment to see the full error message
 			<Label text={label} />
 			<ScrollView
 				horizontal
 				showsHorizontalScrollIndicator={false}
 				contentContainerStyle={styles.scrollView}
 			>
+// @ts-expect-error TS(7006): Parameter 'item' implicitly has an 'any' type.
 				{items.map((item) => {
 					const { label, value } = item
 					const selected = value === selectedValue?.value
@@ -42,6 +51,7 @@ const SelectInput = ({ label, items, readOnly = false, name, ...props }) => {
 					)
 				})}
 			</ScrollView>
+// @ts-expect-error TS(2322): Type '{ message: string; }' is not assignable to t... Remove this comment to see the full error message
 			{meta.error && <ErrorMessage message={meta.error} />}
 		</View>
 	)

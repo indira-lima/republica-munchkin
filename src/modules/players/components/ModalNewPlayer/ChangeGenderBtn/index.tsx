@@ -8,7 +8,11 @@ import genderIcons from "../../../../core/imports/genders";
  * Button to change the player's gender
  * Should receive a onChange function that handles changes in the gender value
  */
-const ChangeGenderBtn = ({ player, onChange = () => {}, theme }) => {
+const ChangeGenderBtn = ({
+  player,
+  onChange = () => {},
+  theme
+}: any) => {
 
 	/**
 	 * Gets the icon source and index from the player.gender value

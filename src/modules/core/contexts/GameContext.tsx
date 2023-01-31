@@ -19,7 +19,9 @@ export default GameContext;
  *    avatar: image,
  *  }
  */
-export const GameProvider = ({ children }) => {
+export const GameProvider = ({
+  children
+}: any) => {
   const [playerList, setPlayerList] = useState([]);
   const { secureSave, getFromStorage, removeFromStorage } = useSecureStorage();
 
@@ -45,7 +47,8 @@ export const GameProvider = ({ children }) => {
   }, [playerList]);
 
   const _getPlayerIndexById = useCallback(
-    (id) => {
+    (id: any) => {
+      // @ts-expect-error TS(2339): Property 'id' does not exist on type 'never'.
       const index = playerList.findIndex((p) => p.id === id);
       return index;
     },
@@ -55,7 +58,7 @@ export const GameProvider = ({ children }) => {
   /**
    * Validate some props of the player object before saving it
    */
-  const _validatePlayerData = useCallback((data) => {
+  const _validatePlayerData = useCallback((data: any) => {
     // validate the gender value, if defined
 		if (data.gender !== undefined) {
 			const foundGender = Object.values(Genders).find(
@@ -71,9 +74,12 @@ export const GameProvider = ({ children }) => {
 		}
   }, []);
 
+  // @ts-expect-error TS(7006): Parameter 'player' implicitly has an 'any' type.
   const addPlayer = useCallback((player) => {
+    // @ts-expect-error TS(2345): Argument of type '(list: never[]) => any[]' is not... Remove this comment to see the full error message
     setPlayerList((list) => {
       // define o ID do player baseado no ID do último cadastrado
+      // @ts-expect-error TS(2339): Property 'last' does not exist on type 'never[]'.
       player.id = list.length > 0 ? Number(list.last().id) + 1 : 1;
       player.level = 1;
       player.items = 0;
@@ -84,6 +90,7 @@ export const GameProvider = ({ children }) => {
   }, []);
 
   const removePlayer = useCallback(
+    // @ts-expect-error TS(7006): Parameter 'id' implicitly has an 'any' type.
     (id) => {
       const index = _getPlayerIndexById(id);
       if (index < 0) return;
@@ -97,15 +104,18 @@ export const GameProvider = ({ children }) => {
   );
 
   const editPlayer = useCallback(
+    // @ts-expect-error TS(7006): Parameter 'id' implicitly has an 'any' type.
     (id, data) => {
       const index = _getPlayerIndexById(id);
       if (index < 0) return;
 
       _validatePlayerData(data);
 
+      // @ts-expect-error TS(2345): Argument of type '(items: never[]) => any[]' is no... Remove this comment to see the full error message
       setPlayerList((items) => {
         return [
           ...items.slice(0, index),
+          // @ts-expect-error TS(2698): Spread types may only be created from object types... Remove this comment to see the full error message
           { ...items[index], ...data },
           ...items.slice(index + 1),
         ];
@@ -115,16 +125,20 @@ export const GameProvider = ({ children }) => {
   );
 
   const levelUpPlayer = useCallback(
+    // @ts-expect-error TS(7006): Parameter 'id' implicitly has an 'any' type.
     (id) => {
       const index = _getPlayerIndexById(id);
       if (index < 0) return;
 
       const player = playerList[index];
+      // @ts-expect-error TS(2532): Object is possibly 'undefined'.
       let level = player.level + 1;
       if (level >= 10) {
         level = 10;
+        // @ts-expect-error TS(2532): Object is possibly 'undefined'.
         player.won = true;
       } else {
+        // @ts-expect-error TS(2532): Object is possibly 'undefined'.
         player.won = false;
       }
 
@@ -134,15 +148,18 @@ export const GameProvider = ({ children }) => {
   );
 
   const levelDownPlayer = useCallback(
+    // @ts-expect-error TS(7006): Parameter 'id' implicitly has an 'any' type.
     (id) => {
       const index = _getPlayerIndexById(id);
       if (index < 0) return;
 
       const player = playerList[index];
+      // @ts-expect-error TS(2532): Object is possibly 'undefined'.
       let level = player.level - 1;
       if (level <= 1) {
         level = 1;
       }
+      // @ts-expect-error TS(2532): Object is possibly 'undefined'.
       player.won = false;
 
       editPlayer(id, { level });

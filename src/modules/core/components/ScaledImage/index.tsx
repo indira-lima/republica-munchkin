@@ -2,7 +2,12 @@ import React, { useCallback, useEffect, useState } from "react";
 import { Image } from "react-native";
 import FastImage from "react-native-fast-image";
 
-const ScaledImage = ({ source, width, height, style = {} }) => {
+const ScaledImage = ({
+    source,
+    width,
+    height,
+    style = {}
+}: any) => {
 	const [calculedWidth, setCalculedWidth] = useState(0)
 	const [calculedHeight, setCalculedHeight] = useState(0)
 	const [uri, setUri] = useState("")
@@ -18,6 +23,7 @@ const ScaledImage = ({ source, width, height, style = {} }) => {
 		}
 	}, [])
 
+// @ts-expect-error TS(7006): Parameter 'imgWidth' implicitly has an 'any' type.
 	const calculateImageSize = useCallback((imgWidth, imgHeight) => {
 		if (width && !height) {
 			setCalculedWidth(width)

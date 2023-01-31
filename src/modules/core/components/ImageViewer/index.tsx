@@ -3,7 +3,10 @@ import { StyleSheet, Text, TouchableOpacity, View } from "react-native"
 import FastImage from "react-native-fast-image"
 import ImageView from "react-native-image-viewing"
 
-const ImageViewer = ({ image, subtitle }) => {
+const ImageViewer = ({
+    image,
+    subtitle
+}: any) => {
 	const [visible, setIsVisible] = useState(false)
 
 	return (

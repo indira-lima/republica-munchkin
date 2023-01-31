@@ -8,12 +8,16 @@ import GenderRole from "./GenderRole";
 import Edition from "../../../players/components/EditPlayerBtn";
 import InGameValues from "../../../game/components/player/InGameValues";
 
+// @ts-expect-error TS(2307): Cannot find module '../../../../../assets/frame.sv... Remove this comment to see the full error message
 import FrameBg from "../../../../../assets/frame.svg";
 
 import themes from "../../utils/themes";
 import styles from "./styles";
 
-const PlayerPanel = ({ player, enableEdit = false }) => {
+const PlayerPanel = ({
+  player,
+  enableEdit = false
+}: any) => {
   const theme = themes[player.theme] || themes[0];
   const playerThemeProps = { player, theme };
 

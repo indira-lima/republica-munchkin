@@ -1,6 +1,9 @@
 import { View, StyleSheet } from "react-native"
 
-const PlayerLevelBars = ({ player, theme }) => {
+const PlayerLevelBars = ({
+  player,
+  theme
+}: any) => {
   return (
     <View style={styles.container}>
       {[...Array(player.level || 1)].map((_, i) => (

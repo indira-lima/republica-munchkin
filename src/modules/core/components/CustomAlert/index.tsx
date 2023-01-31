@@ -52,6 +52,7 @@ const Success = ({
 	message = "Requisição enviada com sucesso.",
 	...props
 }) => {
+// @ts-expect-error TS(2339): Property 'closeAlerts' does not exist on type '{}'... Remove this comment to see the full error message
 	const { closeAlerts } = useAlerts()
 
 	return (
@@ -77,6 +78,7 @@ const Error = ({
 	onTryAgain = () => {},
 	...props
 }) => {
+// @ts-expect-error TS(2339): Property 'closeAlerts' does not exist on type '{}'... Remove this comment to see the full error message
 	const { closeAlerts } = useAlerts()
 
 	return (
@@ -104,10 +106,13 @@ const Confirm = ({
 	show = false,
 	title = "Confirmar",
 	message = "",
+// @ts-expect-error TS(7031): Binding element 'onConfirmPressed' implicitly has ... Remove this comment to see the full error message
 	onConfirmPressed,
+// @ts-expect-error TS(7031): Binding element 'onCancelPressed' implicitly has a... Remove this comment to see the full error message
 	onCancelPressed,
 	...props
 }) => {
+// @ts-expect-error TS(2339): Property 'closeAlerts' does not exist on type '{}'... Remove this comment to see the full error message
 	const { closeAlerts } = useAlerts()
 
 	return (

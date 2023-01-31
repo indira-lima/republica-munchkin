@@ -23,7 +23,9 @@ const Button = ({
     () => buttonThemes.find((t) => t.name === theme) || buttonThemes[0],
     [theme]
   );
+  // @ts-expect-error TS(7053): Element implicitly has an 'any' type because expre... Remove this comment to see the full error message
   const typeDimensions = dimensions[type] || dimensions.large;
+  // @ts-expect-error TS(7053): Element implicitly has an 'any' type because expre... Remove this comment to see the full error message
   const SvgSource = sources[type] || sources.large;
 
   const _btnStyle = [styles.btn, typeDimensions.container, btnStyle];
@@ -34,6 +36,7 @@ const Button = ({
       return (
         <MaterialCommunityIcons
           name={icon}
+          // @ts-expect-error TS(2532): Object is possibly 'undefined'.
           color={themeObject.colors.text}
           size={typeDimensions.icon}
         />
@@ -41,6 +44,7 @@ const Button = ({
     } else {
       return (
         <FastImage
+          // @ts-expect-error TS(2322): Type 'null' is not assignable to type 'number | So... Remove this comment to see the full error message
           source={icon}
           style={{ width: typeDimensions.icon, height: typeDimensions.icon }}
         />
@@ -63,11 +67,13 @@ const Button = ({
         secondaryColor={themeObject?.colors?.secondary}
       />
       {loading ? (
+        // @ts-expect-error TS(2532): Object is possibly 'undefined'.
         <ActivityIndicator size="small" color={themeObject.colors.text} />
       ) : (
         <Fragment>
           {!!icon && renderIcon()}
           {!!text && (
+            // @ts-expect-error TS(2532): Object is possibly 'undefined'.
             <Text style={[styles.textBtn, themeObject.colors.text, textStyle]}>
               {text}
             </Text>

@@ -1,6 +1,7 @@
 import { useFocusEffect } from "@react-navigation/native"
 import { useCallback, useState } from "react"
 import { Linking } from "react-native"
+// @ts-expect-error TS(2307): Cannot find module 'react-native-vision-camera' or... Remove this comment to see the full error message
 import { Camera } from "react-native-vision-camera"
 
 /**

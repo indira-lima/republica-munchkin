@@ -4,8 +4,12 @@ import { View, TouchableOpacity, Text, StyleSheet } from 'react-native'
 import useGame from '../../../../../core/hooks/useGame' 
 import globalStyles from '../../../../../core/utils/styles' 
 
-const PlayerLevelCounter = ({ player, theme }) => {
+const PlayerLevelCounter = ({
+    player,
+    theme
+}: any) => {
 
+// @ts-expect-error TS(2339): Property 'editPlayer' does not exist on type '{}'.
 	const { editPlayer } = useGame()
 	
 	const handleDecreaseItems = useCallback(() => {
