@@ -1,5 +1,5 @@
 import { StyleSheet } from 'react-native';
-import AwesomeAlert from 'react-native-awesome-alerts';
+import AwesomeAlert, {AwesomeAlertProps} from 'react-native-awesome-alerts';
 import useAlerts from '../../hooks/useAlerts';
 import globalStyles, { colors, fonts } from '../../utils/styles';
 
@@ -9,7 +9,7 @@ const DefaultCustomAlert = ({
 	vertical = false,
 	large = false,
 	...props
-}) => {
+}: AwesomeAlertProps & { cancellable?: boolean, vertical?: boolean, large?: boolean }) => {
 	return (
 		<AwesomeAlert
 			show={show}
@@ -51,8 +51,7 @@ const Success = ({
 	title = "Sucesso!",
 	message = "Requisição enviada com sucesso.",
 	...props
-}) => {
-// @ts-expect-error TS(2339): Property 'closeAlerts' does not exist on type '{}'... Remove this comment to see the full error message
+}: AwesomeAlertProps) => {
 	const { closeAlerts } = useAlerts()
 
 	return (
@@ -77,8 +76,7 @@ const Error = ({
 	showTryAgain = false,
 	onTryAgain = () => {},
 	...props
-}) => {
-// @ts-expect-error TS(2339): Property 'closeAlerts' does not exist on type '{}'... Remove this comment to see the full error message
+}: AwesomeAlertProps & { showTryAgain: boolean, onTryAgain: (() => void) }) => {
 	const { closeAlerts } = useAlerts()
 
 	return (
@@ -106,13 +104,10 @@ const Confirm = ({
 	show = false,
 	title = "Confirmar",
 	message = "",
-// @ts-expect-error TS(7031): Binding element 'onConfirmPressed' implicitly has ... Remove this comment to see the full error message
 	onConfirmPressed,
-// @ts-expect-error TS(7031): Binding element 'onCancelPressed' implicitly has a... Remove this comment to see the full error message
 	onCancelPressed,
 	...props
-}) => {
-// @ts-expect-error TS(2339): Property 'closeAlerts' does not exist on type '{}'... Remove this comment to see the full error message
+}: AwesomeAlertProps) => {
 	const { closeAlerts } = useAlerts()
 
 	return (
