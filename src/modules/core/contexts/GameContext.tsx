@@ -5,50 +5,50 @@ import useSecureStorage from "../hooks/useSecureStorage";
 import { Genders } from "../utils/static";
 import avatarImages from "../imports/avatars";
 
-const GameContext = createContext({});
+interface GameContextValue {
+	playerList: Player[],
+	addPlayer: ( player: Player ) => void,
+	removePlayer: ((id: number) => void),
+	editPlayer: (id: number, data: Player) => void,
+	levelUpPlayer: (id: number) => void,
+	levelDownPlayer: (id: number) => void,
+}
+
+const GameContext = createContext<GameContextValue>({} as GameContextValue);
 export default GameContext;
 
-/**
- *  Player object: {
- *    id: 1,
- *    name: 'Xena, the Warrior',
- *    level: 2,
- *    items: 40,
- *    gender: Genders.ENBY,
- *    theme: 'purple',
- *    avatar: image,
- *  }
- */
+interface Player {
+		id: number,
+		name: string,
+		level?: number,
+		items?: number,
+		gender?: number,
+		theme?: string,
+		avatar?: number,
+		won?: boolean,
+	}
+
 export const GameProvider = ({
   children
 }: any) => {
-  const [playerList, setPlayerList] = useState([]);
-  const { secureSave, getFromStorage, removeFromStorage } = useSecureStorage();
+  const [playerList, setPlayerList] = useState<Player[]>([]);
+  const { secureSave, getFromStorage } = useSecureStorage();
 
   useEffect(() => {
     async function initState() {
-      // await removeFromStorage('playerList')
-      const players = await getFromStorage("playerList");
+      const players: Player[] = await getFromStorage("playerList");
       setPlayerList(players || []);
-      // addPlayer({
-      // 	name: 'Nill',
-      // 	gender: Genders.FEM,
-      // 	theme: 'yellow',
-      // 	avatar: 'avatar_9',
-      // })
     }
 
     initState();
   }, []);
 
   useEffect(() => {
-    // console.log("saving", playerList[0]);
     secureSave("playerList", playerList);
   }, [playerList]);
 
   const _getPlayerIndexById = useCallback(
-    (id: any) => {
-      // @ts-expect-error TS(2339): Property 'id' does not exist on type 'never'.
+    (id: number) => {
       const index = playerList.findIndex((p) => p.id === id);
       return index;
     },
@@ -74,9 +74,7 @@ export const GameProvider = ({
 		}
   }, []);
 
-  // @ts-expect-error TS(7006): Parameter 'player' implicitly has an 'any' type.
-  const addPlayer = useCallback((player) => {
-    // @ts-expect-error TS(2345): Argument of type '(list: never[]) => any[]' is not... Remove this comment to see the full error message
+  const addPlayer = useCallback((player: Player) => {
     setPlayerList((list) => {
       // define o ID do player baseado no ID do último cadastrado
       // @ts-expect-error TS(2339): Property 'last' does not exist on type 'never[]'.
@@ -90,8 +88,7 @@ export const GameProvider = ({
   }, []);
 
   const removePlayer = useCallback(
-    // @ts-expect-error TS(7006): Parameter 'id' implicitly has an 'any' type.
-    (id) => {
+    (id: number) => {
       const index = _getPlayerIndexById(id);
       if (index < 0) return;
 
@@ -104,18 +101,15 @@ export const GameProvider = ({
   );
 
   const editPlayer = useCallback(
-    // @ts-expect-error TS(7006): Parameter 'id' implicitly has an 'any' type.
-    (id, data) => {
+    (id: number, data: Player) => {
       const index = _getPlayerIndexById(id);
       if (index < 0) return;
 
       _validatePlayerData(data);
 
-      // @ts-expect-error TS(2345): Argument of type '(items: never[]) => any[]' is no... Remove this comment to see the full error message
       setPlayerList((items) => {
         return [
           ...items.slice(0, index),
-          // @ts-expect-error TS(2698): Spread types may only be created from object types... Remove this comment to see the full error message
           { ...items[index], ...data },
           ...items.slice(index + 1),
         ];
@@ -125,44 +119,39 @@ export const GameProvider = ({
   );
 
   const levelUpPlayer = useCallback(
-    // @ts-expect-error TS(7006): Parameter 'id' implicitly has an 'any' type.
-    (id) => {
+    (id: number) => {
       const index = _getPlayerIndexById(id);
-      if (index < 0) return;
 
       const player = playerList[index];
-      // @ts-expect-error TS(2532): Object is possibly 'undefined'.
-      let level = player.level + 1;
+      if (player === undefined) return;
+
+      let level = player.level ? player.level + 1 : 1;
       if (level >= 10) {
         level = 10;
-        // @ts-expect-error TS(2532): Object is possibly 'undefined'.
         player.won = true;
       } else {
-        // @ts-expect-error TS(2532): Object is possibly 'undefined'.
         player.won = false;
       }
 
-      editPlayer(id, { level });
+      editPlayer(id, { ...player, level });
     },
     [playerList, editPlayer, _getPlayerIndexById]
   );
 
   const levelDownPlayer = useCallback(
-    // @ts-expect-error TS(7006): Parameter 'id' implicitly has an 'any' type.
-    (id) => {
+    (id: number) => {
       const index = _getPlayerIndexById(id);
-      if (index < 0) return;
 
       const player = playerList[index];
-      // @ts-expect-error TS(2532): Object is possibly 'undefined'.
-      let level = player.level - 1;
+      if (player === undefined) return;
+
+      let level = player.level ? player.level - 1 : 1;
       if (level <= 1) {
         level = 1;
       }
-      // @ts-expect-error TS(2532): Object is possibly 'undefined'.
       player.won = false;
 
-      editPlayer(id, { level });
+      editPlayer(id, { ...player, level });
     },
     [playerList, editPlayer, _getPlayerIndexById]
   );
