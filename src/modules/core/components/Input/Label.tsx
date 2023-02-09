@@ -1,10 +1,14 @@
-import React from "react"
-import { Text } from "react-native"
-import styles from "./styles"
+import React from "react";
+import { Text } from "react-native";
+import styles from "./styles";
 
-// @ts-expect-error TS(2339): Property 'text' does not exist on type '{}'.
-const Label = React.memo(({ text }) => {
-	return <Text style={styles.label}>{text}</Text>
-})
+interface LabelProps {
+  text: string;
+}
 
-export default Label
+const Label = React.memo<LabelProps>(({ text }) => {
+  return <Text style={styles.label}>{text}</Text>;
+});
+
+export default Label;
+

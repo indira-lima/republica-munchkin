@@ -1,4 +1,6 @@
-const themes = [
+import { Theme } from "../definitions";
+
+const themes: Theme[] = [
   {
     name: "default",
     colors: {

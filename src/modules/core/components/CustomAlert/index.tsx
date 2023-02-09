@@ -1,5 +1,5 @@
 import { StyleSheet } from 'react-native';
-import AwesomeAlert, {AwesomeAlertProps} from 'react-native-awesome-alerts';
+import AwesomeAlert, { AwesomeAlertProps } from 'react-native-awesome-alerts';
 import useAlerts from '../../hooks/useAlerts';
 import globalStyles, { colors, fonts } from '../../utils/styles';
 
@@ -36,7 +36,7 @@ const DefaultCustomAlert = ({
 	)
 }
 
-const Loading = ({ show = false  }) => {
+const Loading = ({ show = false }) => {
 	return (
 		<DefaultCustomAlert
 			show={show}
@@ -74,7 +74,7 @@ const Error = ({
 	title = "Ops!",
 	message = "Ocorreu um erro ao enviar a requisição. Por favor, tente novamente.",
 	showTryAgain = false,
-	onTryAgain = () => {},
+	onTryAgain = () => { },
 	...props
 }: AwesomeAlertProps & { showTryAgain: boolean, onTryAgain: (() => void) }) => {
 	const { closeAlerts } = useAlerts()
@@ -120,7 +120,7 @@ const Confirm = ({
 			confirmText={props.confirmText || "Confirmar"}
 			showConfirmButton={true}
 			onConfirmPressed={onConfirmPressed || closeAlerts}
-			
+
 			// Cancelar
 			cancelText={props.cancelText || "Cancelar"}
 			showCancelButton={true}

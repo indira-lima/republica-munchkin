@@ -24,7 +24,6 @@ const PlayerModal = ({
   ...modalProps
 }) => {
   // gets the functions to add/edit players from the context
-  // @ts-expect-error TS(2339): Property 'addPlayer' does not exist on type '{}'.
   const { addPlayer, editPlayer } = useGame();
 
   // stores the form data in a separate state

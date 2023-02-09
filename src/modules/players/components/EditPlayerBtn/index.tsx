@@ -5,12 +5,13 @@ import PlayerModalContext from "../../contexts/ModalNewPlayerContext";
 import Name from "../../../core/components/Player/Name";
 
 import styles from "./styles";
+import { Player } from "../../../core/definitions";
 
-const Edition = ({
-  player,
-  theme
-}: any) => {
-  // @ts-expect-error TS(2339): Property 'setCurrentPlayer' does not exist on type... Remove this comment to see the full error message
+interface EditionProps {
+  player: Player;
+}
+
+const Edition: React.FunctionComponent<EditionProps> = ({ player }) => {
   const { setCurrentPlayer, setIsModalOpen } = useContext(PlayerModalContext);
 
   const handleEditPlayer = useCallback(() => {
@@ -20,7 +21,7 @@ const Edition = ({
 
   return (
     <View style={styles.container}>
-      <Name player={player} theme={theme} />
+      <Name player={player} />
       <TouchableOpacity
         activeOpacity={0.8}
         onPress={handleEditPlayer}

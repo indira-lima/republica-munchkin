@@ -1,13 +1,20 @@
 import React, { useCallback, useEffect, useState } from "react";
-import { Image } from "react-native";
-import FastImage from "react-native-fast-image";
+import { Image, ImageSourcePropType, StyleProp } from "react-native";
+import FastImage, { ImageStyle } from "react-native-fast-image";
 
-const ScaledImage = ({
-    source,
-    width,
-    height,
-    style = {}
-}: any) => {
+interface ScaledImageProps {
+	source: string | ImageSourcePropType;
+	width?: number;
+	height?: number;
+	style?: StyleProp<ImageStyle>;
+}
+
+const ScaledImage: React.FunctionComponent<ScaledImageProps> = ({
+	source,
+	width,
+	height,
+	style = {}
+}) => {
 	const [calculedWidth, setCalculedWidth] = useState(0)
 	const [calculedHeight, setCalculedHeight] = useState(0)
 	const [uri, setUri] = useState("")
@@ -23,8 +30,7 @@ const ScaledImage = ({
 		}
 	}, [])
 
-// @ts-expect-error TS(7006): Parameter 'imgWidth' implicitly has an 'any' type.
-	const calculateImageSize = useCallback((imgWidth, imgHeight) => {
+	const calculateImageSize = useCallback((imgWidth: number, imgHeight: number) => {
 		if (width && !height) {
 			setCalculedWidth(width)
 			setCalculedHeight(imgHeight * (width / imgWidth))
@@ -38,13 +44,13 @@ const ScaledImage = ({
 	}, [width, height])
 
 	return uri
-			? ( 
-				<FastImage
-					source={{uri}}
-					style={[ { height: calculedHeight, width: calculedWidth }, style ]}
-				/>
-			)
-			: null
+		? (
+			<FastImage
+				source={{ uri }}
+				style={[{ height: calculedHeight, width: calculedWidth }, style!]}
+			/>
+		)
+		: null
 }
 
 export default ScaledImage

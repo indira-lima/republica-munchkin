@@ -9,12 +9,12 @@ const ChangePlayerLevel = ({
   children,
   player
 }: any) => {
-  // @ts-expect-error TS(2339): Property 'removePlayer' does not exist on type '{}... Remove this comment to see the full error message
   const { removePlayer } = useGame();
   const swipeableRef = useRef(null);
 
   return (
     <HorizontalSwipeableActions
+			// @ts-ignore
       ref={swipeableRef}
       left={{
         image: imgTrash,

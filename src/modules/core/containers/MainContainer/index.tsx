@@ -1,10 +1,5 @@
 import { useMemo, Fragment } from "react";
-import {
-  ActivityIndicator,
-  StyleSheet,
-  View,
-  Dimensions,
-} from "react-native";
+import { ActivityIndicator, StyleSheet, View, Dimensions } from "react-native";
 import { useIsFocused } from "@react-navigation/native";
 import { SafeAreaView } from "react-native-safe-area-context";
 
@@ -25,18 +20,16 @@ const MainContainer = ({
   loading = false,
   showBackgroundImage = true,
   children,
-  FooterComponent = Footer
+  FooterComponent = Footer,
 }: any) => {
   const isFocused = useIsFocused();
 
   const Container = useMemo(() => {
     return showBackgroundImage
-      ? ({
-      children
-    }: any) => <View style={styles.imageContainer}>{children}</View>
-      : ({
-      children
-    }: any) => <Fragment>{children}</Fragment>;
+      ? ({ children }: any) => (
+          <View style={styles.imageContainer}>{children}</View>
+        )
+      : ({ children }: any) => <Fragment>{children}</Fragment>;
   }, []);
 
   return (

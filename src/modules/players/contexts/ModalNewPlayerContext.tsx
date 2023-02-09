@@ -1,13 +1,19 @@
 import { createContext, useState } from "react";
+import { Player } from "../../core/definitions";
 
-const ModalNewPlayerContext = createContext({});
+interface ModalNewPlayerContextValue {
+  isModalOpen: boolean;
+  setIsModalOpen: (open: boolean) => void;
+  currentPlayer?: Player;
+	setCurrentPlayer: (player: Player | undefined) => void,
+}
+
+const ModalNewPlayerContext = createContext<ModalNewPlayerContextValue>({} as ModalNewPlayerContextValue);
 export default ModalNewPlayerContext;
 
-export const PlayerModalProvider = ({
-  children
-}: any) => {
-  const [isModalOpen, setIsModalOpen] = useState(false);
-  const [currentPlayer, setCurrentPlayer] = useState(null);
+export const PlayerModalProvider = ({ children }: any) => {
+  const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
+  const [currentPlayer, setCurrentPlayer] = useState<Player | undefined>();
 
   return (
     <ModalNewPlayerContext.Provider

@@ -4,13 +4,20 @@ import globalStyles from "../../core/utils/styles";
 import PanelPlayer from "../../core/containers/PlayerPanel";
 import Button from "../../core/components/Button";
 
-const PlayerList = ({
+import { Player } from "../../core/definitions";
+
+interface PlayerListProps {
+  data: Player[];
+  handleOpenPlayerModal: () => void;
+}
+
+const PlayerList: React.FC<PlayerListProps> = ({
   data,
-  handleAddPlayer
-}: any) => {
+  handleOpenPlayerModal,
+}) => {
   return (
     <View style={styles.container}>
-      <Button text="ADD PLAYER" onPress={handleAddPlayer} />
+      <Button text="ADD PLAYER" onPress={handleOpenPlayerModal} />
       <FlatList
         data={data}
         renderItem={({ item }) => <PanelPlayer player={item} enableEdit />}
@@ -27,4 +34,3 @@ const styles = StyleSheet.create({
 });
 
 export default PlayerList;
-

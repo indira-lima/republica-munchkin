@@ -2,15 +2,20 @@ import { useCallback, useMemo } from "react";
 
 import Button from "../../../../core/components/Button";
 import themes from "../../../../core/utils/themes";
+import { Player, Theme } from "../../../../core/definitions";
 
-const ChangeThemeBtn = ({
+interface ChangeThemeBtnProps {
+  player: Player;
+  onChange: (newTheme: Theme) => void;
+}
+
+const ChangeThemeBtn: React.FunctionComponent<ChangeThemeBtnProps> = ({
   player,
-  onChange = () => {}
-}: any) => {
+  onChange = () => {},
+}) => {
   const [theme, currentThemeIndex] = useMemo(() => {
-    const _theme = themes[player?.theme] || themes[0];
-    // @ts-expect-error TS(2532): Object is possibly 'undefined'.
-    const index = themes.findIndex((t) => t.name === _theme.name);
+    const _theme = player?.theme || themes[0];
+    const index = themes.findIndex((t) => t.name === _theme?.name);
 
     return [_theme, index];
   }, [player?.theme]);
@@ -23,14 +28,13 @@ const ChangeThemeBtn = ({
       newThemeIndex = currentThemeIndex + 1;
     }
 
-    onChange(newThemeIndex);
+    onChange(themes[newThemeIndex]!);
   }, [currentThemeIndex]);
 
   return (
     <Button
       type="hexagon"
       theme={theme?.name}
-      // @ts-expect-error TS(2322): Type 'string' is not assignable to type 'null | un... Remove this comment to see the full error message
       icon="select-color"
       onPress={handleChangeTheme}
     />

@@ -4,33 +4,21 @@ import useSecureStorage from "../hooks/useSecureStorage";
 
 import { Genders } from "../utils/static";
 import avatarImages from "../imports/avatars";
+import { Player } from "../definitions";
 
 interface GameContextValue {
-	playerList: Player[],
-	addPlayer: ( player: Player ) => void,
-	removePlayer: ((id: number) => void),
-	editPlayer: (id: number, data: Player) => void,
-	levelUpPlayer: (id: number) => void,
-	levelDownPlayer: (id: number) => void,
+  playerList: Player[];
+  addPlayer: (player: Player) => void;
+  removePlayer: (id: number) => void;
+  editPlayer: (id: number, data: Player) => void;
+  levelUpPlayer: (id: number) => void;
+  levelDownPlayer: (id: number) => void;
 }
 
 const GameContext = createContext<GameContextValue>({} as GameContextValue);
 export default GameContext;
 
-interface Player {
-		id: number,
-		name: string,
-		level?: number,
-		items?: number,
-		gender?: number,
-		theme?: string,
-		avatar?: number,
-		won?: boolean,
-	}
-
-export const GameProvider = ({
-  children
-}: any) => {
+export const GameProvider = ({ children }: any) => {
   const [playerList, setPlayerList] = useState<Player[]>([]);
   const { secureSave, getFromStorage } = useSecureStorage();
 
@@ -76,11 +64,13 @@ export const GameProvider = ({
 
   const addPlayer = useCallback((player: Player) => {
     setPlayerList((list) => {
-      // define o ID do player baseado no ID do último cadastrado
-      // @ts-expect-error TS(2339): Property 'last' does not exist on type 'never[]'.
+      // define o ID do player baseado no ID do último cadastrado,
+			// usando a função last() definida no utils/functions
+      // @ts-ignore
       player.id = list.length > 0 ? Number(list.last().id) + 1 : 1;
       player.level = 1;
       player.items = 0;
+			player.won = false;
 
       _validatePlayerData(player);
       return [...list, player];

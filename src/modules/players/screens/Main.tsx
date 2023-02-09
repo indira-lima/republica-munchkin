@@ -13,20 +13,18 @@ import globalStyles from "../../core/utils/styles";
 import PlayerList from "../components/PlayerList";
 
 const PlayersScreen = ({}) => {
-  // @ts-expect-error TS(2339): Property 'playerList' does not exist on type '{}'.
   const { playerList } = useGame();
-  // @ts-expect-error TS(2339): Property 'isModalOpen' does not exist on type '{}'... Remove this comment to see the full error message
   const { isModalOpen, setIsModalOpen, currentPlayer, setCurrentPlayer } =
     useContext(PlayerModalContext);
 
-  const handleAddPlayer = useCallback(() => {
-    setCurrentPlayer(null);
+  const handleOpenPlayerModal = useCallback(() => {
+    setCurrentPlayer(undefined);
     setIsModalOpen(true);
   }, []);
 
   return (
     <MainContainer>
-      <PlayerList data={playerList} handleAddPlayer={handleAddPlayer} />
+      <PlayerList data={playerList} handleOpenPlayerModal={handleOpenPlayerModal} />
       <PlayerModal
         currentPlayer={currentPlayer}
         openModal={isModalOpen}
@@ -41,7 +39,7 @@ const PlayersWithModalContext = ({
 }: any) => {
   return (
     <PlayerModalProvider>
-      // @ts-expect-error TS(2322): Type '{ navigation: any; }' is not assignable to t... Remove this comment to see the full error message
+      {/* @ts-expect-error TS(2322): Type '{ navigation: any; }' is not assignable to t... Remove this comment to see the full error message */}
       <PlayersScreen navigation={navigation}></PlayersScreen>
     </PlayerModalProvider>
   );

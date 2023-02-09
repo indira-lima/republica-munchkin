@@ -1,13 +1,32 @@
 import { MaterialCommunityIcons } from "@expo/vector-icons";
-import { Fragment, useCallback, useMemo } from "react";
-import { StyleSheet } from "react-native";
-import { ActivityIndicator, Text, TouchableOpacity } from "react-native";
-import FastImage from "react-native-fast-image";
+import React, { Fragment, useCallback, useMemo } from "react";
+import {
+  ActivityIndicator,
+  StyleProp,
+  StyleSheet,
+  Text,
+  TextStyle,
+  TouchableOpacity,
+} from "react-native";
+import FastImage, { Source } from "react-native-fast-image";
 import styles, { buttonThemes, dimensions, sources } from "./styles";
 
-const Button = ({
+interface ButtonProps {
+  text?: string;
+  icon?: string | number | Source;
+  type?: "large" | "squared" | "hexagon";
+  theme?: string;
+  onPress?: () => void;
+  loading?: boolean;
+  disabled?: boolean;
+  style?: {};
+  styleDisabled?: {};
+  textStyle?: StyleProp<TextStyle>;
+}
+
+const Button: React.FunctionComponent<ButtonProps> = ({
   text = "",
-  icon = null,
+  icon = undefined,
   type = "large",
   theme = "default",
   onPress = () => {},
@@ -19,14 +38,13 @@ const Button = ({
 }) => {
   const _disabled = disabled || loading;
 
-  const themeObject = useMemo(
-    () => buttonThemes.find((t) => t.name === theme) || buttonThemes[0],
-    [theme]
-  );
-  // @ts-expect-error TS(7053): Element implicitly has an 'any' type because expre... Remove this comment to see the full error message
-  const typeDimensions = dimensions[type] || dimensions.large;
-  // @ts-expect-error TS(7053): Element implicitly has an 'any' type because expre... Remove this comment to see the full error message
-  const SvgSource = sources[type] || sources.large;
+  const typeDimensions = dimensions[type];
+  const SvgSource = sources[type];
+
+  const themeObject = useMemo(() => {
+    const _theme = buttonThemes.find((t) => t.name === theme);
+    return _theme || buttonThemes[0];
+  }, [theme]);
 
   const _btnStyle = [styles.btn, typeDimensions.container, btnStyle];
   _disabled && _btnStyle.push(btnStyleDisabled);
@@ -35,16 +53,15 @@ const Button = ({
     if (typeof icon === "string") {
       return (
         <MaterialCommunityIcons
+          // @ts-ignore
           name={icon}
-          // @ts-expect-error TS(2532): Object is possibly 'undefined'.
-          color={themeObject.colors.text}
+          color={themeObject?.colors.text}
           size={typeDimensions.icon}
         />
       );
     } else {
       return (
         <FastImage
-          // @ts-expect-error TS(2322): Type 'null' is not assignable to type 'number | So... Remove this comment to see the full error message
           source={icon}
           style={{ width: typeDimensions.icon, height: typeDimensions.icon }}
         />
@@ -67,14 +84,18 @@ const Button = ({
         secondaryColor={themeObject?.colors?.secondary}
       />
       {loading ? (
-        // @ts-expect-error TS(2532): Object is possibly 'undefined'.
-        <ActivityIndicator size="small" color={themeObject.colors.text} />
+        <ActivityIndicator size="small" color={themeObject?.colors.text} />
       ) : (
         <Fragment>
           {!!icon && renderIcon()}
           {!!text && (
-            // @ts-expect-error TS(2532): Object is possibly 'undefined'.
-            <Text style={[styles.textBtn, themeObject.colors.text, textStyle]}>
+            <Text
+              style={[
+                styles.textBtn,
+                { color: themeObject?.colors.text },
+                textStyle,
+              ]}
+            >
               {text}
             </Text>
           )}

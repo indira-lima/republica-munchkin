@@ -1,10 +1,15 @@
 import { StyleSheet, Text } from "react-native";
 
 import globalStyles from "../../../utils/styles";
+import { Player } from "../../../definitions";
 
-const Name = ({
+interface NameProps {
+	player: Player;
+}
+
+const Name: React.FunctionComponent<NameProps> = ({
   player
-}: any) => {
+}) => {
   return <Text style={styles.name}>{player.name}</Text>;
 };
 
