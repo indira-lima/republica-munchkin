@@ -18,7 +18,14 @@ const PlayerPanel = ({
   player,
   enableEdit = false
 }: any) => {
-  const theme = themes[player.theme] || themes[0];
+  // gets the theme from the playerData
+  const theme = useMemo(() => {
+    if (player?.theme) {
+      return themes.find((t) => t.name === player.theme?.name);
+    }
+    return themes[0];
+  }, [player]);
+
   const playerThemeProps = { player, theme };
 
   const Container = useMemo(
