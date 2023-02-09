@@ -8,7 +8,6 @@ import { Player, Theme } from "../../../../core/definitions";
 interface ChangeGenderBtnProps {
   player: Player;
   onChange: (newThemeIndex: number) => void;
-  theme: Theme;
 }
 
 /**
@@ -18,7 +17,6 @@ interface ChangeGenderBtnProps {
 const ChangeGenderBtn: React.FunctionComponent<ChangeGenderBtnProps> = ({
   player,
   onChange = () => {},
-  theme,
 }) => {
   /**
    * Gets the icon source and index from the player.gender value
@@ -49,7 +47,7 @@ const ChangeGenderBtn: React.FunctionComponent<ChangeGenderBtnProps> = ({
   return (
     <Button
       type="hexagon"
-      theme={theme?.name}
+      theme={player?.theme?.name}
       icon={genderImgSource}
       onPress={handleChangeGender}
     />
