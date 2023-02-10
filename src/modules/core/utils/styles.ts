@@ -7,9 +7,9 @@ export const vw = (amount = 100) => amount * viewWidth;
 export const vh = (amount = 100) => amount * viewHeight;
 
 export const colors = {
-  primary: "#316E9F",
-  secondary: "#103339",
-  action: "#5AADCB",
+  primary: "#0C3845",
+  secondary: "#3BC7F4",
+  action: "#D7F1EF",
   accent: "#DE2E2C",
   background: "#CBC8C3",
   text: "#CBC8C3",
