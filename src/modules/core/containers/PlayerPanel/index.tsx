@@ -1,19 +1,20 @@
 import { useMemo } from "react";
-import { View, StyleSheet } from "react-native";
+import { StyleSheet, View } from "react-native";
 
+import InGameValues from "../../../game/components/player/InGameValues";
+import Edition from "../../../players/components/EditPlayerBtn";
+import Avatar from "./Avatar";
 import ChangePlayerLevel from "./ChangePlayerLevel";
 import DeletePlayer from "./DeletePlayer";
-import Avatar from "./Avatar";
 import GenderRole from "./GenderRole";
-import Edition from "../../../players/components/EditPlayerBtn";
-import InGameValues from "../../../game/components/player/InGameValues";
 
 // @ts-ignore
 import FrameBg from "../../../../../assets/frame.svg";
 
+import Animated, { SlideInLeft, SlideOutLeft } from "react-native-reanimated";
+import { Player } from "../../definitions";
 import themes from "../../utils/themes";
 import styles from "./styles";
-import { Player } from "../../definitions";
 
 interface PlayerPanelProps {
   player: Player;
@@ -47,22 +48,24 @@ const PlayerPanel: React.FunctionComponent<PlayerPanelProps> = ({
   );
 
   return (
-    <Container player={player}>
-      <View style={styles.container}>
-        <FrameBg
-          width={styles.frame.width}
-          height={styles.frame.height}
-          style={[StyleSheet.absoluteFillObject, { opacity: 0.95 }]}
-          primaryColor={theme?.colors?.primary}
-          secondaryColor={theme?.colors?.secondary}
-        />
-        <View style={styles.content}>
-          <Avatar player={player}/>
-          <MiddleContent player={player}/>
-          <GenderRole player={player}/>
+    <Animated.View entering={SlideInLeft} exiting={SlideOutLeft}>
+      <Container player={player}>
+        <View style={styles.container}>
+          <FrameBg
+            width={styles.frame.width}
+            height={styles.frame.height}
+            style={[StyleSheet.absoluteFillObject, { opacity: 0.95 }]}
+            primaryColor={theme?.colors?.primary}
+            secondaryColor={theme?.colors?.secondary}
+          />
+          <View style={styles.content}>
+            <Avatar player={player} />
+            <MiddleContent player={player} />
+            <GenderRole player={player} />
+          </View>
         </View>
-      </View>
-    </Container>
+      </Container>
+    </Animated.View>
   );
 };
 
