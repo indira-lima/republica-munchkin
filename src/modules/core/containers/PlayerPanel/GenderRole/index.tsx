@@ -4,25 +4,22 @@ import FastImage from "react-native-fast-image";
 import useGame from "../../../hooks/useGame";
 import { Genders } from "../../../utils/static";
 
-import { circulo } from "../../../utils/styles";
+import { Player } from "../../../definitions";
 import genderIcons from "../../../imports/genders";
+import { circulo } from "../../../utils/styles";
 
 /**
  * Very similar to the ChangeGenderBtn, but it's a circle
  * I'm gonna refactor this later
  */
-const PlayerGender = ({
-  player,
-  theme
-}: any) => {
-  // @ts-expect-error TS(2339): Property 'editPlayer' does not exist on type '{}'.
+const PlayerGender = ({ player }: { player: Player }) => {
   const { editPlayer } = useGame();
 
   /**
    * Gets the icon source and index from the player.gender value
    */
   const [genderImgSource, currentGenderIndex] = useMemo(() => {
-    const source = genderIcons[player?.gender] || genderIcons[Genders.PAN];
+    const source = genderIcons[player?.gender!] || genderIcons[Genders.PAN];
     const index = Object.entries(genderIcons).findIndex(
       ([, img]) => img === source
     );
@@ -48,7 +45,12 @@ const PlayerGender = ({
 
   return (
     <TouchableWithoutFeedback onPress={handleChangeGender}>
-      <View style={[styles.container, { borderColor: theme.colors.primary }]}>
+      <View
+        style={[
+          styles.container,
+          { borderColor: player?.theme?.colors.primary },
+        ]}
+      >
         <FastImage source={genderImgSource} style={styles.image} />
       </View>
     </TouchableWithoutFeedback>

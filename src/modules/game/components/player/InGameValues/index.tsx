@@ -2,22 +2,23 @@ import { View } from "react-native";
 
 import LevelIndicatorBars from "../../../../core/components/Player/LevelIndicatorBars";
 import Name from "../../../../core/components/Player/Name";
-import { Player, Theme } from "../../../../core/definitions";
+import { Player } from "../../../../core/definitions";
 import StrengthCounter from "./StrengthCounter";
 
 import styles from "./styles";
 
-const InGameValues = ({
-  ...playerThemeProps
-}: {
+interface InGameValuesProps {
   player: Player;
-  theme: Theme;
+}
+
+const InGameValues: React.FunctionComponent<InGameValuesProps> = ({
+  player,
 }) => {
   return (
     <View style={styles.container}>
-      <Name {...playerThemeProps} />
-      <StrengthCounter {...playerThemeProps} />
-      <LevelIndicatorBars {...playerThemeProps} />
+      <Name player={player} />
+      <StrengthCounter player={player} />
+      <LevelIndicatorBars player={player} />
     </View>
   );
 };

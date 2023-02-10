@@ -8,16 +8,27 @@ import GenderRole from "./GenderRole";
 import Edition from "../../../players/components/EditPlayerBtn";
 import InGameValues from "../../../game/components/player/InGameValues";
 
-// @ts-expect-error TS(2307): Cannot find module '../../../../../assets/frame.sv... Remove this comment to see the full error message
+// @ts-ignore
 import FrameBg from "../../../../../assets/frame.svg";
 
 import themes from "../../utils/themes";
 import styles from "./styles";
+import { Player } from "../../definitions";
 
-const PlayerPanel = ({
+interface PlayerPanelProps {
+  player: Player;
+  enableEdit?: boolean;
+}
+
+/**
+ * Main panel used for showing player information in the Players
+ * and Game screens
+ * Some components are rendered dependent on the enableEdit prop
+ */
+const PlayerPanel: React.FunctionComponent<PlayerPanelProps> = ({
   player,
-  enableEdit = false
-}: any) => {
+  enableEdit = false,
+}) => {
   // gets the theme from the playerData
   const theme = useMemo(() => {
     if (player?.theme) {
@@ -25,8 +36,6 @@ const PlayerPanel = ({
     }
     return themes[0];
   }, [player]);
-
-  const playerThemeProps = { player, theme };
 
   const Container = useMemo(
     () => (enableEdit ? DeletePlayer : ChangePlayerLevel),
@@ -38,19 +47,19 @@ const PlayerPanel = ({
   );
 
   return (
-    <Container {...playerThemeProps}>
+    <Container player={player}>
       <View style={styles.container}>
-				<FrameBg
-            width={styles.frame.width}
-            height={styles.frame.height}
-            style={[StyleSheet.absoluteFillObject, { opacity: 0.95 }]}
-            primaryColor={theme?.colors?.primary}
-            secondaryColor={theme?.colors?.secondary}
-				/>
+        <FrameBg
+          width={styles.frame.width}
+          height={styles.frame.height}
+          style={[StyleSheet.absoluteFillObject, { opacity: 0.95 }]}
+          primaryColor={theme?.colors?.primary}
+          secondaryColor={theme?.colors?.secondary}
+        />
         <View style={styles.content}>
-          <Avatar {...playerThemeProps} />
-          <MiddleContent {...playerThemeProps} />
-          <GenderRole {...playerThemeProps} />
+          <Avatar player={player}/>
+          <MiddleContent player={player}/>
+          <GenderRole player={player}/>
         </View>
       </View>
     </Container>

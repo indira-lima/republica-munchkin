@@ -1,9 +1,7 @@
-import { View, StyleSheet } from "react-native"
+import { View, StyleSheet } from "react-native";
+import { Player } from "../../../definitions";
 
-const PlayerLevelBars = ({
-  player,
-  theme
-}: any) => {
+const PlayerLevelBars = ({ player }: { player: Player }) => {
   return (
     <View style={styles.container}>
       {[...Array(player.level || 1)].map((_, i) => (
@@ -12,7 +10,7 @@ const PlayerLevelBars = ({
             style={[
               styles.levelBar,
               {
-                backgroundColor: theme.colors.secondary,
+                backgroundColor: player.theme?.colors.secondary,
               },
             ]}
           />
