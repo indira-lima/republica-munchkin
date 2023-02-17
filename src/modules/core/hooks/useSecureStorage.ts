@@ -4,7 +4,13 @@ import useCancelablePromise from "./useCancelablePromise";
 
 const appPrefixStorage = "__rep_munchkin";
 
-const useSecureStorage = () => {
+interface SecureStorageProps {
+	secureSave: (key: string, value: any) => Promise<void>;
+	removeFromStorage: (key: string) => Promise<void>;
+	getFromStorage: (key: string) => Promise<any>;
+}
+
+const useSecureStorage = (): SecureStorageProps => {
   const { cancelablePromise } = useCancelablePromise();
 
   /** Salva dados sensíveis no storage com encriptação */
