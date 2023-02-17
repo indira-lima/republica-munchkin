@@ -1,12 +1,12 @@
 import { useCallback, useMemo } from "react";
 import { StyleSheet, TouchableWithoutFeedback, View } from "react-native";
 import FastImage from "react-native-fast-image";
-import useGame from "../../../hooks/useGame";
-import { Genders } from "../../../utils/static";
+import useGame from "../../../../core/hooks/useGame";
+import { Genders } from "../../../../core/utils/static";
 
-import { Player } from "../../../definitions";
-import genderIcons from "../../../imports/genders";
-import { circulo } from "../../../utils/styles";
+import { Player } from "../../../../core/definitions";
+import genderIcons from "../../../../core/imports/genders";
+import { circulo } from "../../../../core/utils/styles";
 
 /**
  * Very similar to the ChangeGenderBtn, but it's a circle
@@ -19,13 +19,14 @@ const PlayerGender = ({ player }: { player: Player }) => {
    * Gets the icon source and index from the player.gender value
    */
   const [genderImgSource, currentGenderIndex] = useMemo(() => {
-    const source = genderIcons[player?.gender!] || genderIcons[Genders.PAN];
+    const source =
+      genderIcons[player?.memberInfo.gender!] || genderIcons[Genders.PAN];
     const index = Object.entries(genderIcons).findIndex(
       ([, img]) => img === source
     );
 
     return [source, index];
-  }, [player?.gender]);
+  }, [player?.memberInfo]);
 
   /**
    * Changes the current gender value to the next one in the Genders list
@@ -40,7 +41,10 @@ const PlayerGender = ({ player }: { player: Player }) => {
       newGenderIndex = currentGenderIndex + 1;
     }
 
-    editPlayer(player.id, { ...player, gender: newGenderIndex });
+    editPlayer(player.id, {
+      ...player,
+      memberInfo: { ...player.memberInfo, gender: newGenderIndex },
+    });
   }, [player, currentGenderIndex]);
 
   return (
@@ -48,7 +52,7 @@ const PlayerGender = ({ player }: { player: Player }) => {
       <View
         style={[
           styles.container,
-          { borderColor: player?.theme?.colors.primary },
+          { borderColor: player?.memberInfo?.theme?.colors.primary },
         ]}
       >
         <FastImage source={genderImgSource} style={styles.image} />

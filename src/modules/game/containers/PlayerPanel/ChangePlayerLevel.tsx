@@ -5,7 +5,7 @@ import imgLevelDown from "../../../../../assets/level-down.png";
 // @ts-ignore
 import imgLevelUp from "../../../../../assets/level-up.png";
 
-import useGame from "../../hooks/useGame";
+import useGame from "../../../core/hooks/useGame";
 import HorizontalSwipeableActions from "../../../core/components/SwipeableActions/Horizontal";
 import { Swipeable } from "react-native-gesture-handler";
 

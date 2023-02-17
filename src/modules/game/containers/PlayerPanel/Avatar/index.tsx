@@ -1,4 +1,3 @@
-import { MaterialCommunityIcons } from "@expo/vector-icons";
 import { useCallback, useMemo, useState } from "react";
 import { StyleSheet, TouchableWithoutFeedback, View } from "react-native";
 
@@ -10,15 +9,15 @@ import Animated, {
   FlipOutEasyY,
 } from "react-native-reanimated";
 
-import { Player } from "../../../definitions";
-import avatarImages from "../../../imports/avatars";
-import globalStyles, { circulo, colors } from "../../../utils/styles";
+import { Player } from "../../../../core/definitions";
+import avatarImages from "../../../../core/imports/avatars";
+import globalStyles, { circulo, colors } from "../../../../core/utils/styles";
 
 // @ts-ignore
 import FastImage from "react-native-fast-image";
 // @ts-ignore
 import battleReady from "../../../../../../assets/battle_ready.png";
-import useInterval from "../../../hooks/useInterval";
+import useInterval from "../../../../core/hooks/useInterval";
 
 interface PlayerAvatarProps {
   player: Player;
@@ -31,20 +30,11 @@ const BACK_TO_IDLE_TIMEOUT = 2000;
 
 /**
  * Component used to show the player's avatar image
- * It can cycle trough the available avatar images if
- * edition is enabled
  * It can take the player to the Battle screen if
  * edition is not enabled
- *
- * After creating a new context for the running game, this
- * component's logic should be separated into two files,
- * for the Players and Game screens
- * Each one will receive a different kind of player object
  */
 const PlayerAvatar: React.FunctionComponent<PlayerAvatarProps> = ({
   player,
-  enableEdit = false,
-  onChange = () => {},
 }) => {
   const navigation = useNavigation();
 
@@ -53,52 +43,12 @@ const PlayerAvatar: React.FunctionComponent<PlayerAvatarProps> = ({
    * from the player's avatar
    * If the source is not found, gets the first one in the list
    */
-  const [avatarSource, currentAvatarIndex] = useMemo(() => {
-    const avatar = avatarImages[player?.avatar!];
+  const avatarSource = useMemo(() => {
+    const avatar = avatarImages[player?.memberInfo.avatar!];
     const source = avatar || avatarImages[0];
-    const index = avatarImages.findIndex((img) => img === source);
 
-    return [source, index];
-  }, [player?.avatar]);
-
-  /**
-   * Changes the avatar to the previous one in the `avatarImages` list
-   *
-   * Emit the onChange event passing the index of the previous avatar
-   * in the list from the current defined avatar
-   */
-  const handlePrevAvatar = useCallback(() => {
-    if (!enableEdit) return;
-
-    let newAvatarIndex;
-    if (currentAvatarIndex === 0) {
-      newAvatarIndex = avatarImages.length - 1;
-    } else {
-      newAvatarIndex = currentAvatarIndex - 1;
-    }
-
-    onChange(newAvatarIndex);
-  }, [currentAvatarIndex]);
-
-  /**
-   * Changes the avatar to the next one in the `avatarImages` list
-   *
-   * Emit the onChange event passing the index of the next avatar
-   * in the list from the current defined avatar
-   */
-  const handleNextAvatar = useCallback(() => {
-    if (!enableEdit) return;
-
-    let newAvatarIndex;
-
-    if (currentAvatarIndex === avatarImages.length - 1) {
-      newAvatarIndex = 0;
-    } else {
-      newAvatarIndex = currentAvatarIndex + 1;
-    }
-
-    onChange(newAvatarIndex);
-  }, [currentAvatarIndex]);
+    return source;
+  }, [player?.memberInfo]);
 
   // battle state: is the player ready for some action??
   const [battleState, setBattleState] = useState<"idle" | "ready">("idle");
@@ -122,8 +72,6 @@ const PlayerAvatar: React.FunctionComponent<PlayerAvatarProps> = ({
    * redirecting to Battle screen when ready
    */
   const handleBattleStateChange = useCallback(() => {
-    if (enableEdit) return;
-
     if (battleState === "idle") {
       setBattleState("ready");
       setBackToIdleTimeout(BACK_TO_IDLE_TIMEOUT); // 2s timeout
@@ -133,16 +81,11 @@ const PlayerAvatar: React.FunctionComponent<PlayerAvatarProps> = ({
     // @ts-ignore
     navigation.navigate("Battle", { player });
     setBattleState("idle");
-  }, [battleState, player, enableEdit]);
+  }, [battleState, player]);
 
   return (
     <View style={styles.container}>
       {/* If edition is enabled, renders two buttons on the side to change the avatar */}
-      {enableEdit && (
-        <TouchableWithoutFeedback onPress={handlePrevAvatar}>
-          <MaterialCommunityIcons color="#fff" name="chevron-left" size={24} />
-        </TouchableWithoutFeedback>
-      )}
       <TouchableWithoutFeedback onPress={handleBattleStateChange}>
         <View>
           {/* Idle means the the user hasn't tapped the avatat */}
@@ -152,7 +95,7 @@ const PlayerAvatar: React.FunctionComponent<PlayerAvatarProps> = ({
                 source={avatarSource}
                 style={[
                   styles.avatarImage,
-                  { borderColor: player?.theme?.colors.primary },
+                  { borderColor: player?.memberInfo?.theme?.colors.primary },
                 ]}
               />
             </Animated.View>
@@ -173,11 +116,6 @@ const PlayerAvatar: React.FunctionComponent<PlayerAvatarProps> = ({
           )}
         </View>
       </TouchableWithoutFeedback>
-      {enableEdit && (
-        <TouchableWithoutFeedback onPress={handleNextAvatar}>
-          <MaterialCommunityIcons color="#fff" name="chevron-right" size={24} />
-        </TouchableWithoutFeedback>
-      )}
     </View>
   );
 };

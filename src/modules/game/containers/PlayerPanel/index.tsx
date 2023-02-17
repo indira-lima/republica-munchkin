@@ -1,20 +1,16 @@
-import { useMemo } from "react";
 import { StyleSheet, View } from "react-native";
 
-import InGameValues from "../../../game/components/player/InGameValues";
-import Edition from "../../../players/components/EditPlayerBtn";
+import InGameValues from "../../components/player/InGameValues";
 import Avatar from "./Avatar";
 import ChangePlayerLevel from "./ChangePlayerLevel";
-import DeletePlayer from "./DeletePlayer";
 import GenderRole from "./GenderRole";
 
 // @ts-ignore
 import FrameBg from "../../../../../assets/frame.svg";
 
 import Animated, { SlideInLeft, SlideOutLeft } from "react-native-reanimated";
-import { Player } from "../../definitions";
-import themes from "../../utils/themes";
 import styles from "./styles";
+import { Player } from "../../../core/definitions";
 
 interface PlayerPanelProps {
   player: Player;
@@ -26,45 +22,25 @@ interface PlayerPanelProps {
  * and Game screens
  * Some components are rendered dependent on the enableEdit prop
  */
-const PlayerPanel: React.FunctionComponent<PlayerPanelProps> = ({
-  player,
-  enableEdit = false,
-}) => {
-  // gets the theme from the playerData
-  const theme = useMemo(() => {
-    if (player?.theme) {
-      return themes.find((t) => t.name === player.theme?.name);
-    }
-    return themes[0];
-  }, [player]);
-
-  const Container = useMemo(
-    () => (enableEdit ? DeletePlayer : ChangePlayerLevel),
-    [enableEdit]
-  );
-  const MiddleContent = useMemo(
-    () => (enableEdit ? Edition : InGameValues),
-    [enableEdit]
-  );
-
+const PlayerPanel: React.FunctionComponent<PlayerPanelProps> = ({ player }) => {
   return (
     <Animated.View entering={SlideInLeft} exiting={SlideOutLeft}>
-      <Container player={player}>
+      <ChangePlayerLevel player={player}>
         <View style={styles.container}>
           <FrameBg
             width={styles.frame.width}
             height={styles.frame.height}
             style={[StyleSheet.absoluteFillObject, { opacity: 0.95 }]}
-            primaryColor={theme?.colors?.primary}
-            secondaryColor={theme?.colors?.secondary}
+            primaryColor={player.memberInfo.theme.colors.primary}
+            secondaryColor={player.memberInfo.theme.colors.secondary}
           />
           <View style={styles.content}>
             <Avatar player={player} />
-            <MiddleContent player={player} />
+            <InGameValues player={player} />
             <GenderRole player={player} />
           </View>
         </View>
-      </Container>
+      </ChangePlayerLevel>
     </Animated.View>
   );
 };

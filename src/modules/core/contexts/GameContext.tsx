@@ -2,8 +2,6 @@ import { createContext, useEffect, useCallback, useState } from "react";
 
 import useSecureStorage from "../hooks/useSecureStorage";
 
-import { Genders } from "../utils/static";
-import avatarImages from "../imports/avatars";
 import { Player } from "../definitions";
 
 interface GameContextValue {
@@ -18,10 +16,23 @@ interface GameContextValue {
 const GameContext = createContext<GameContextValue>({} as GameContextValue);
 export default GameContext;
 
+/**
+ * The ongoing game context
+ *
+ * Uses a subset of the Crew list with a minimum of 3 and a maximum of 6
+ * players, which have the crew member's info with the addition of level,
+ * items and whether they won the match
+ */
 export const GameProvider = ({ children }: any) => {
-  const [playerList, setPlayerList] = useState<Player[]>([]);
+	// hooks for saving and retrieving data from the local storage
   const { secureSave, getFromStorage } = useSecureStorage();
 
+	/** The match's player list */
+  const [playerList, setPlayerList] = useState<Player[]>([]);
+
+	/**
+	 * Retrieving data from the storage at initialization
+	 */
   useEffect(() => {
     async function initState() {
       const players: Player[] = await getFromStorage("playerList");
@@ -31,10 +42,16 @@ export const GameProvider = ({ children }: any) => {
     initState();
   }, []);
 
+	/**
+	 * Saving data to the storage everytime the playerList changes
+	 */
   useEffect(() => {
     secureSave("playerList", playerList);
   }, [playerList]);
 
+	/**
+	 * Method to find a player index inside the playerList by its ID
+	 */
   const _getPlayerIndexById = useCallback(
     (id: number) => {
       const index = playerList.findIndex((p) => p.id === id);
@@ -42,25 +59,6 @@ export const GameProvider = ({ children }: any) => {
     },
     [playerList]
   );
-
-  /**
-   * Validate some props of the player object before saving it
-   */
-  const _validatePlayerData = useCallback((data: any) => {
-    // validate the gender value, if defined
-		if (data.gender !== undefined) {
-			const foundGender = Object.values(Genders).find(
-				(value) => value === data.gender
-			);
-			data.gender = foundGender === undefined ? Genders.PAN : foundGender;
-		}
-
-    // validate the avatar value, if defined
-		if (data.avatar !== undefined) {
-			const foundAvatar = avatarImages[data.avatar];
-			data.avatar = foundAvatar === undefined ? 0 : data.avatar;
-		}
-  }, []);
 
   const addPlayer = useCallback((player: Player) => {
     setPlayerList((list) => {
@@ -72,11 +70,13 @@ export const GameProvider = ({ children }: any) => {
       player.items = 0;
 			player.won = false;
 
-      _validatePlayerData(player);
       return [...list, player];
     });
   }, []);
 
+	/**
+	 * Delete a player from the game by its ID
+	 */
   const removePlayer = useCallback(
     (id: number) => {
       const index = _getPlayerIndexById(id);
@@ -90,12 +90,13 @@ export const GameProvider = ({ children }: any) => {
     [_getPlayerIndexById]
   );
 
+	/**
+	 * Find a player by its ID and apply all props from `data`
+	 */
   const editPlayer = useCallback(
     (id: number, data: Player) => {
       const index = _getPlayerIndexById(id);
       if (index < 0) return;
-
-      _validatePlayerData(data);
 
       setPlayerList((items) => {
         return [
