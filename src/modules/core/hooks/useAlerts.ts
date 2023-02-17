@@ -4,7 +4,7 @@ import AlertContext from "../contexts/AlertContext";
 function useAlerts() {
 	const alertContext = useContext(AlertContext);
 
-	if (!alertContext) {
+	if (!alertContext.showAlert) {
 		throw new Error('useAlerts must be used within an AlertProvider');
 	}
 

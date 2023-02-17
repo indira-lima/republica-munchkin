@@ -4,7 +4,7 @@ import GameContext from "../contexts/GameContext";
 function useGame() {
 	const gameContext = useContext(GameContext);
 
-	if (!gameContext) {
+	if (!gameContext.addPlayer) {
 		throw new Error('useGame must be used within an GameProvider');
 	}
 
