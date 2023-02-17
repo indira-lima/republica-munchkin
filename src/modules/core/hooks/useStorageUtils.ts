@@ -3,8 +3,8 @@ import { useCallback } from "react";
 interface StorageUtilsProps<T extends { id: number }> {
   getItemIndexById: (list: T[], id: number) => number;
   getNewItemId: (list: T[]) => number;
-  removeListItem: (list: T[], index: number) => T[];
-  editListItem: (list: T[], index: number, data: T) => T[];
+  removeListItem: (list: T[], id: number) => T[];
+  editListItem: (list: T[], id: number, data: T) => T[];
 }
 
 /**
