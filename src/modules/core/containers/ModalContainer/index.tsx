@@ -17,6 +17,7 @@ import styles, { modalSize } from "./styles";
 // @ts-expect-error
 import ModalSquaredBg from "../../../../../assets/modal-squared.svg";
 import { Theme } from "../../definitions";
+import themes from "../../utils/themes";
 
 export interface ModalContainerProps {
   openModal: boolean;
@@ -34,7 +35,7 @@ const ModalContainer: React.FunctionComponent<ModalContainerProps> = ({
   modalViewProps = {},
   modalViewStyle = {},
   loading = false,
-  theme = {},
+  theme = themes[0],
   children,
 }) => {
   return (

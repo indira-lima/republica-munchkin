@@ -1,27 +1,29 @@
 import { useCallback, useContext } from "react";
 import { Text, TouchableOpacity, View } from "react-native";
 
-import PlayerModalContext from "../../contexts/ModalNewPlayerContext";
+import PlayerModalContext from "../../contexts/ModalNewMemberContext";
 import Name from "../../../core/components/Player/Name";
 
 import styles from "./styles";
-import { Player } from "../../../core/definitions";
+import { CrewMember } from "../../../core/definitions";
 
 interface EditionProps {
-  player: Player;
+  crewMember: CrewMember;
 }
 
-const Edition: React.FunctionComponent<EditionProps> = ({ player }) => {
-  const { setCurrentPlayer, setIsModalOpen } = useContext(PlayerModalContext);
+const Edition: React.FunctionComponent<EditionProps> = ({
+  crewMember: crewMember,
+}) => {
+  const { setCurrentMember, setIsModalOpen } = useContext(PlayerModalContext);
 
   const handleEditPlayer = useCallback(() => {
-    setCurrentPlayer(player);
+    setCurrentMember(crewMember);
     setIsModalOpen(true);
-  }, [player]);
+  }, [crewMember]);
 
   return (
     <View style={styles.container}>
-      <Name player={player} />
+      <Name text={crewMember.name} />
       <TouchableOpacity
         activeOpacity={0.8}
         onPress={handleEditPlayer}

@@ -33,9 +33,9 @@ const Footer = () => {
 		},
 		{
 			order: 2,
-			label: 'Players',
+			label: 'Crew',
 			icon: 'people',
-			...getLinkConfig('Players')
+			...getLinkConfig('Crew')
 		},
 	], [navigation, getLinkConfig])
 

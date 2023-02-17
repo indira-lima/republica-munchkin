@@ -5,6 +5,7 @@ import useSecureStorage from "../hooks/useSecureStorage";
 import { Genders } from "../utils/static";
 import avatarImages from "../imports/avatars";
 import { CrewMember } from "../definitions";
+import useStorageUtils from "../hooks/useStorageUtils";
 
 interface CrewContextValue {
   crew: CrewMember[];
@@ -16,10 +17,29 @@ interface CrewContextValue {
 const CrewContext = createContext<CrewContextValue>({} as CrewContextValue);
 export default CrewContext;
 
-export const GameProvider = ({ children }: any) => {
-  const [crew, setCrew] = useState<CrewMember[]>([]);
+/**
+ * The context for handling Crew members
+ *
+ * The Crew is a list of playable characters created for later games,
+ * with no level and items
+ */
+export const CrewProvider = ({ children }: any) => {
+  // hooks for saving and retrieving data from the local storage
   const { secureSave, getFromStorage } = useSecureStorage();
 
+  /** The Crew members list */
+  const [crew, setCrew] = useState<CrewMember[]>([]);
+
+  const {
+    getItemIndexById: getCrewMemberIndexById,
+    getNewItemId,
+    removeListItem,
+    editListItem,
+  } = useStorageUtils<CrewMember>();
+
+  /**
+   * Retrieving data from the storage at initialization
+   */
   useEffect(() => {
     async function initState() {
       const crew: CrewMember[] = await getFromStorage("crew");
@@ -29,22 +49,17 @@ export const GameProvider = ({ children }: any) => {
     initState();
   }, []);
 
+  /**
+   * Saving data to the storage everytime the playerList changes
+   */
   useEffect(() => {
     secureSave("crew", crew);
   }, [crew]);
 
-  const _getCrewMemberIndexById = useCallback(
-    (id: number) => {
-      const index = crew.findIndex((member) => member.id === id);
-      return index;
-    },
-    [crew]
-  );
-
   /**
    * Validate some props of the player object before saving it
    */
-  const _validateCrewMemberData = useCallback((data: any) => {
+  const _validateCrewMemberData = useCallback((data: CrewMember) => {
     // validate the gender value, if defined
     if (data.gender !== undefined) {
       const foundGender = Object.values(Genders).find(
@@ -60,51 +75,31 @@ export const GameProvider = ({ children }: any) => {
       const foundAvatar = avatarImages[data.avatar];
       data.avatar = foundAvatar === undefined ? 0 : data.avatar;
     } else {
-			data.avatar = 0;
-		}
+      data.avatar = 0;
+    }
   }, []);
 
   const addCrewMember = useCallback((member: CrewMember) => {
     setCrew((list) => {
-      // define o ID do player baseado no ID do último cadastrado,
-      // usando a função last() definida no utils/functions
-      // @ts-ignore
-      member.id = list.length > 0 ? Number(list.last().id) + 1 : 1;
-
       _validateCrewMemberData(member);
+      member.id = getNewItemId(list);
       return [...list, member];
     });
   }, []);
 
   const removeCrewMember = useCallback(
     (id: number) => {
-      const index = _getCrewMemberIndexById(id);
-      if (index < 0) return;
-
-      setCrew((list) => {
-        list.splice(index, 1);
-        return [...list];
-      });
+      setCrew((list) => removeListItem(list, id));
     },
-    [_getCrewMemberIndexById]
+    []
   );
 
   const editCrewMember = useCallback(
     (id: number, data: CrewMember) => {
-      const index = _getCrewMemberIndexById(id);
-      if (index < 0) return;
-
       _validateCrewMemberData(data);
-
-      setCrew((items) => {
-        return [
-          ...items.slice(0, index),
-          { ...items[index], ...data },
-          ...items.slice(index + 1),
-        ];
-      });
+      setCrew((list) => editListItem(list, id, data));
     },
-    [_getCrewMemberIndexById]
+    [getCrewMemberIndexById]
   );
 
   return (

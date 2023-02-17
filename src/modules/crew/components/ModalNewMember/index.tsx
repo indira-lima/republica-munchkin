@@ -1,47 +1,38 @@
-import { useCallback, useEffect, useMemo, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import { View } from "react-native";
 
-import useGame from "../../../core/hooks/useGame";
 import Button from "../../../core/components/Button";
 import TextInput from "../../../core/components/Input/TextInput";
-import PlayerAvatar from "../../../core/containers/PlayerPanel/Avatar";
 import ModalContainer, {
   ModalContainerProps,
 } from "../../../core/containers/ModalContainer";
+import useCrew from "../../../core/hooks/useCrew";
 
 import ChangeGenderBtn from "./ChangeGenderBtn";
 import ChangeThemeBtn from "./ChangeThemeBtn";
 
 import globalStyles from "../../../core/utils/styles";
-import themes from "../../../core/utils/themes";
 
+import { CrewMember } from "../../../core/definitions";
+import Avatar from "../../containers/CrewMemberPanel/Avatar";
 import styles from "./styles";
-import { Player } from "../../../core/definitions";
 
-interface PlayerModalProps {
-  currentPlayer: Player;
+interface ModalNewMemberProps {
+  currentMember?: CrewMember;
   onClose: () => void;
 }
 
 /**
  * Modal that opens a form to edit the player's data or to create a new one
  */
-const PlayerModal: React.FunctionComponent<
-  PlayerModalProps & ModalContainerProps
-> = ({ currentPlayer = {}, onClose = () => {}, ...modalProps }) => {
+const ModalNewMember: React.FunctionComponent<
+  ModalNewMemberProps & ModalContainerProps
+> = ({ currentMember = {}, onClose = () => {}, ...modalProps }) => {
   // gets the functions to add/edit players from the context
-  const { addPlayer, editPlayer } = useGame();
+  const { addCrewMember, editCrewMember } = useCrew();
 
   // stores the form data in a separate state
-  const [playerData, setPlayerData] = useState<Player>({} as Player);
-
-  // gets the theme from the playerData
-  const theme = useMemo(() => {
-    if (playerData?.theme) {
-      return themes.find((t) => t.name === playerData.theme?.name);
-    }
-    return themes[0];
-  }, [playerData]);
+  const [memberData, setMemberData] = useState<CrewMember>({} as CrewMember);
 
   /**
    * Initializes the playerData state with the currentPlayer prop
@@ -49,15 +40,15 @@ const PlayerModal: React.FunctionComponent<
    */
   useEffect(() => {
     // @ts-ignore
-    setPlayerData(modalProps?.openModal ? currentPlayer : null);
+    setMemberData(modalProps?.openModal ? currentMember : null);
   }, [modalProps?.openModal]);
 
   /**
    * Function to update one prop of the playerData state
    * Used in each field of the form
    */
-  const handleSetPlayerValue = useCallback((propName: any, value: any) => {
-    setPlayerData((data) => ({
+  const handleSetMemberProp = useCallback((propName: any, value: any) => {
+    setMemberData((data) => ({
       ...data,
       [propName]: value,
     }));
@@ -67,41 +58,40 @@ const PlayerModal: React.FunctionComponent<
    * Create or edit a player with the current form data
    * and then closes the modal
    */
-  const handleSavePlayer = useCallback(() => {
-    if (playerData.id) {
-      editPlayer(playerData.id, playerData);
+  const handleSaveCrewMember = useCallback(() => {
+    if (memberData?.id) {
+      editCrewMember(memberData.id, memberData);
     } else {
-      addPlayer(playerData);
+      addCrewMember(memberData);
     }
 
     onClose();
-  }, [playerData]);
+  }, [memberData, editCrewMember, addCrewMember]);
 
   return (
-    <ModalContainer {...modalProps} theme={theme!}>
+    <ModalContainer {...modalProps} theme={memberData?.theme!}>
       <View style={styles.container}>
         <View style={styles.formContent}>
           <View style={[globalStyles.row]}>
             <ChangeThemeBtn
-              player={playerData}
-              onChange={(value: any) => handleSetPlayerValue("theme", value)}
+              crewMember={memberData}
+              onChange={(value: any) => handleSetMemberProp("theme", value)}
             />
-            <PlayerAvatar
+            <Avatar
               enableEdit
-              theme={theme}
-              player={playerData}
-              onChange={(value: any) => handleSetPlayerValue("avatar", value)}
+              crewMember={memberData}
+              onChange={(value: any) => handleSetMemberProp("avatar", value)}
             />
             <ChangeGenderBtn
-              player={playerData}
-              onChange={(value: any) => handleSetPlayerValue("gender", value)}
+              crewMember={memberData}
+              onChange={(value: any) => handleSetMemberProp("gender", value)}
             />
           </View>
           <View style={styles.inputSession}>
             <TextInput
               label={">"}
-              value={playerData?.name}
-              onChangeText={(value: any) => handleSetPlayerValue("name", value)}
+              value={memberData?.name}
+              onChangeText={(value: any) => handleSetMemberProp("name", value)}
               placeholder="Username"
             />
           </View>
@@ -114,11 +104,11 @@ const PlayerModal: React.FunctionComponent<
             onPress={onClose}
           />
           <Button
-            theme={theme?.name}
+            theme={memberData?.theme?.name}
             type="squared"
             icon="check"
             style={{ marginLeft: 5 }}
-            onPress={handleSavePlayer}
+            onPress={handleSaveCrewMember}
           />
         </View>
       </View>
@@ -126,4 +116,4 @@ const PlayerModal: React.FunctionComponent<
   );
 };
 
-export default PlayerModal;
+export default ModalNewMember;
