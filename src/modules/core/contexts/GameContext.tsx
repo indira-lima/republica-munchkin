@@ -2,11 +2,13 @@ import { createContext, useEffect, useCallback, useState } from "react";
 
 import useSecureStorage from "../hooks/useSecureStorage";
 
-import { Player } from "../definitions";
+import { CrewMember, Player } from "../definitions";
+import useStorageUtils from "../hooks/useStorageUtils";
 
 interface GameContextValue {
+  isGameInProgress: boolean;
+  createNewGame: (members: CrewMember[]) => void;
   playerList: Player[];
-  addPlayer: (player: Player) => void;
   removePlayer: (id: number) => void;
   editPlayer: (id: number, data: Player) => void;
   levelUpPlayer: (id: number) => void;
@@ -24,94 +26,95 @@ export default GameContext;
  * items and whether they won the match
  */
 export const GameProvider = ({ children }: any) => {
-	// hooks for saving and retrieving data from the local storage
+  // hooks for saving and retrieving data from the local storage
   const { secureSave, getFromStorage } = useSecureStorage();
 
-	/** The match's player list */
+  const {
+    getItemIndexById: _getPlayerIndexById,
+		getNewItemId,
+    editListItem,
+    removeListItem,
+  } = useStorageUtils<Player>();
+
+  const [isGameInProgress, setIsGameInProgress] = useState<boolean>(false);
+
+  /** The match's player list */
   const [playerList, setPlayerList] = useState<Player[]>([]);
 
-	/**
-	 * Retrieving data from the storage at initialization
-	 */
+  /**
+   * Retrieving data from the storage at initialization
+   */
   useEffect(() => {
     async function initState() {
-      const players: Player[] = await getFromStorage("playerList");
-      setPlayerList(players || []);
+      const isGameInProgress: boolean = await getFromStorage(
+        "isGameInProgress"
+      );
+      if (isGameInProgress) {
+        const players: Player[] = await getFromStorage("playerList");
+        setPlayerList(players || []);
+      }
+      setIsGameInProgress(isGameInProgress);
     }
 
     initState();
   }, []);
 
-	/**
-	 * Saving data to the storage everytime the playerList changes
-	 */
+  /**
+   * Saving data to the storage everytime the playerList changes
+   */
   useEffect(() => {
-    secureSave("playerList", playerList);
-  }, [playerList]);
+    secureSave("isGameInProgress", isGameInProgress);
+    if (isGameInProgress) {
+      secureSave("playerList", playerList);
+    }
+  }, [isGameInProgress, playerList]);
 
-	/**
-	 * Method to find a player index inside the playerList by its ID
-	 */
-  const _getPlayerIndexById = useCallback(
-    (id: number) => {
-      const index = playerList.findIndex((p) => p.id === id);
-      return index;
-    },
-    [playerList]
-  );
+	const createNewGame = useCallback((members: CrewMember[]) => {
+		if (members.length < 3)
+			throw new Error("A game must have at least 3 players");
+		if (members.length > 6)
+			throw new Error("A game must have a maximum of 6 players");
 
-  const addPlayer = useCallback((player: Player) => {
-    setPlayerList((list) => {
-      // define o ID do player baseado no ID do último cadastrado,
-			// usando a função last() definida no utils/functions
-      // @ts-ignore
-      player.id = list.length > 0 ? Number(list.last().id) + 1 : 1;
-      player.level = 1;
-      player.items = 0;
-			player.won = false;
+		const playerList: Player[] = [];
+		members.forEach(member => {
+			const player: Player = {
+				id: getNewItemId(playerList),
+				level: 1,
+				items: 0,
+				won: false,
+				memberInfo: member,
+			}
 
-      return [...list, player];
-    });
-  }, []);
+			playerList.push(player);
+		});
 
-	/**
-	 * Delete a player from the game by its ID
-	 */
+		setPlayerList(playerList);
+		setIsGameInProgress(true);
+	}, []);
+
+  /**
+   * Delete a player from the game by its ID
+   */
   const removePlayer = useCallback(
     (id: number) => {
-      const index = _getPlayerIndexById(id);
-      if (index < 0) return;
-
-      setPlayerList((list) => {
-        list.splice(index, 1);
-        return [...list];
-      });
+      setPlayerList((list) => removeListItem(list, id));
     },
     [_getPlayerIndexById]
   );
 
-	/**
-	 * Find a player by its ID and apply all props from `data`
-	 */
+  /**
+   * Find a player by its ID and apply all props from `data`
+   */
   const editPlayer = useCallback(
     (id: number, data: Player) => {
-      const index = _getPlayerIndexById(id);
-      if (index < 0) return;
-
-      setPlayerList((items) => {
-        return [
-          ...items.slice(0, index),
-          { ...items[index], ...data },
-          ...items.slice(index + 1),
-        ];
-      });
+      setPlayerList((list) => editListItem(list, id, data));
     },
     [_getPlayerIndexById]
   );
 
   const levelUpPlayer = useCallback(
     (id: number) => {
-      const index = _getPlayerIndexById(id);
+      const index = _getPlayerIndexById(playerList, id);
 
       const player = playerList[index];
       if (player === undefined) return;
@@ -131,7 +134,7 @@ export const GameProvider = ({ children }: any) => {
 
   const levelDownPlayer = useCallback(
     (id: number) => {
-      const index = _getPlayerIndexById(id);
+      const index = _getPlayerIndexById(playerList, id);
 
       const player = playerList[index];
       if (player === undefined) return;
@@ -150,8 +153,9 @@ export const GameProvider = ({ children }: any) => {
   return (
     <GameContext.Provider
       value={{
+				isGameInProgress,
+				createNewGame,
         playerList,
-        addPlayer,
         removePlayer,
         editPlayer,
         levelUpPlayer,
