@@ -5,9 +5,18 @@ import useSecureStorage from "../hooks/useSecureStorage";
 import { CrewMember, Player } from "../definitions";
 import useStorageUtils from "../hooks/useStorageUtils";
 
+/**
+ * void means the game hasn't started
+ * choosing-players means the user is selecting the match's players
+ * started means the action has began!
+ */
+type GameState =  "void" | "choosing-players" | "started";
+
 interface GameContextValue {
-  isGameInProgress: boolean;
+  gameState: GameState;
+	setGameState: (state: GameState) => void;
   createNewGame: (members: CrewMember[]) => void;
+	endGame: () => void;
   playerList: Player[];
   removePlayer: (id: number) => void;
   editPlayer: (id: number, data: Player) => void;
@@ -31,12 +40,12 @@ export const GameProvider = ({ children }: any) => {
 
   const {
     getItemIndexById: _getPlayerIndexById,
-		getNewItemId,
+    getNewItemId,
     editListItem,
     removeListItem,
   } = useStorageUtils<Player>();
 
-  const [isGameInProgress, setIsGameInProgress] = useState<boolean>(false);
+  const [gameState, setGameState] = useState<GameState>("void");
 
   /** The match's player list */
   const [playerList, setPlayerList] = useState<Player[]>([]);
@@ -46,14 +55,14 @@ export const GameProvider = ({ children }: any) => {
    */
   useEffect(() => {
     async function initState() {
-      const isGameInProgress: boolean = await getFromStorage(
+      const gameState: GameState = await getFromStorage(
         "isGameInProgress"
       );
-      if (isGameInProgress) {
+      if (gameState) {
         const players: Player[] = await getFromStorage("playerList");
         setPlayerList(players || []);
       }
-      setIsGameInProgress(isGameInProgress);
+      setGameState(gameState);
     }
 
     initState();
@@ -63,34 +72,37 @@ export const GameProvider = ({ children }: any) => {
    * Saving data to the storage everytime the playerList changes
    */
   useEffect(() => {
-    secureSave("isGameInProgress", isGameInProgress);
-    if (isGameInProgress) {
-      secureSave("playerList", playerList);
-    }
-  }, [isGameInProgress, playerList]);
+    secureSave("isGameInProgress", gameState);
+    secureSave("playerList", gameState ? playerList : []);
+  }, [gameState, playerList]);
 
-	const createNewGame = useCallback((members: CrewMember[]) => {
-		if (members.length < 3)
-			throw new Error("A game must have at least 3 players");
-		if (members.length > 6)
-			throw new Error("A game must have a maximum of 6 players");
+  const createNewGame = useCallback((members: CrewMember[]) => {
+    if (members.length < 3)
+      throw new Error("A game must have at least 3 players");
+    if (members.length > 6)
+      throw new Error("A game must have a maximum of 6 players");
 
-		const playerList: Player[] = [];
-		members.forEach(member => {
-			const player: Player = {
-				id: getNewItemId(playerList),
-				level: 1,
-				items: 0,
-				won: false,
-				memberInfo: member,
-			}
+    const playerList: Player[] = [];
+    members.forEach((member) => {
+      const player: Player = {
+        id: getNewItemId(playerList),
+        level: 1,
+        items: 0,
+        won: false,
+        memberInfo: member,
+      };
 
-			playerList.push(player);
-		});
+      playerList.push(player);
+    });
 
-		setPlayerList(playerList);
-		setIsGameInProgress(true);
-	}, []);
+    setPlayerList(playerList);
+    setGameState("started");
+  }, []);
+
+  const endGame = useCallback(() => {
+    setGameState("void");
+    setPlayerList([]);
+  }, []);
 
   /**
    * Delete a player from the game by its ID
@@ -153,8 +165,10 @@ export const GameProvider = ({ children }: any) => {
   return (
     <GameContext.Provider
       value={{
-				isGameInProgress,
-				createNewGame,
+        gameState,
+				setGameState,
+        createNewGame,
+				endGame,
         playerList,
         removePlayer,
         editPlayer,
