@@ -16,7 +16,7 @@ const InGameValues: React.FunctionComponent<InGameValuesProps> = ({
 }) => {
   return (
     <View style={styles.container}>
-      <Name player={player} />
+      <Name text={player.memberInfo.name} />
       <StrengthCounter player={player} />
       <LevelIndicatorBars player={player} />
     </View>
