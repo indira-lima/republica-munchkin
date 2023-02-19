@@ -24,7 +24,7 @@ const AppStack = createStackNavigator<AppStackParamList>();
 export default function AppRoutes() {
   return (
     <AppStack.Navigator
-      initialRouteName="Crew"
+      initialRouteName="Game"
       screenOptions={{
         headerShown: false,
         animationEnabled: true,
