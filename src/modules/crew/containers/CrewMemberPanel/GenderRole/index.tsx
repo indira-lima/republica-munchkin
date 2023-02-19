@@ -19,8 +19,6 @@ const CrewMemberGender = ({ crewMember }: { crewMember: CrewMember }) => {
    * Gets the icon source and index from the player.gender value
    */
   const [genderImgSource, currentGenderIndex] = useMemo(() => {
-		console.log('from gender:', crewMember);
-
     const source = genderIcons[crewMember.gender]
     const index = Object.entries(genderIcons).findIndex(
       ([, img]) => img === source

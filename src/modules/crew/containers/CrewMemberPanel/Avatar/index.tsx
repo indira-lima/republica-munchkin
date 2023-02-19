@@ -37,7 +37,6 @@ const CrewMemberAvatar: React.FunctionComponent<CrewMemberAvatarProps> = ({
    * If the source is not found, gets the first one in the list
    */
   const [avatarSource, currentAvatarIndex] = useMemo(() => {
-		console.log('from avatar:', crewMember)
     const avatar = avatarImages[crewMember?.avatar!];
     const source = avatar || avatarImages[0];
     const index = avatarImages.findIndex((img) => img === source);
