@@ -21,6 +21,7 @@ const MainContainer = ({
   showBackgroundImage = true,
   children,
   FooterComponent = Footer,
+  style: containerStyle = {},
 }: any) => {
   const isFocused = useIsFocused();
 
@@ -39,8 +40,6 @@ const MainContainer = ({
         <ScaledImage
           source={backgroundSpace}
           style={styles.image}
-          resizeMethod="scale"
-          resizeMode="stretch"
           width={screenWidth}
         />
       )}
@@ -52,7 +51,7 @@ const MainContainer = ({
             style={{ flex: 1 }}
           />
         ) : (
-          <View style={styles.body}>{children}</View>
+          <View style={[styles.body, containerStyle]}>{children}</View>
         )}
       </SafeAreaView>
       <FooterComponent />
@@ -71,7 +70,10 @@ const styles = StyleSheet.create({
     top: 0,
     right: 0,
   },
-  body: { flex: 1, paddingTop: HEADER_HEIGHT },
+  body: {
+    flex: 1,
+    marginTop: HEADER_HEIGHT,
+  },
 });
 
 export default MainContainer;
