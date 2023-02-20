@@ -6,7 +6,7 @@ import ChangePlayerLevel from "./ChangePlayerLevel";
 import GenderRole from "./GenderRole";
 
 // @ts-ignore
-import FrameBg from "../../../../../assets/frame.svg";
+import FrameBg from "../../../../../assets/frames/frame.svg";
 
 import Animated, { SlideInLeft, SlideOutLeft } from "react-native-reanimated";
 import styles from "./styles";
