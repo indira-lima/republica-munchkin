@@ -16,7 +16,7 @@ import globalStyles, { circulo, colors } from "../../../../core/utils/styles";
 // @ts-ignore
 import FastImage from "react-native-fast-image";
 // @ts-ignore
-import battleReady from "../../../../../../assets/battle_ready.png";
+import battleReady from "../../../../../../assets/icons/battle_ready.png";
 import useInterval from "../../../../core/hooks/useInterval";
 
 interface PlayerAvatarProps {

@@ -12,7 +12,7 @@ import useGame from "../../../core/hooks/useGame";
 import globalStyles from "../../../core/utils/styles";
 
 // @ts-ignore
-import buttonImg from "../../../../../assets/BigStartButton.png";
+import buttonImg from "../../../../../assets/icons/BigStartButton.png";
 
 interface BigStartButtonProps {
   // nothing

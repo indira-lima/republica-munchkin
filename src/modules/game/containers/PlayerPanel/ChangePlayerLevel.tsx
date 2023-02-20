@@ -1,9 +1,9 @@
 import { createRef } from "react";
 
 // @ts-ignore
-import imgLevelDown from "../../../../../assets/level-down.png";
+import imgLevelDown from "../../../../../assets/icons/level-down.png";
 // @ts-ignore
-import imgLevelUp from "../../../../../assets/level-up.png";
+import imgLevelUp from "../../../../../assets/icons/level-up.png";
 
 import useGame from "../../../core/hooks/useGame";
 import HorizontalSwipeableActions from "../../../core/components/SwipeableActions/Horizontal";
