@@ -3,21 +3,22 @@ import { StyleSheet, View } from "react-native";
 import useCrew from "../../../core/hooks/useCrew";
 import Button from "../../../core/components/Button";
 import useGame from "../../../core/hooks/useGame";
-import SelectableMember from "./SelectableMember";
+import SelectableMember from "../SelectableMember";
 import AnimatedPanel from "../../../core/containers/AnimatedPanel";
 
 interface PlayersSelectionPanelProps {
-  // TODO: Component props
+  // nothing
 }
 
 /**
  * Panel for selecting 3 to 6 players out of the Crew members list
+ *
+	 * TODO: context for selected members
  */
 const PlayersSelectionPanel: React.FunctionComponent<
   PlayersSelectionPanelProps
 > = () => {
   const { crew } = useCrew();
-	// TODO: contexto de seleção de players
   const { setGameState } = useGame();
   const [isPanelOpen, setIsPanelOpen] = useState<boolean>(true);
 
