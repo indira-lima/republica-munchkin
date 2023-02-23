@@ -34,7 +34,6 @@ const AnimatedPanel: React.FunctionComponent<AnimatedPanelProps> = ({
    * the containerMaxHeight
    */
   useEffect(() => {
-		console.log("panel open:", isPanelOPen);
     if (isPanelOPen) {
       animation.value = withTiming(containerMaxHeight);
     } else {
