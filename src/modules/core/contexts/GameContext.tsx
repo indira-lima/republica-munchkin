@@ -5,18 +5,21 @@ import useSecureStorage from "../hooks/useSecureStorage";
 import { CrewMember, Player } from "../definitions";
 import useStorageUtils from "../hooks/useStorageUtils";
 
+import GameConfig from "../game_config.json";
+const { max_players, min_players } = GameConfig;
+
 /**
  * void means the game hasn't started
  * choosing-players means the user is selecting the match's players
  * started means the action has began!
  */
-type GameState =  "void" | "choosing-players" | "started";
+type GameState = "void" | "choosing-players" | "started";
 
 interface GameContextValue {
   gameState: GameState;
-	setGameState: (state: GameState) => void;
+  setGameState: (state: GameState) => void;
   createNewGame: (members: CrewMember[]) => void;
-	endGame: () => void;
+  endGame: () => void;
   playerList: Player[];
   removePlayer: (id: number) => void;
   editPlayer: (id: number, data: Player) => void;
@@ -55,9 +58,7 @@ export const GameProvider = ({ children }: any) => {
    */
   useEffect(() => {
     async function initState() {
-      const gameState: GameState = await getFromStorage(
-        "isGameInProgress"
-      );
+      const gameState: GameState = await getFromStorage("isGameInProgress");
       if (gameState) {
         const players: Player[] = await getFromStorage("playerList");
         setPlayerList(players || []);
@@ -77,10 +78,10 @@ export const GameProvider = ({ children }: any) => {
   }, [gameState, playerList]);
 
   const createNewGame = useCallback((members: CrewMember[]) => {
-    if (members.length < 3)
-      throw new Error("A game must have at least 3 players");
-    if (members.length > 6)
-      throw new Error("A game must have a maximum of 6 players");
+    if (members.length < min_players)
+      throw new Error(`A game must have at least ${min_players} players`);
+    if (members.length > max_players)
+      throw new Error(`A game must have a maximum of ${max_players} players`);
 
     const playerList: Player[] = [];
     members.forEach((member) => {
@@ -166,9 +167,9 @@ export const GameProvider = ({ children }: any) => {
     <GameContext.Provider
       value={{
         gameState,
-				setGameState,
+        setGameState,
         createNewGame,
-				endGame,
+        endGame,
         playerList,
         removePlayer,
         editPlayer,
