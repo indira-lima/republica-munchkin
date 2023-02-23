@@ -7,7 +7,7 @@ export const frameHeight = frameWidth * 0.37
 
 const styles = StyleSheet.create({
   container: {
-    paddingHorizontal: 15,
+    paddingHorizontal: 20,
     width: frameWidth,
     height: frameHeight,
     position: 'relative',

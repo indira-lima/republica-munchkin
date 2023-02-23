@@ -1,4 +1,4 @@
-import { useCallback, useMemo, useState } from "react";
+import { useCallback, useState } from "react";
 import { StyleSheet, TouchableWithoutFeedback, View } from "react-native";
 
 import { useNavigation } from "@react-navigation/native";
@@ -10,14 +10,13 @@ import Animated, {
 } from "react-native-reanimated";
 
 import { Player } from "../../../../core/definitions";
-import avatarImages from "../../../../core/imports/avatars";
 import globalStyles, { circulo, colors } from "../../../../core/utils/styles";
 
 // @ts-ignore
-import FastImage from "react-native-fast-image";
-// @ts-ignore
 import battleReady from "../../../../../../assets/icons/battle_ready.png";
 import useInterval from "../../../../core/hooks/useInterval";
+import AvatarImage from "../../../../core/components/AvatarImage";
+import FastImage from "react-native-fast-image";
 
 interface PlayerAvatarProps {
   player: Player;
@@ -37,18 +36,6 @@ const PlayerAvatar: React.FunctionComponent<PlayerAvatarProps> = ({
   player,
 }) => {
   const navigation = useNavigation();
-
-  /**
-   * Gets the avatar image source and index in the `avatarImages` list
-   * from the player's avatar
-   * If the source is not found, gets the first one in the list
-   */
-  const avatarSource = useMemo(() => {
-    const avatar = avatarImages[player?.memberInfo.avatar!];
-    const source = avatar || avatarImages[0];
-
-    return source;
-  }, [player?.memberInfo]);
 
   // battle state: is the player ready for some action??
   const [battleState, setBattleState] = useState<"idle" | "ready">("idle");
@@ -91,12 +78,11 @@ const PlayerAvatar: React.FunctionComponent<PlayerAvatarProps> = ({
           {/* Idle means the the user hasn't tapped the avatat */}
           {battleState === "idle" && (
             <Animated.View entering={FlipInEasyY} exiting={FlipOutEasyY}>
-              <FastImage
-                source={avatarSource}
-                style={[
-                  styles.avatarImage,
-                  { borderColor: player?.memberInfo?.theme?.colors.primary },
-                ]}
+              <AvatarImage
+                index={player.memberInfo.avatar}
+								width={styles.avatarImage.width}
+								height={styles.avatarImage.height}
+								borderColor={player.memberInfo.theme.colors.primary}
               />
             </Animated.View>
           )}

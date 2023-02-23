@@ -2,10 +2,7 @@ import { MaterialCommunityIcons } from "@expo/vector-icons";
 import { useCallback, useMemo } from "react";
 import { StyleSheet, TouchableWithoutFeedback, View } from "react-native";
 
-import Animated, {
-  FlipInEasyY,
-  FlipOutEasyY,
-} from "react-native-reanimated";
+import Animated, { FlipInEasyY, FlipOutEasyY } from "react-native-reanimated";
 
 import { CrewMember } from "../../../../core/definitions";
 import avatarImages from "../../../../core/imports/avatars";
@@ -13,6 +10,7 @@ import globalStyles, { circulo, colors } from "../../../../core/utils/styles";
 
 // @ts-ignore
 import FastImage from "react-native-fast-image";
+import AvatarImage from "../../../../core/components/AvatarImage";
 
 interface CrewMemberAvatarProps {
   crewMember: CrewMember;
@@ -30,7 +28,6 @@ const CrewMemberAvatar: React.FunctionComponent<CrewMemberAvatarProps> = ({
   enableEdit = false,
   onChange = () => {},
 }) => {
-
   /**
    * Gets the avatar image source and index in the `avatarImages` list
    * from the player's avatar
@@ -93,12 +90,11 @@ const CrewMemberAvatar: React.FunctionComponent<CrewMemberAvatarProps> = ({
       )}
       <View>
         <Animated.View entering={FlipInEasyY} exiting={FlipOutEasyY}>
-          <FastImage
-            source={avatarSource}
-            style={[
-              styles.avatarImage,
-              { borderColor: crewMember?.theme?.colors?.primary },
-            ]}
+          <AvatarImage
+            index={crewMember?.avatar!}
+            width={styles.avatarImage.width}
+            height={styles.avatarImage.height}
+            borderColor={crewMember?.theme.colors.secondary}
           />
         </Animated.View>
       </View>
@@ -115,8 +111,8 @@ const avatarSize = 78;
 
 const styles = StyleSheet.create({
   avatarImage: {
-    ...circulo(avatarSize),
-    borderWidth: 3,
+    width: avatarSize,
+		height: avatarSize,
   },
   battleImageWrapper: {
     ...circulo(avatarSize),
@@ -132,6 +128,5 @@ const styles = StyleSheet.create({
     ...globalStyles.row,
   },
 });
-
 
 export default CrewMemberAvatar;
