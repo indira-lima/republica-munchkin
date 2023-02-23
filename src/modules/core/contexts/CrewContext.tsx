@@ -3,7 +3,6 @@ import { createContext, useEffect, useCallback, useState } from "react";
 import useSecureStorage from "../hooks/useSecureStorage";
 
 import { Genders } from "../utils/static";
-import avatarImages from "../imports/avatars";
 import { CrewMember } from "../definitions";
 import useStorageUtils from "../hooks/useStorageUtils";
 
@@ -68,14 +67,6 @@ export const CrewProvider = ({ children }: any) => {
       data.gender = foundGender === undefined ? Genders.PAN : foundGender;
     } else {
       data.gender = Genders.PAN;
-    }
-
-    // validate the avatar value, if defined
-    if (data.avatar !== undefined) {
-      const foundAvatar = avatarImages[data.avatar];
-      data.avatar = foundAvatar === undefined ? 0 : data.avatar;
-    } else {
-      data.avatar = 0;
     }
   }, []);
 

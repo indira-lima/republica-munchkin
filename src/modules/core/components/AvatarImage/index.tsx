@@ -58,6 +58,8 @@ const avatars = [
   Avatar17,
 ];
 
+export const LAST_AVATAR_INDEX = 17;
+
 interface AvatarImageProps {
   index: number;
   borderColor: string;

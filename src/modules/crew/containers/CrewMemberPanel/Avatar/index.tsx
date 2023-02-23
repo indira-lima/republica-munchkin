@@ -1,16 +1,16 @@
 import { MaterialCommunityIcons } from "@expo/vector-icons";
-import { useCallback, useMemo } from "react";
+import { useCallback } from "react";
 import { StyleSheet, TouchableWithoutFeedback, View } from "react-native";
 
 import Animated, { FlipInEasyY, FlipOutEasyY } from "react-native-reanimated";
 
 import { CrewMember } from "../../../../core/definitions";
-import avatarImages from "../../../../core/imports/avatars";
 import globalStyles, { circulo, colors } from "../../../../core/utils/styles";
 
 // @ts-ignore
-import FastImage from "react-native-fast-image";
-import AvatarImage from "../../../../core/components/AvatarImage";
+import AvatarImage, {
+  LAST_AVATAR_INDEX,
+} from "../../../../core/components/AvatarImage";
 
 interface CrewMemberAvatarProps {
   crewMember: CrewMember;
@@ -29,19 +29,6 @@ const CrewMemberAvatar: React.FunctionComponent<CrewMemberAvatarProps> = ({
   onChange = () => {},
 }) => {
   /**
-   * Gets the avatar image source and index in the `avatarImages` list
-   * from the player's avatar
-   * If the source is not found, gets the first one in the list
-   */
-  const [avatarSource, currentAvatarIndex] = useMemo(() => {
-    const avatar = avatarImages[crewMember?.avatar!];
-    const source = avatar || avatarImages[0];
-    const index = avatarImages.findIndex((img) => img === source);
-
-    return [source, index];
-  }, [crewMember]);
-
-  /**
    * Changes the avatar to the previous one in the `avatarImages` list
    *
    * Emit the onChange event passing the index of the previous avatar
@@ -51,14 +38,18 @@ const CrewMemberAvatar: React.FunctionComponent<CrewMemberAvatarProps> = ({
     if (!enableEdit) return;
 
     let newAvatarIndex;
-    if (currentAvatarIndex === 0) {
-      newAvatarIndex = avatarImages.length - 1;
+    if (!crewMember) {
+      newAvatarIndex = 0;
     } else {
-      newAvatarIndex = currentAvatarIndex - 1;
+      if (crewMember?.avatar === 0) {
+        newAvatarIndex = LAST_AVATAR_INDEX;
+      } else {
+        newAvatarIndex = crewMember.avatar - 1;
+      }
     }
 
     onChange(newAvatarIndex);
-  }, [currentAvatarIndex]);
+  }, [crewMember?.avatar]);
 
   /**
    * Changes the avatar to the next one in the `avatarImages` list
@@ -71,14 +62,18 @@ const CrewMemberAvatar: React.FunctionComponent<CrewMemberAvatarProps> = ({
 
     let newAvatarIndex;
 
-    if (currentAvatarIndex === avatarImages.length - 1) {
+    if (!crewMember) {
       newAvatarIndex = 0;
     } else {
-      newAvatarIndex = currentAvatarIndex + 1;
+      if (crewMember.avatar === LAST_AVATAR_INDEX) {
+        newAvatarIndex = 0;
+      } else {
+        newAvatarIndex = crewMember.avatar + 1;
+      }
     }
 
     onChange(newAvatarIndex);
-  }, [currentAvatarIndex]);
+  }, [crewMember?.avatar]);
 
   return (
     <View style={styles.container}>
@@ -112,7 +107,7 @@ const avatarSize = 78;
 const styles = StyleSheet.create({
   avatarImage: {
     width: avatarSize,
-		height: avatarSize,
+    height: avatarSize,
   },
   battleImageWrapper: {
     ...circulo(avatarSize),
