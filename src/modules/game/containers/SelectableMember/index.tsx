@@ -5,13 +5,13 @@ import { CrewMember } from "../../../core/definitions";
 // @ts-ignore
 import SelectableFrame from "../../../../../assets/frames/member_selectable.svg";
 // @ts-ignore
-import SelectedFrame from "../../../../../assets/frames/member_selected.svg";
 import Animated, {
   LightSpeedInLeft,
   LightSpeedOutLeft,
 } from "react-native-reanimated";
+
 import styles from "./styles";
-import globalStyles from "../../../core/utils/styles";
+import AvatarImage from "../../../core/components/AvatarImage";
 
 interface SelectableMemberProps {
   member: CrewMember;
@@ -42,6 +42,12 @@ const SelectableMember: React.FunctionComponent<SelectableMemberProps> = ({
         />
         <View style={styles.content}>
           <View style={styles.avatarSection}>
+            <AvatarImage
+              index={member.avatar}
+              width={styles.avatarImage.width}
+              height={styles.avatarImage.height}
+              borderColor={member.theme.colors.secondary}
+            />
           </View>
           <View>
             <Text style={styles.name}>{member.name}</Text>

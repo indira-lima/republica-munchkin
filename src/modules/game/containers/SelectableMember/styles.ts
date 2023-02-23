@@ -2,12 +2,11 @@ import { StyleSheet } from "react-native";
 
 import globalStyles, { vw } from '../../../core/utils/styles'
 
-export const frameWidth = vw(90)
+export const frameWidth = vw(85)
 export const frameHeight = frameWidth * 0.21
 
 const styles = StyleSheet.create({
   container: {
-    paddingHorizontal: 15,
     width: frameWidth,
     height: frameHeight,
     position: 'relative',
@@ -29,6 +28,10 @@ const styles = StyleSheet.create({
 	avatarSection: {
 		minWidth: '20%',
 		marginRight: 15,
+	},
+	avatarImage: {
+		width: frameHeight,
+		height: frameHeight,
 	},
 	name: {
 		...globalStyles.text,
