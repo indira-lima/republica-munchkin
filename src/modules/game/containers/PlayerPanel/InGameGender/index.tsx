@@ -1,12 +1,11 @@
 import { useCallback, useMemo } from "react";
-import { StyleSheet, TouchableWithoutFeedback, View } from "react-native";
-import FastImage from "react-native-fast-image";
+import { TouchableWithoutFeedback } from "react-native";
 import useGame from "../../../../core/hooks/useGame";
 import { Genders } from "../../../../core/utils/static";
 
 import { Player } from "../../../../core/definitions";
 import genderIcons from "../../../../core/imports/genders";
-import { circulo } from "../../../../core/utils/styles";
+import GenderImage from "../../../../core/components/GenderImage";
 
 /**
  * Shows and changes the Player.inGameGender prop
@@ -17,14 +16,14 @@ const InGameGender = ({ player }: { player: Player }) => {
   /**
    * Gets the icon source and index from the player.gender value
    */
-  const [genderImgSource, currentGenderIndex] = useMemo(() => {
+  const currentGenderIndex = useMemo(() => {
     const source =
       genderIcons[player?.inGameGender!] || genderIcons[Genders.PAN];
     const index = Object.entries(genderIcons).findIndex(
       ([, img]) => img === source
     );
 
-    return [source, index];
+    return index;
   }, [player?.inGameGender]);
 
   /**
@@ -42,35 +41,22 @@ const InGameGender = ({ player }: { player: Player }) => {
 
     editPlayer(player.id, {
       ...player,
-			inGameGender: newGenderIndex,
+      inGameGender: newGenderIndex,
     });
   }, [player, currentGenderIndex]);
 
   return (
     <TouchableWithoutFeedback onPress={handleChangeGender}>
-      <View
-        style={[
-          styles.container,
-          { borderColor: player?.memberInfo?.theme?.colors.primary },
-        ]}
-      >
-        <FastImage source={genderImgSource} style={styles.image} />
-      </View>
+      <GenderImage
+        width={imageSize}
+        height={imageSize}
+        theme={player?.memberInfo?.theme}
+				index={player.inGameGender}
+      />
     </TouchableWithoutFeedback>
   );
 };
 
-const containerSize = 78;
-
-const styles = StyleSheet.create({
-  container: {
-    ...circulo(containerSize),
-    borderWidth: 3,
-  },
-  image: {
-    height: containerSize * 0.6,
-    width: containerSize * 0.6,
-  },
-});
+const imageSize = 78;
 
 export default InGameGender;
