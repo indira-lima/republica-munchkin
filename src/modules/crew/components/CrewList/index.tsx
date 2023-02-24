@@ -1,10 +1,10 @@
 import { FlatList, View, StyleSheet } from "react-native";
 
-import globalStyles from "../../core/utils/styles";
-import Button from "../../core/components/Button";
+import globalStyles from "../../../core/utils/styles";
+import Button from "../../../core/components/Button";
 
-import { CrewMember } from "../../core/definitions";
-import CrewMemberPanel from "../containers/CrewMemberPanel";
+import { CrewMember } from "../../../core/definitions";
+import CrewMemberPanel from "../../containers/CrewMemberPanel";
 
 interface CrewListProps {
   data: CrewMember[];
