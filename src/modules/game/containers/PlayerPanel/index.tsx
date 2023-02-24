@@ -9,8 +9,8 @@ import InGameGender from "./InGameGender";
 import FrameBg from "../../../../../assets/frames/frame.svg";
 
 import Animated, { SlideInLeft, SlideOutLeft } from "react-native-reanimated";
-import styles from "./styles";
 import { Player } from "../../../core/definitions";
+import styles from "./styles";
 
 interface PlayerPanelProps {
   player: Player;
