@@ -8,7 +8,7 @@ import ModalContainer, {
 } from "../../../core/containers/ModalContainer";
 import useCrew from "../../../core/hooks/useCrew";
 
-import ChangeGenderBtn from "./ChangeGenderBtn";
+import CrewMemberGender from "../../containers/GenderRole";
 import ChangeThemeBtn from "./ChangeThemeBtn";
 
 import globalStyles from "../../../core/utils/styles";
@@ -82,9 +82,11 @@ const ModalNewMember: React.FunctionComponent<
               crewMember={memberData}
               onChange={(value: any) => handleSetMemberProp("avatar", value)}
             />
-            <ChangeGenderBtn
+            <CrewMemberGender
               crewMember={memberData}
               onChange={(value: any) => handleSetMemberProp("gender", value)}
+							height={52}
+							width={52}
             />
           </View>
           <View style={styles.inputSession}>

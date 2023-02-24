@@ -1,8 +1,8 @@
 import { StyleSheet, View } from "react-native";
 
-import CrewMemberAvatar from './Avatar';
+import CrewMemberAvatar from "./Avatar";
 import DeleteCrewMember from "./DeleteCrewMember";
-import GenderRole from "../GenderRole";
+import CrewMemberGender from "../GenderRole";
 
 // @ts-ignore
 import FrameBg from "../../../../../assets/frames/frame.svg";
@@ -15,6 +15,8 @@ import styles from "./styles";
 interface CrewMemberPanelProps {
   crewMember: CrewMember;
 }
+
+const iconsSize = 78;
 
 /**
  * Main panel used for showing a member information in the Crew screen
@@ -34,9 +36,9 @@ const CrewMemberPanel: React.FunctionComponent<CrewMemberPanelProps> = ({
             secondaryColor={crewMember?.theme?.colors?.secondary}
           />
           <View style={styles.content}>
-            <CrewMemberAvatar crewMember={crewMember} /> 
+            <CrewMemberAvatar crewMember={crewMember} height={iconsSize} width={iconsSize}/>
             <Edition crewMember={crewMember} />
-            <GenderRole crewMember={crewMember} />
+            <CrewMemberGender crewMember={crewMember} height={iconsSize} width={iconsSize}/>
           </View>
         </View>
       </DeleteCrewMember>
