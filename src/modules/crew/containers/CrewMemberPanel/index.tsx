@@ -30,8 +30,8 @@ const CrewMemberPanel: React.FunctionComponent<CrewMemberPanelProps> = ({
             width={styles.frame.width}
             height={styles.frame.height}
             style={[StyleSheet.absoluteFillObject, { opacity: 0.95 }]}
-            primaryColor={crewMember.theme.colors?.primary}
-            secondaryColor={crewMember.theme.colors?.secondary}
+            primaryColor={crewMember?.theme?.colors?.primary}
+            secondaryColor={crewMember?.theme?.colors?.secondary}
           />
           <View style={styles.content}>
             <CrewMemberAvatar crewMember={crewMember} /> 

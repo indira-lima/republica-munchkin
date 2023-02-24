@@ -89,7 +89,7 @@ const CrewMemberAvatar: React.FunctionComponent<CrewMemberAvatarProps> = ({
             index={crewMember?.avatar!}
             width={styles.avatarImage.width}
             height={styles.avatarImage.height}
-            borderColor={crewMember?.theme.colors.secondary}
+            borderColor={crewMember?.theme?.colors?.secondary}
           />
         </Animated.View>
       </View>

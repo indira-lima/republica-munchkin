@@ -36,6 +36,7 @@ import Avatar15 from "../../../../../assets/avatars/avatar_15.svg";
 import Avatar16 from "../../../../../assets/avatars/avatar_16.svg";
 // @ts-ignore
 import Avatar17 from "../../../../../assets/avatars/avatar_17.svg";
+import themes from "../../utils/themes";
 
 const avatars = [
   Avatar0,
@@ -83,6 +84,7 @@ const AvatarImage: React.FunctionComponent<AvatarImageProps> = ({
   width,
   height,
 }) => {
+	index = index !== undefined ? index : 0;
   return (
     <>
       {avatars.map((Avatar, i) => {
@@ -90,7 +92,7 @@ const AvatarImage: React.FunctionComponent<AvatarImageProps> = ({
         return (
           <Avatar
 						key={i}
-            secondaryColor={borderColor}
+            secondaryColor={borderColor || themes[0]?.colors.secondary}
             style={style}
             width={width}
             height={height}

@@ -5,6 +5,7 @@ import useSecureStorage from "../hooks/useSecureStorage";
 import { Genders } from "../utils/static";
 import { CrewMember } from "../definitions";
 import useStorageUtils from "../hooks/useStorageUtils";
+import themes from "../utils/themes";
 
 interface CrewContextValue {
   crew: CrewMember[];
@@ -68,6 +69,10 @@ export const CrewProvider = ({ children }: any) => {
     } else {
       data.gender = Genders.PAN;
     }
+		
+		if (data.theme === undefined) {
+			data.theme = themes[0]!;
+		}
   }, []);
 
   const addCrewMember = useCallback((member: CrewMember) => {
