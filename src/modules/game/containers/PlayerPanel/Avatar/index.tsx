@@ -80,9 +80,9 @@ const PlayerAvatar: React.FunctionComponent<PlayerAvatarProps> = ({
             <Animated.View entering={FlipInEasyY} exiting={FlipOutEasyY}>
               <AvatarImage
                 index={player.memberInfo.avatar}
-								width={styles.avatarImage.width}
-								height={styles.avatarImage.height}
-								borderColor={player.memberInfo.theme.colors.primary}
+								width={avatarSize}
+								height={avatarSize}
+								borderColor={player.memberInfo.theme.colors.secondary}
               />
             </Animated.View>
           )}
@@ -109,10 +109,6 @@ const PlayerAvatar: React.FunctionComponent<PlayerAvatarProps> = ({
 const avatarSize = 78;
 
 const styles = StyleSheet.create({
-  avatarImage: {
-    ...circulo(avatarSize),
-    borderWidth: 3,
-  },
   battleImageWrapper: {
     ...circulo(avatarSize),
     borderWidth: 3,

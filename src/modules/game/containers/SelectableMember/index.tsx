@@ -26,17 +26,12 @@ interface SelectableMemberProps {
 /**
  * Component that shows the info of a crew member and let it
  * available for selection in the choosing-players game state
- *
- * TODO: Component style and member selection
  */
 const SelectableMember: React.FunctionComponent<SelectableMemberProps> = ({
   member,
   onPress,
   isSelected,
 }) => {
-  useEffect(() => {
-    console.log("rendering:", member.name);
-  }, []);
 
   return (
     <TouchableWithoutFeedback onPress={() => onPress(member)}>

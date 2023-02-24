@@ -59,7 +59,7 @@ const avatars = [
   Avatar17,
 ];
 
-export const LAST_AVATAR_INDEX = 17;
+export const LAST_AVATAR_INDEX = avatars.length - 1;
 
 interface AvatarImageProps {
   index: number;

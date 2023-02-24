@@ -58,11 +58,20 @@ export const GameProvider = ({ children }: any) => {
    */
   useEffect(() => {
     async function initState() {
-      const gameState: GameState = await getFromStorage("gameState");
+      let gameState: GameState = await getFromStorage("gameState");
       if (gameState) {
         const players: Player[] = await getFromStorage("playerList");
+
+        // console.log("loading list:", players);
         setPlayerList(players || []);
-				setGameState(gameState);
+
+        if (
+          players.length < GameConfig.min_players ||
+          players.length > GameConfig.max_players
+        )
+          gameState = "void";
+
+        setGameState(gameState);
       }
     }
 
@@ -73,8 +82,12 @@ export const GameProvider = ({ children }: any) => {
    * Saving data to the storage everytime the playerList changes
    */
   useEffect(() => {
-    secureSave("gameState", gameState);
-    secureSave("playerList", gameState === "started" ? playerList : []);
+    async function saveState() {
+      await secureSave("gameState", gameState);
+      await secureSave("playerList", playerList)
+    }
+
+    saveState();
   }, [gameState, playerList]);
 
   const createNewGame = useCallback((members: CrewMember[]) => {
@@ -91,7 +104,7 @@ export const GameProvider = ({ children }: any) => {
         items: 0,
         won: false,
         memberInfo: member,
-				inGameGender: member.gender,
+        inGameGender: member.gender,
       };
 
       playerList.push(player);
