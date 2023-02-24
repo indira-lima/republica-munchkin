@@ -58,12 +58,12 @@ export const GameProvider = ({ children }: any) => {
    */
   useEffect(() => {
     async function initState() {
-      const gameState: GameState = await getFromStorage("isGameInProgress");
+      const gameState: GameState = await getFromStorage("gameState");
       if (gameState) {
         const players: Player[] = await getFromStorage("playerList");
         setPlayerList(players || []);
+				setGameState(gameState);
       }
-      setGameState(gameState);
     }
 
     initState();
@@ -73,8 +73,8 @@ export const GameProvider = ({ children }: any) => {
    * Saving data to the storage everytime the playerList changes
    */
   useEffect(() => {
-    secureSave("isGameInProgress", gameState);
-    secureSave("playerList", gameState ? playerList : []);
+    secureSave("gameState", gameState);
+    secureSave("playerList", gameState === "started" ? playerList : []);
   }, [gameState, playerList]);
 
   const createNewGame = useCallback((members: CrewMember[]) => {

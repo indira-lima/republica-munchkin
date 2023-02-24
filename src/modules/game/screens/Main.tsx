@@ -16,7 +16,7 @@ import BigStartButton from "../containers/BigStartButton";
  * a list of the current crew members
  */
 const GameScreen = () => {
-  const { gameState, setGameState, playerList } = useGame();
+  const { gameState, playerList } = useGame();
 
   const renderItemPlayer = useCallback(({ item }: any) => {
     return <PanelPlayer key={item.id} player={item} />;
