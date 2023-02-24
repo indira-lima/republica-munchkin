@@ -2,14 +2,14 @@ import { StyleSheet, View } from "react-native";
 
 import CrewMemberAvatar from './Avatar';
 import DeleteCrewMember from "./DeleteCrewMember";
-import GenderRole from "./GenderRole";
+import GenderRole from "../GenderRole";
 
 // @ts-ignore
 import FrameBg from "../../../../../assets/frames/frame.svg";
 
 import Animated, { SlideInLeft, SlideOutLeft } from "react-native-reanimated";
 import { CrewMember } from "../../../core/definitions";
-import Edition from "../../components/EditPlayerBtn";
+import Edition from "../../components/EditionButton";
 import styles from "./styles";
 
 interface CrewMemberPanelProps {
