@@ -77,7 +77,7 @@ const Button: React.FunctionComponent<ButtonProps> = ({
       activeOpacity={0.75}
     >
       <SvgSource
-        style={StyleSheet.absoluteFill}
+        style={[StyleSheet.absoluteFill, _disabled ? styles.btnDisabled : {}]}
         width={typeDimensions.container.width}
         height={typeDimensions.container.height}
         primaryColor={themeObject?.colors?.primary}

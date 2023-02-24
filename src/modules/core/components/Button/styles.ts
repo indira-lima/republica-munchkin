@@ -18,8 +18,8 @@ export const sources = {
 export const dimensions = {
   large: {
     container: {
-      height: 65,
-      width: 310,
+      height: 60,
+      width: 300,
     },
     icon: 36,
   },
@@ -67,7 +67,7 @@ const styles = StyleSheet.create({
     textAlign: "center",
   },
   btnDisabled: {
-    opacity: 0.7,
+    opacity: 0.9,
   },
 });
 
