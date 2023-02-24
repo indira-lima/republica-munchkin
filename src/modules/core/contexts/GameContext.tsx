@@ -91,6 +91,7 @@ export const GameProvider = ({ children }: any) => {
         items: 0,
         won: false,
         memberInfo: member,
+				inGameGender: member.gender,
       };
 
       playerList.push(player);

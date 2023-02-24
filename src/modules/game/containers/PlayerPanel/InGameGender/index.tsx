@@ -9,10 +9,9 @@ import genderIcons from "../../../../core/imports/genders";
 import { circulo } from "../../../../core/utils/styles";
 
 /**
- * Very similar to the ChangeGenderBtn, but it's a circle
- * I'm gonna refactor this later
+ * Shows and changes the Player.inGameGender prop
  */
-const PlayerGender = ({ player }: { player: Player }) => {
+const InGameGender = ({ player }: { player: Player }) => {
   const { editPlayer } = useGame();
 
   /**
@@ -20,13 +19,13 @@ const PlayerGender = ({ player }: { player: Player }) => {
    */
   const [genderImgSource, currentGenderIndex] = useMemo(() => {
     const source =
-      genderIcons[player?.memberInfo.gender!] || genderIcons[Genders.PAN];
+      genderIcons[player?.inGameGender!] || genderIcons[Genders.PAN];
     const index = Object.entries(genderIcons).findIndex(
       ([, img]) => img === source
     );
 
     return [source, index];
-  }, [player?.memberInfo]);
+  }, [player?.inGameGender]);
 
   /**
    * Changes the current gender value to the next one in the Genders list
@@ -43,7 +42,7 @@ const PlayerGender = ({ player }: { player: Player }) => {
 
     editPlayer(player.id, {
       ...player,
-      memberInfo: { ...player.memberInfo, gender: newGenderIndex },
+			inGameGender: newGenderIndex,
     });
   }, [player, currentGenderIndex]);
 
@@ -74,4 +73,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default PlayerGender;
+export default InGameGender;

@@ -3,7 +3,7 @@ import { StyleSheet, View } from "react-native";
 import InGameValues from "../../components/player/InGameValues";
 import Avatar from "./Avatar";
 import ChangePlayerLevel from "./ChangePlayerLevel";
-import GenderRole from "./GenderRole";
+import InGameGender from "./InGameGender";
 
 // @ts-ignore
 import FrameBg from "../../../../../assets/frames/frame.svg";
@@ -37,7 +37,7 @@ const PlayerPanel: React.FunctionComponent<PlayerPanelProps> = ({ player }) => {
           <View style={styles.content}>
             <Avatar player={player} />
             <InGameValues player={player} />
-            <GenderRole player={player} />
+            <InGameGender player={player} />
           </View>
         </View>
       </ChangePlayerLevel>

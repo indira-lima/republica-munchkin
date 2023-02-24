@@ -36,5 +36,6 @@ export interface Player {
   level: number;
   items: number;
   won: boolean;
+	inGameGender: number;
 }
 
