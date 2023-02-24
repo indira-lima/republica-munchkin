@@ -1,5 +1,4 @@
 import { useCallback } from "react";
-import { TouchableWithoutFeedback } from "react-native";
 
 import { CrewMember } from "../../../core/definitions";
 
@@ -7,6 +6,7 @@ import useCrew from "../../../core/hooks/useCrew";
 import GenderImage, {
   LAST_GENDER_INDEX,
 } from "../../../core/components/GenderImage";
+import {TouchableOpacity} from "react-native";
 
 /**
  * Changes the current CrewMember gender
@@ -45,14 +45,14 @@ const CrewMemberGender = ({
   }, [crewMember]);
 
   return (
-    <TouchableWithoutFeedback onPress={handleChangeGender}>
+    <TouchableOpacity activeOpacity={1} onPress={handleChangeGender}>
       <GenderImage
         height={height!}
         width={width!}
         index={crewMember?.gender}
         theme={crewMember?.theme}
       />
-    </TouchableWithoutFeedback>
+    </TouchableOpacity>
   );
 };
 

@@ -3,7 +3,7 @@ import { StyleSheet, View } from "react-native";
 import InGameValues from "../../components/player/InGameValues";
 import Avatar from "./Avatar";
 import ChangePlayerLevel from "./ChangePlayerLevel";
-import InGameGender from "./InGameGender";
+import InGameGender from "../InGameGender";
 
 // @ts-ignore
 import FrameBg from "../../../../../assets/frames/frame.svg";

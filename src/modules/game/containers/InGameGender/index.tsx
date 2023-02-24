@@ -1,11 +1,11 @@
 import { useCallback, useMemo } from "react";
-import { TouchableWithoutFeedback } from "react-native";
-import useGame from "../../../../core/hooks/useGame";
-import { Genders } from "../../../../core/utils/static";
+import { TouchableOpacity } from "react-native";
+import useGame from "../../../core/hooks/useGame";
+import { Genders } from "../../../core/utils/static";
 
-import { Player } from "../../../../core/definitions";
-import genderIcons from "../../../../core/imports/genders";
-import GenderImage from "../../../../core/components/GenderImage";
+import { Player } from "../../../core/definitions";
+import genderIcons from "../../../core/imports/genders";
+import GenderImage from "../../../core/components/GenderImage";
 
 /**
  * Shows and changes the Player.inGameGender prop
@@ -46,14 +46,14 @@ const InGameGender = ({ player }: { player: Player }) => {
   }, [player, currentGenderIndex]);
 
   return (
-    <TouchableWithoutFeedback onPress={handleChangeGender}>
+    <TouchableOpacity activeOpacity={1} onPress={handleChangeGender}>
       <GenderImage
         width={imageSize}
         height={imageSize}
         theme={player?.memberInfo?.theme}
 				index={player.inGameGender}
       />
-    </TouchableWithoutFeedback>
+    </TouchableOpacity>
   );
 };
 
