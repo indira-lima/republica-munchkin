@@ -16,7 +16,7 @@ const Battle: React.FunctionComponent = () => {
 
   return (
     <View style={{ justifyContent: "center", alignItems: "center", flex: 1 }}>
-      <Text>Hello, {player?.name}, time for some battle!!</Text>
+      <Text>Hello, {player?.memberInfo.name}, time for some battle!!</Text>
     </View>
   );
 };
