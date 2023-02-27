@@ -1,5 +1,5 @@
 import { MaterialCommunityIcons } from "@expo/vector-icons";
-import { useCallback } from "react";
+import { useCallback, useEffect } from "react";
 import { StyleSheet, TouchableWithoutFeedback, View } from "react-native";
 
 import Animated, { FlipInEasyY, FlipOutEasyY } from "react-native-reanimated";
@@ -38,14 +38,10 @@ const CrewMemberAvatar: React.FunctionComponent<CrewMemberAvatarProps> = ({
     if (!enableEdit) return;
 
     let newAvatarIndex;
-    if (!crewMember) {
-      newAvatarIndex = 0;
+    if (isNaN(crewMember?.avatar) || crewMember.avatar === 0) {
+      newAvatarIndex = LAST_AVATAR_INDEX;
     } else {
-      if (crewMember?.avatar === 0) {
-        newAvatarIndex = LAST_AVATAR_INDEX;
-      } else {
-        newAvatarIndex = crewMember.avatar - 1;
-      }
+      newAvatarIndex = crewMember.avatar - 1;
     }
 
     onChange(newAvatarIndex);
@@ -62,14 +58,12 @@ const CrewMemberAvatar: React.FunctionComponent<CrewMemberAvatarProps> = ({
 
     let newAvatarIndex;
 
-    if (!crewMember) {
+    if (isNaN(crewMember?.avatar)) {
+      newAvatarIndex = 1;
+    } else if (crewMember.avatar === LAST_AVATAR_INDEX) {
       newAvatarIndex = 0;
     } else {
-      if (crewMember.avatar === LAST_AVATAR_INDEX) {
-        newAvatarIndex = 0;
-      } else {
-        newAvatarIndex = crewMember.avatar + 1;
-      }
+      newAvatarIndex = crewMember.avatar + 1;
     }
 
     onChange(newAvatarIndex);
