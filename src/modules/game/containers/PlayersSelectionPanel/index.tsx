@@ -7,6 +7,12 @@ import {
   TouchableOpacity,
   View,
 } from "react-native";
+import Animated, {
+  LightSpeedInLeft,
+  LightSpeedInRight,
+  LightSpeedOutLeft,
+  LightSpeedOutRight,
+} from "react-native-reanimated";
 import Button from "../../../core/components/Button";
 import AnimatedPanel from "../../../core/containers/AnimatedPanel";
 import { CrewMember } from "../../../core/definitions";
@@ -97,24 +103,45 @@ const PlayersSelectionPanel: React.FunctionComponent<
 
   return (
     <View>
+      {/* Back button to reset the gameState to "void" */}
       <View style={styles.backButtonContainer}>
         <TouchableOpacity onPress={() => setIsPanelOpen(false)}>
           <Text style={styles.backButton}>{"< Back"}</Text>
         </TouchableOpacity>
       </View>
+
+      {/* Renders the playerList inside an AnimatedPanel */}
       <AnimatedPanel isPanelOPen={isPanelOpen} onClose={handleBackToVoid}>
         <FlatList data={crew} renderItem={renderCrewMember} />
 
+        {/*
+					Start Game button. The text inside the button is animated
+					using Animated.Text and the gameState prop
+				*/}
         <View style={styles.startButton}>
-          <Button
-            text={
-              canStartGame
-                ? "START"
-                : `Select ${GameConfig.min_players} to ${GameConfig.max_players} players`
-            }
-            disabled={!canStartGame}
-            onPress={handleStartGame}
-          />
+          {/* The button is disabled if the game cannot be started */}
+          <Button disabled={!canStartGame} onPress={handleStartGame}>
+            {/* Show "START" if the game can be started */}
+            {canStartGame && (
+              <Animated.Text
+                entering={LightSpeedInLeft}
+                exiting={LightSpeedOutLeft}
+                style={globalStyles.text}
+              >
+                START
+              </Animated.Text>
+            )}
+            {/* Show a help message if the game cannot be started */}
+            {!canStartGame && (
+              <Animated.Text
+                entering={LightSpeedInRight}
+                exiting={LightSpeedOutRight}
+                style={globalStyles.text}
+              >
+                {`Select ${GameConfig.min_players} to ${GameConfig.max_players} players`}
+              </Animated.Text>
+            )}
+          </Button>
         </View>
       </AnimatedPanel>
     </View>

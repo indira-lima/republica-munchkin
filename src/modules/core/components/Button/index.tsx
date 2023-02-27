@@ -13,6 +13,7 @@ import styles, { buttonThemes, dimensions, sources } from "./styles";
 
 interface ButtonProps {
   text?: string;
+  children?: React.ReactNode;
   icon?: string | number | Source;
   type?: "large" | "squared" | "hexagon";
   theme?: string;
@@ -26,6 +27,7 @@ interface ButtonProps {
 
 const Button: React.FunctionComponent<ButtonProps> = ({
   text = "",
+  children,
   icon = undefined,
   type = "large",
   theme = "default",
@@ -99,6 +101,7 @@ const Button: React.FunctionComponent<ButtonProps> = ({
               {text}
             </Text>
           )}
+          {children}
         </Fragment>
       )}
     </TouchableOpacity>
