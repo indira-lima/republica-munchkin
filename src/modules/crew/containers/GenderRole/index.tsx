@@ -31,7 +31,7 @@ const CrewMemberGender = ({
    */
   const handleChangeGender = useCallback(() => {
     let newGenderIndex;
-    if (!crewMember || crewMember.gender >= LAST_GENDER_INDEX) {
+    if (isNaN(crewMember?.gender) || crewMember.gender >= LAST_GENDER_INDEX) {
       newGenderIndex = 0;
     } else {
       newGenderIndex = crewMember.gender + 1;
