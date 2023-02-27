@@ -6,6 +6,7 @@ import CrewScreen from "../../../crew/screens/Main";
 import Header from "../../containers/Header";
 import { Player } from "../../definitions";
 import GameHeader from "../../../game/containers/GameHeader";
+import BattleHeader from "../../../battle/containers/BattleHeader";
 
 const fade = ({ current }: any) => {
   return {
@@ -47,7 +48,7 @@ export default function AppRoutes() {
         options={{
           headerShown: true,
           headerTransparent: true,
-          header: () => <Header />,
+          header: () => <BattleHeader />,
         }}
       />
       <AppStack.Screen
