@@ -5,7 +5,7 @@ import globalStyles, { colors, fonts } from '../../utils/styles';
 
 const DefaultCustomAlert = ({
 	show = false,
-	cancellable = false,
+	cancellable = true,
 	vertical = false,
 	large = false,
 	...props
@@ -15,6 +15,7 @@ const DefaultCustomAlert = ({
 			show={show}
 			closeOnTouchOutside={cancellable}
 			closeOnHardwareBackPress={cancellable}
+			overlayStyle={{ backgroundColor: '#000000e0' }}
 			useNativeDriver
 			titleStyle={styles.alertTitle}
 			messageStyle={styles.alertMessage}
