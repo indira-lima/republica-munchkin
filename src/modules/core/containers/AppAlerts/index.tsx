@@ -5,7 +5,7 @@ import CustomAlert from "../../components/CustomAlert";
 import useAlerts from "../../hooks/useAlerts";
 
 export default function AppAlerts() {
-  const { currentAlert, isAlertOpen } = useAlerts();
+  const { currentAlert, isAlertOpen, closeAlerts } = useAlerts();
   if (!isAlertOpen || !currentAlert) return null;
 
   const { name = "", customProps = {} } = currentAlert;
@@ -27,8 +27,8 @@ export default function AppAlerts() {
         <CustomAlert.Confirm
           show={true}
           {...customProps}
-          onConfirmPressed={customProps.onConfirmPressed || (() => {})}
-          onCancelPressed={customProps.onCancelPressed || (() => {})}
+          onConfirmPressed={customProps.onConfirmPressed || closeAlerts}
+          onCancelPressed={customProps.onCancelPressed || closeAlerts}
         />
       )}
     </Fragment>

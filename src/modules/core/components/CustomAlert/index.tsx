@@ -18,19 +18,23 @@ const DefaultCustomAlert = ({
 			useNativeDriver
 			titleStyle={styles.alertTitle}
 			messageStyle={styles.alertMessage}
-			cancelButtonTextStyle={styles.alertButton}
-			confirmButtonTextStyle={styles.alertButton}
 			contentStyle={styles.alertContent}
-			contentContainerStyle={large ? { width: '95%', maxWidth: null } : undefined}
+			contentContainerStyle={[
+				large ? { width: '95%', maxWidth: null } : undefined,
+				styles.contentContainer,
+			]}
 			actionContainerStyle={{
 				flexDirection: vertical ? 'column' : 'row',
 				justifyContent: vertical ? undefined : 'space-between',
 			}}
+
 			cancelText='Cancelar'
-			cancelButtonColor={"gray"}
+			cancelButtonTextStyle={styles.alertButton}
+			cancelButtonColor={"lightgray"}
 
 			confirmText='Ok'
-			confirmButtonColor={colors.action}
+			confirmButtonTextStyle={[globalStyles.text, styles.alertButton]}
+			confirmButtonColor={colors.secondary}
 			{...props}
 		/>
 	)
@@ -102,7 +106,7 @@ const Error = ({
 
 const Confirm = ({
 	show = false,
-	title = "Confirmar",
+	title = "Confirm",
 	message = "",
 	onConfirmPressed,
 	onCancelPressed,
@@ -117,12 +121,12 @@ const Confirm = ({
 			message={message}
 
 			// Confirmar
-			confirmText={props.confirmText || "Confirmar"}
+			confirmText={props.confirmText || "Confirm"}
 			showConfirmButton={true}
 			onConfirmPressed={onConfirmPressed || closeAlerts}
 
 			// Cancelar
-			cancelText={props.cancelText || "Cancelar"}
+			cancelText={props.cancelText || "Cancel"}
 			showCancelButton={true}
 			onCancelPressed={onCancelPressed || closeAlerts}
 			{...props}
@@ -142,9 +146,12 @@ const styles = StyleSheet.create({
 	},
 	alertButton: {
 		...globalStyles.text,
-		color: 'white'
+		color: 'black'
 	},
 	alertContent: { padding: 0 },
+	contentContainer: {
+		backgroundColor: colors.primary,
+	}
 });
 
 const CustomAlert = {
