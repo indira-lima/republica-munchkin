@@ -25,6 +25,7 @@ interface GameContextValue {
   editPlayer: (id: number, data: Player) => void;
   levelUpPlayer: (id: number) => void;
   levelDownPlayer: (id: number) => void;
+  resetAllPlayers: () => void;
 }
 
 const GameContext = createContext<GameContextValue>({} as GameContextValue);
@@ -84,7 +85,7 @@ export const GameProvider = ({ children }: any) => {
   useEffect(() => {
     async function saveState() {
       await secureSave("gameState", gameState);
-      await secureSave("playerList", playerList)
+      await secureSave("playerList", playerList);
     }
 
     saveState();
@@ -139,6 +140,22 @@ export const GameProvider = ({ children }: any) => {
     [_getPlayerIndexById]
   );
 
+  /**
+   * Resets the status of all current players, going back
+   * to the initial state of the game
+   */
+  const resetAllPlayers = useCallback(() => {
+    setPlayerList((players) => {
+      return players.map((player) => ({
+        ...player,
+        level: 1,
+        items: 0,
+        won: false,
+        inGameGender: player.memberInfo.gender,
+      }));
+    });
+  }, []);
+
   const levelUpPlayer = useCallback(
     (id: number) => {
       const index = _getPlayerIndexById(playerList, id);
@@ -186,6 +203,7 @@ export const GameProvider = ({ children }: any) => {
         endGame,
         playerList,
         removePlayer,
+        resetAllPlayers,
         editPlayer,
         levelUpPlayer,
         levelDownPlayer,
