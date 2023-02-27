@@ -9,13 +9,13 @@ interface NameProps {
 const Name: React.FunctionComponent<NameProps> = ({
   text
 }) => {
-  return <Text style={styles.name}>{text}</Text>;
+  return <Text numberOfLines={2} ellipsizeMode="tail" style={styles.name}>{text}</Text>;
 };
 
 const styles = StyleSheet.create({
   name: {
     ...globalStyles.text,
-    fontSize: 20,
+    fontSize: 18,
     color: "#fff",
   },
 });
