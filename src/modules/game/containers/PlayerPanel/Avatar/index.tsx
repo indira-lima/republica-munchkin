@@ -1,6 +1,6 @@
 import { useCallback, useState } from "react";
 import { StyleSheet, TouchableWithoutFeedback, View } from "react-native";
-
+import FastImage from "react-native-fast-image";
 import { useNavigation } from "@react-navigation/native";
 import Animated, {
   FadeIn,
@@ -13,10 +13,9 @@ import { Player } from "../../../../core/definitions";
 import globalStyles, { circulo, colors } from "../../../../core/utils/styles";
 
 // @ts-ignore
-import battleReady from "../../../../../../assets/icons/battle_ready.png";
+import BattleReady from "../../../../../../assets/icons/BattleReady.svg";
 import useInterval from "../../../../core/hooks/useInterval";
 import AvatarImage from "../../../../core/components/AvatarImage";
-import FastImage from "react-native-fast-image";
 
 interface PlayerAvatarProps {
   player: Player;
@@ -80,9 +79,9 @@ const PlayerAvatar: React.FunctionComponent<PlayerAvatarProps> = ({
             <Animated.View entering={FlipInEasyY} exiting={FlipOutEasyY}>
               <AvatarImage
                 index={player.memberInfo.avatar}
-								width={avatarSize}
-								height={avatarSize}
-								borderColor={player.memberInfo.theme.colors.secondary}
+                width={avatarSize}
+                height={avatarSize}
+                borderColor={player.memberInfo.theme.colors.secondary}
               />
             </Animated.View>
           )}
@@ -93,10 +92,11 @@ const PlayerAvatar: React.FunctionComponent<PlayerAvatarProps> = ({
               exiting={FadeOut}
               style={styles.battleImageWrapper}
             >
-              <FastImage
-                resizeMode="contain"
-                source={battleReady}
-                style={styles.battleImage}
+              <BattleReady
+                primaryColor={player.memberInfo.theme.colors.primary}
+                secondaryColor={player.memberInfo.theme.colors.secondary}
+                width={avatarSize}
+                height={avatarSize}
               />
             </Animated.View>
           )}
@@ -111,9 +111,6 @@ const avatarSize = 78;
 const styles = StyleSheet.create({
   battleImageWrapper: {
     ...circulo(avatarSize),
-    borderWidth: 3,
-    backgroundColor: "transparent",
-    borderColor: colors.accent,
   },
   battleImage: {
     width: 48,
