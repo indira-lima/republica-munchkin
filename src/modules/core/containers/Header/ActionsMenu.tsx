@@ -1,4 +1,4 @@
-import React, { useCallback, useMemo } from "react";
+import React, { Fragment, useCallback, useMemo } from "react";
 import { StyleSheet, TouchableOpacity, View } from "react-native";
 import Animated, { FadeIn, FadeOut } from "react-native-reanimated";
 import { HeaderAction } from ".";
@@ -43,29 +43,23 @@ const ActionsMenu: React.FunctionComponent<ActionsMenuProps> = ({
   if (!isOpen) return null;
   return (
     isOpen && (
-      <View style={styles.container}>
-        <Animated.View
-          entering={FadeIn}
-          exiting={FadeOut}
-          style={[styles.menuContainer, { height: actionsMenuHeight }]}
-        >
-          <GradientBackground colors={Gradients.Dark} />
+      <Animated.View
+        style={styles.container}
+        entering={FadeIn}
+        exiting={FadeOut}
+      >
+        <GradientBackground colors={Gradients.Dark} />
+        <View style={[styles.menuContainer, { height: actionsMenuHeight }]}>
           {actions.map(renderAction)}
-        </Animated.View>
+        </View>
         <TouchableOpacity
           style={[StyleSheet.absoluteFillObject, { top: actionsMenuHeight }]}
           onPress={closeMenu}
           activeOpacity={1}
         >
-          <Animated.View
-            entering={FadeIn}
-            exiting={FadeOut}
-            style={{ flex: 1 }}
-          >
-            <GradientBackground colors={Gradients.Darker} />
-          </Animated.View>
+          <Fragment/>
         </TouchableOpacity>
-      </View>
+      </Animated.View>
     )
   );
 };
