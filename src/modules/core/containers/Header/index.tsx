@@ -1,37 +1,59 @@
-import { StyleSheet, View } from "react-native"
+import { MaterialCommunityIcons } from "@expo/vector-icons";
+import { useCallback, useMemo, useState } from "react";
+import { Text, TouchableOpacity, View } from "react-native";
+import { colors } from "../../utils/styles";
+import ActionsMenu from "./ActionsMenu";
+import styles, { actionsIconSize } from "./styles";
 
-import ScaledImage from '../../components/ScaledImage'
+export type HeaderAction = {
+  icon: string;
+  label?: string;
+  onPress: () => void;
+};
 
-// @ts-expect-error TS(2307): Cannot find module '../../../../../assets/logo.png... Remove this comment to see the full error message
-import logo from '../../../../../assets/logo.png'
-
-const Header = () => {
-	return (
-		<View style={styles.container}>
-			<View style={styles.containerImg}>
-				<ScaledImage source={logo} width={230} />
-			</View>
-		</View>
-	)
+interface HeaderProps {
+  actions?: HeaderAction[];
+  title?: string;
 }
 
-export const HEADER_HEIGHT = 65
+const Header: React.FunctionComponent<HeaderProps> = ({
+  title = "Star Munchkin",
+  actions,
+}) => {
+  const hasActions = useMemo<boolean>(() => {
+    return actions?.length! > 0;
+  }, [actions]);
 
-const borderRadius = 12
-const styles = StyleSheet.create({
-	container: {
-		backgroundColor: '#00000080',
-		width: '100%',
-    height: HEADER_HEIGHT,
-    justifyContent: 'center',
-		position: 'relative',
-		borderBottomLeftRadius: borderRadius,
-		borderBottomRightRadius: borderRadius
-	},
-	containerImg: {
-		width: '100%',
-		alignItems: 'center',
-	},
-});
+  const [isActionsMenuOpen, setIsActionsMenuOpen] = useState<boolean>(false);
+  const toggleIsMenuOpen = useCallback(() => {
+    setIsActionsMenuOpen((current) => !current);
+  }, []);
 
-export default Header
+  return (
+    <View style={styles.container}>
+      <Text style={styles.headerTitle}>{title}</Text>
+      {hasActions && (
+        <TouchableOpacity
+          style={styles.actionButton}
+          activeOpacity={0.8}
+          onPress={toggleIsMenuOpen}
+        >
+          <MaterialCommunityIcons
+            name="dots-vertical"
+            size={actionsIconSize}
+            color={colors.action}
+          />
+        </TouchableOpacity>
+      )}
+      {hasActions && (
+        <ActionsMenu
+          actions={actions!}
+          isOpen={isActionsMenuOpen}
+          closeMenu={() => setIsActionsMenuOpen(false)}
+        />
+      )}
+    </View>
+  );
+};
+
+export default Header;

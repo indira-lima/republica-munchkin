@@ -12,6 +12,7 @@ export const colors = {
   action: "#D7F1EF",
   accent: "#DE2E2C",
   background: "#CBC8C3",
+	header:  "#00000080",
   text: "#CBC8C3",
   success: "#5cb85c",
   danger: "#d9534f",

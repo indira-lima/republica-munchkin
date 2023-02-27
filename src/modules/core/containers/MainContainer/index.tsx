@@ -7,7 +7,7 @@ import DefaultStatusBar from "../../components/DefaultStatusBar";
 import ScaledImage from "../../components/ScaledImage";
 
 import Footer from "../Footer";
-import { HEADER_HEIGHT } from "../Header";
+import { HEADER_HEIGHT } from "../Header/styles";
 
 // @ts-expect-error TS(2307): Cannot find module '../../../../../assets/backgrou... Remove this comment to see the full error message
 import backgroundSpace from "../../../../../assets/background.png";
