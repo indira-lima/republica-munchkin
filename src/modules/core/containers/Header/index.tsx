@@ -1,6 +1,7 @@
 import { MaterialCommunityIcons } from "@expo/vector-icons";
 import { useCallback, useMemo, useState } from "react";
 import { Text, TouchableOpacity, View } from "react-native";
+import Animated, { SlideInRight, SlideOutRight } from "react-native-reanimated";
 import { colors } from "../../utils/styles";
 import ActionsMenu from "./ActionsMenu";
 import styles, { actionsIconSize } from "./styles";
@@ -38,11 +39,13 @@ const Header: React.FunctionComponent<HeaderProps> = ({
           activeOpacity={0.8}
           onPress={toggleIsMenuOpen}
         >
-          <MaterialCommunityIcons
-            name="dots-vertical"
-            size={actionsIconSize}
-            color={colors.action}
-          />
+          <Animated.View entering={SlideInRight} exiting={SlideOutRight}>
+            <MaterialCommunityIcons
+              name="dots-vertical"
+              size={actionsIconSize}
+              color={colors.action}
+            />
+          </Animated.View>
         </TouchableOpacity>
       )}
       {hasActions && (
