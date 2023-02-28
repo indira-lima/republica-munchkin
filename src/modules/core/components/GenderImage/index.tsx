@@ -11,6 +11,8 @@ import Masc from "../../../../../assets/genders/Masc.svg";
 
 import themes from "../../utils/themes";
 import { Theme } from "../../definitions";
+import ThemedSVG from "../ThemedSVG";
+import { StyleProp, View } from "react-native";
 
 const genders = [Pangender, Agender, Fem, Masc];
 
@@ -19,9 +21,9 @@ export const LAST_GENDER_INDEX = genders.length - 1;
 interface GenderImageProps {
   index: number;
   theme?: Theme;
-  style?: any;
-  width: number;
-  height: number;
+  style?: StyleProp<View>;
+  width: number | string;
+  height: number | string;
 }
 
 /**
@@ -46,10 +48,10 @@ const GenderImage: React.FunctionComponent<GenderImageProps> = ({
       {genders.map((Gender, i) => {
         if (i !== index) return;
         return (
-          <Gender
+          <ThemedSVG
             key={i}
-            primaryColor={theme?.colors.primary}
-            secondaryColor={theme?.colors.secondary}
+						SVGImage={Gender}
+            theme={theme}
             style={style}
             width={width}
             height={height}

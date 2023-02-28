@@ -18,6 +18,7 @@ import styles, { modalSize } from "./styles";
 import ModalSquaredBg from "../../../../../assets/frames/modal-squared.svg";
 import { Theme } from "../../definitions";
 import themes from "../../utils/themes";
+import ThemedSVG from "../../components/ThemedSVG";
 
 export interface ModalContainerProps {
   openModal: boolean;
@@ -51,12 +52,12 @@ const ModalContainer: React.FunctionComponent<ModalContainerProps> = ({
           style={[styles.modalView, modalViewStyle]}
           {...modalViewProps}
         >
-          <ModalSquaredBg
+          <ThemedSVG
+						SVGImage={ModalSquaredBg}
             width={modalSize}
             height={modalSize}
             style={[StyleSheet.absoluteFillObject, { opacity: 0.95 }]}
-            primaryColor={theme?.colors?.primary}
-            secondaryColor={theme?.colors?.secondary}
+            theme={theme}
           />
           {loading ? (
             <ActivityIndicator style={{ flex: 1 }} size="large" color="#f00" />

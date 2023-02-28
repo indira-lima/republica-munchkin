@@ -11,6 +11,7 @@ import Animated, { SlideInLeft, SlideOutLeft } from "react-native-reanimated";
 import { CrewMember } from "../../../core/definitions";
 import Edition from "../../components/EditionButton";
 import styles from "./styles";
+import ThemedSVG from "../../../core/components/ThemedSVG";
 
 interface CrewMemberPanelProps {
   crewMember: CrewMember;
@@ -28,12 +29,12 @@ const CrewMemberPanel: React.FunctionComponent<CrewMemberPanelProps> = ({
     <Animated.View entering={SlideInLeft} exiting={SlideOutLeft}>
       <DeleteCrewMember crewMember={crewMember}>
         <View style={styles.container}>
-          <FrameBg
+          <ThemedSVG
+						SVGImage={FrameBg}
             width={styles.frame.width}
             height={styles.frame.height}
             style={[StyleSheet.absoluteFillObject, { opacity: 0.95 }]}
-            primaryColor={crewMember?.theme?.colors?.primary}
-            secondaryColor={crewMember?.theme?.colors?.secondary}
+            theme={crewMember.theme}
           />
           <View style={styles.content}>
             <CrewMemberAvatar crewMember={crewMember} height={iconsSize} width={iconsSize}/>

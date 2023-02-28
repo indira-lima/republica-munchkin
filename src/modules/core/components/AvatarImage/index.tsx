@@ -36,7 +36,9 @@ import Avatar15 from "../../../../../assets/avatars/avatar_15.svg";
 import Avatar16 from "../../../../../assets/avatars/avatar_16.svg";
 // @ts-ignore
 import Avatar17 from "../../../../../assets/avatars/avatar_17.svg";
-import themes from "../../utils/themes";
+import ThemedSVG from "../ThemedSVG";
+import { Theme } from "../../definitions";
+import { StyleProp, View } from "react-native";
 
 const avatars = [
   Avatar0,
@@ -63,8 +65,8 @@ export const LAST_AVATAR_INDEX = avatars.length - 1;
 
 interface AvatarImageProps {
   index: number;
-  borderColor: string;
-  style?: any;
+  theme?: Theme;
+  style?: StyleProp<View>;
   width: number;
   height: number;
 }
@@ -79,20 +81,21 @@ interface AvatarImageProps {
  */
 const AvatarImage: React.FunctionComponent<AvatarImageProps> = ({
   index,
-  borderColor,
+  theme,
   style,
   width,
   height,
 }) => {
-	index = index !== undefined ? index : 0;
+  index = index !== undefined ? index : 0;
   return (
     <>
       {avatars.map((Avatar, i) => {
-				if (i !== index) return;
+        if (i !== index) return;
         return (
-          <Avatar
-						key={i}
-            secondaryColor={borderColor || themes[0]?.colors.secondary}
+          <ThemedSVG
+            key={i}
+            SVGImage={Avatar}
+            theme={theme}
             style={style}
             width={width}
             height={height}

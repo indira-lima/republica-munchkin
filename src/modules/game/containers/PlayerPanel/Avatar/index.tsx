@@ -16,6 +16,7 @@ import globalStyles, { circulo, colors } from "../../../../core/utils/styles";
 import BattleReady from "../../../../../../assets/icons/BattleReady.svg";
 import useInterval from "../../../../core/hooks/useInterval";
 import AvatarImage from "../../../../core/components/AvatarImage";
+import ThemedSVG from "../../../../core/components/ThemedSVG";
 
 interface PlayerAvatarProps {
   player: Player;
@@ -81,7 +82,7 @@ const PlayerAvatar: React.FunctionComponent<PlayerAvatarProps> = ({
                 index={player.memberInfo.avatar}
                 width={avatarSize}
                 height={avatarSize}
-                borderColor={player.memberInfo.theme.colors.secondary}
+                theme={player.memberInfo.theme}
               />
             </Animated.View>
           )}
@@ -92,9 +93,9 @@ const PlayerAvatar: React.FunctionComponent<PlayerAvatarProps> = ({
               exiting={FadeOut}
               style={styles.battleImageWrapper}
             >
-              <BattleReady
-                primaryColor={player.memberInfo.theme.colors.primary}
-                secondaryColor={player.memberInfo.theme.colors.secondary}
+              <ThemedSVG
+                theme={player.memberInfo.theme}
+								SVGImage={BattleReady}
                 width={avatarSize}
                 height={avatarSize}
               />

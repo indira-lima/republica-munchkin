@@ -11,6 +11,7 @@ import FrameBg from "../../../../../assets/frames/frame.svg";
 import Animated, { SlideInLeft, SlideOutLeft } from "react-native-reanimated";
 import { Player } from "../../../core/definitions";
 import styles from "./styles";
+import ThemedSVG from "../../../core/components/ThemedSVG";
 
 interface PlayerPanelProps {
   player: Player;
@@ -27,12 +28,12 @@ const PlayerPanel: React.FunctionComponent<PlayerPanelProps> = ({ player }) => {
     <Animated.View entering={SlideInLeft} exiting={SlideOutLeft}>
       <ChangePlayerLevel player={player}>
         <View style={styles.container}>
-          <FrameBg
+          <ThemedSVG
+						SVGImage={FrameBg}
             width={styles.frame.width}
             height={styles.frame.height}
             style={[StyleSheet.absoluteFillObject, { opacity: 0.95 }]}
-            primaryColor={player.memberInfo.theme.colors.primary}
-            secondaryColor={player.memberInfo.theme.colors.secondary}
+            theme={player.memberInfo.theme}
           />
           <View style={styles.content}>
             <Avatar player={player} />

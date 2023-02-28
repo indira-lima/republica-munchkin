@@ -1,5 +1,5 @@
 import { MaterialCommunityIcons } from "@expo/vector-icons";
-import { useCallback, useEffect } from "react";
+import { useCallback } from "react";
 import { StyleSheet, TouchableWithoutFeedback, View } from "react-native";
 
 import Animated, { FlipInEasyY, FlipOutEasyY } from "react-native-reanimated";
@@ -16,6 +16,8 @@ interface CrewMemberAvatarProps {
   crewMember: CrewMember;
   enableEdit?: boolean;
   onChange?: (newAvatarIndex: number) => void;
+  width: number | string;
+  height: number | string;
 }
 
 /**
@@ -27,6 +29,8 @@ const CrewMemberAvatar: React.FunctionComponent<CrewMemberAvatarProps> = ({
   crewMember,
   enableEdit = false,
   onChange = () => {},
+  width,
+  height,
 }) => {
   /**
    * Changes the avatar to the previous one in the `avatarImages` list
@@ -81,9 +85,9 @@ const CrewMemberAvatar: React.FunctionComponent<CrewMemberAvatarProps> = ({
         <Animated.View entering={FlipInEasyY} exiting={FlipOutEasyY}>
           <AvatarImage
             index={crewMember?.avatar!}
-            width={styles.avatarImage.width}
-            height={styles.avatarImage.height}
-            borderColor={crewMember?.theme?.colors?.secondary}
+            width={width}
+            height={height}
+            theme={crewMember?.theme}
           />
         </Animated.View>
       </View>
@@ -96,23 +100,7 @@ const CrewMemberAvatar: React.FunctionComponent<CrewMemberAvatarProps> = ({
   );
 };
 
-const avatarSize = 78;
-
 const styles = StyleSheet.create({
-  avatarImage: {
-    width: avatarSize,
-    height: avatarSize,
-  },
-  battleImageWrapper: {
-    ...circulo(avatarSize),
-    borderWidth: 3,
-    backgroundColor: "transparent",
-    borderColor: colors.accent,
-  },
-  battleImage: {
-    width: 48,
-    height: 48,
-  },
   container: {
     ...globalStyles.row,
   },
