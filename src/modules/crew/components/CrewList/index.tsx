@@ -17,6 +17,7 @@ const CrewList: React.FC<CrewListProps> = ({ data, handleOpenMemberModal }) => {
       <Button text="ADD MEMBER" onPress={handleOpenMemberModal} />
       <FlatList
         data={data}
+				style={styles.list}
         renderItem={({ item }) => <CrewMemberPanel crewMember={item} />}
       />
     </View>
@@ -28,6 +29,9 @@ const styles = StyleSheet.create({
     ...globalStyles.containerBody,
     justifyContent: "flex-start",
   },
+	list: {
+		marginTop: 10,
+	}
 });
 
 export default CrewList;

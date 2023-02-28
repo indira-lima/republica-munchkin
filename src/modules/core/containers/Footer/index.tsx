@@ -88,7 +88,11 @@ const Footer = () => {
 
 const iconSize = 36;
 const styles = StyleSheet.create({
-  footerContainer: { backgroundColor: `${colors.primary}50`, paddingBottom: 4 },
+  footerContainer: {
+    backgroundColor: `${colors.primary}50`,
+    marginTop: 10,
+    paddingBottom: 4,
+  },
   tabBar: {
     flexDirection: "row",
     justifyContent: "space-around",
