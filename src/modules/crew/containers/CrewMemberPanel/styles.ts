@@ -26,6 +26,11 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     alignItems: 'center',
   },
+	middleContent: {
+		flex: 1,
+		height: '100%',
+		justifyContent: 'space-evenly',
+	},
   swipeIcon: {
     width: 64,
     height: 64,

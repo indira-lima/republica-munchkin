@@ -12,6 +12,7 @@ import { CrewMember } from "../../../core/definitions";
 import Edition from "../../components/EditionButton";
 import styles from "./styles";
 import ThemedSVG from "../../../core/components/ThemedSVG";
+import Name from "../../../core/components/Player/Name";
 
 interface CrewMemberPanelProps {
   crewMember: CrewMember;
@@ -30,16 +31,27 @@ const CrewMemberPanel: React.FunctionComponent<CrewMemberPanelProps> = ({
       <DeleteCrewMember crewMember={crewMember}>
         <View style={styles.container}>
           <ThemedSVG
-						SVGImage={FrameBg}
+            SVGImage={FrameBg}
             width={styles.frame.width}
             height={styles.frame.height}
             style={[StyleSheet.absoluteFillObject, { opacity: 0.95 }]}
             theme={crewMember.theme}
           />
           <View style={styles.content}>
-            <CrewMemberAvatar crewMember={crewMember} height={iconsSize} width={iconsSize}/>
-            <Edition crewMember={crewMember} />
-            <CrewMemberGender crewMember={crewMember} height={iconsSize} width={iconsSize}/>
+            <CrewMemberAvatar
+              crewMember={crewMember}
+              height={iconsSize}
+              width={iconsSize}
+            />
+            <View style={styles.middleContent}>
+              <Name text={crewMember.name} />
+              <Edition crewMember={crewMember} />
+            </View>
+            <CrewMemberGender
+              crewMember={crewMember}
+              height={iconsSize}
+              width={iconsSize}
+            />
           </View>
         </View>
       </DeleteCrewMember>
