@@ -1,6 +1,7 @@
 import React from "react";
 import { StyleProp } from "react-native";
 import { Theme } from "../../definitions";
+import {colors} from "../../utils/styles";
 import themes from "../../utils/themes";
 
 interface ThemedSVGProps {
@@ -31,6 +32,7 @@ const ThemedSVG: React.FunctionComponent<ThemedSVGProps> = ({
     <SVGImage
       primaryColor={theme?.colors.primary!}
       secondaryColor={theme?.colors.secondary!}
+      terciaryColor={colors.action}
       width={width}
       height={height}
       style={style}
