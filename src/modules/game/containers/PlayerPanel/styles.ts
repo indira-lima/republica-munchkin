@@ -3,28 +3,22 @@ import { StyleSheet } from 'react-native'
 import { vw } from '../../../core/utils/styles'
 
 export const frameWidth = vw(90)
-export const frameHeight = frameWidth * 0.37
+export const frameHeight = frameWidth * 0.38
 
 const styles = StyleSheet.create({
   container: {
-    paddingHorizontal: 20,
+    paddingHorizontal: 15,
     width: frameWidth,
     height: frameHeight,
     position: 'relative',
     justifyContent: 'center',
 		marginTop: 15,
   },
-  frame: {
-    position: 'absolute',
-    top: 0,
-    left: 0,
-    width: frameWidth,
-    height: frameHeight,
-  },
   content: {
     height: frameHeight - 36,
     flexDirection: 'row',
-    alignItems: 'center',
+    alignItems: 'flex-start',
+		justifyContent: 'space-between',
   },
   swipeIcon: {
     width: 64,

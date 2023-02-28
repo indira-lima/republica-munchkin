@@ -6,10 +6,8 @@ import globalStyles from '../../../../../core/utils/styles'
 
 const PlayerLevelCounter = ({
     player,
-    theme
 }: any) => {
 
-// @ts-expect-error TS(2339): Property 'editPlayer' does not exist on type '{}'.
 	const { editPlayer } = useGame()
 	
 	const handleDecreaseItems = useCallback(() => {
@@ -55,7 +53,7 @@ const styles = StyleSheet.create({
 	},
 	text: {
 		...globalStyles.text,
-		fontSize: 34,
+		fontSize: 26,
 		color: '#fff',
 		marginHorizontal: 3,
 	}

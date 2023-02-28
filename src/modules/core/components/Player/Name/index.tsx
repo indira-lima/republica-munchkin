@@ -9,7 +9,7 @@ interface NameProps {
 const Name: React.FunctionComponent<NameProps> = ({
   text
 }) => {
-  return <Text numberOfLines={2} ellipsizeMode="tail" style={styles.name}>{text}</Text>;
+  return <Text numberOfLines={1} ellipsizeMode="tail" style={styles.name}>{text}</Text>;
 };
 
 const styles = StyleSheet.create({
@@ -17,6 +17,7 @@ const styles = StyleSheet.create({
     ...globalStyles.text,
     fontSize: 18,
     color: "#fff",
+		width: '100%',
   },
 });
 

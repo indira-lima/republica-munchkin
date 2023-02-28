@@ -10,7 +10,7 @@ import FrameBg from "../../../../../assets/frames/frame.svg";
 
 import Animated, { SlideInLeft, SlideOutLeft } from "react-native-reanimated";
 import { Player } from "../../../core/definitions";
-import styles from "./styles";
+import styles, { frameHeight, frameWidth } from "./styles";
 import ThemedSVG from "../../../core/components/ThemedSVG";
 
 interface PlayerPanelProps {
@@ -29,9 +29,9 @@ const PlayerPanel: React.FunctionComponent<PlayerPanelProps> = ({ player }) => {
       <ChangePlayerLevel player={player}>
         <View style={styles.container}>
           <ThemedSVG
-						SVGImage={FrameBg}
-            width={styles.frame.width}
-            height={styles.frame.height}
+            SVGImage={FrameBg}
+            width={frameWidth}
+            height={frameHeight}
             style={[StyleSheet.absoluteFillObject, { opacity: 0.95 }]}
             theme={player.memberInfo.theme}
           />
