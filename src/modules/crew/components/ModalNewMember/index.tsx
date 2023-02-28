@@ -22,6 +22,9 @@ interface ModalNewMemberProps {
   onClose: () => void;
 }
 
+const secondaryIconsSize = 54;
+const avatarSize = 78;
+
 /**
  * Modal that opens a form to edit the player's data or to create a new one
  */
@@ -76,17 +79,21 @@ const ModalNewMember: React.FunctionComponent<
             <ChangeThemeBtn
               crewMember={memberData}
               onChange={(value: any) => handleSetMemberProp("theme", value)}
+							height={secondaryIconsSize}
+							width={secondaryIconsSize}
             />
             <Avatar
               enableEdit
               crewMember={memberData}
               onChange={(value: any) => handleSetMemberProp("avatar", value)}
+							height={avatarSize}
+							width={avatarSize}
             />
             <CrewMemberGender
               crewMember={memberData}
               onChange={(value: any) => handleSetMemberProp("gender", value)}
-							height={52}
-							width={52}
+							height={secondaryIconsSize}
+							width={secondaryIconsSize}
             />
           </View>
           <View style={styles.inputSession}>

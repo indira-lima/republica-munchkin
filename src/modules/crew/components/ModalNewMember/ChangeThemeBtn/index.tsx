@@ -1,23 +1,30 @@
 import { useCallback, useMemo } from "react";
+import {TouchableOpacity} from "react-native";
 
-import Button from "../../../../core/components/Button";
+import ThemedSVG from "../../../../core/components/ThemedSVG";
 import { CrewMember, Theme } from "../../../../core/definitions";
 import themes from "../../../../core/utils/themes";
+
+// @ts-ignore
+import ChangeTheme from "../../../../../../assets/icons/ChangeTheme.svg"
 
 interface ChangeThemeBtnProps {
   crewMember: CrewMember;
   onChange: (newTheme: Theme) => void;
+	width: number | string;
+	height: number | string;
 }
 
 const ChangeThemeBtn: React.FunctionComponent<ChangeThemeBtnProps> = ({
   crewMember,
   onChange = () => {},
+	width, height
 }) => {
-  const [theme, currentThemeIndex] = useMemo(() => {
+  const currentThemeIndex = useMemo(() => {
     const _theme = crewMember?.theme || themes[0];
     const index = themes.findIndex((t) => t.name === _theme?.name);
 
-    return [_theme, index];
+    return index;
   }, [crewMember?.theme]);
 
   const handleChangeTheme = useCallback(() => {
@@ -32,12 +39,14 @@ const ChangeThemeBtn: React.FunctionComponent<ChangeThemeBtnProps> = ({
   }, [currentThemeIndex]);
 
   return (
-    <Button
-      type="hexagon"
-      theme={theme?.name}
-      icon="select-color"
-      onPress={handleChangeTheme}
-    />
+    <TouchableOpacity activeOpacity={1} onPress={handleChangeTheme}>
+      <ThemedSVG
+				SVGImage={ChangeTheme}
+				width={width}
+				height={height}
+				theme={crewMember?.theme}
+			/>
+    </TouchableOpacity>
   );
 };
 
