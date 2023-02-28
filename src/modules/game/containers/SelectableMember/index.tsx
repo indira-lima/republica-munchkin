@@ -16,6 +16,7 @@ import Animated, {
 
 import AvatarImage from "../../../core/components/AvatarImage";
 import styles from "./styles";
+import ThemedSVG from "../../../core/components/ThemedSVG";
 
 interface SelectableMemberProps {
   member: CrewMember;
@@ -52,17 +53,17 @@ const SelectableMember: React.FunctionComponent<SelectableMemberProps> = ({
                     index={member.avatar}
                     width={styles.avatarImage.width}
                     height={styles.avatarImage.height}
-                    borderColor={member.theme.colors.secondary}
+                    theme={member.theme}
                   />
                 </Animated.View>
               )}
               {isSelected && (
                 <Animated.View entering={FlipInYLeft} exiting={FlipOutYRight}>
-                  <AvatarSelected
+                  <ThemedSVG
+										SVGImage={AvatarSelected}
                     width={styles.avatarImage.width}
                     height={styles.avatarImage.height}
-                    primaryColor={member.theme.colors.primary}
-                    secondaryColor={member.theme.colors.secondary}
+                    theme={member.theme}
                   />
                 </Animated.View>
               )}
