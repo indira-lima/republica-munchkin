@@ -9,14 +9,14 @@ import Animated, {
   FlipOutEasyY,
 } from "react-native-reanimated";
 
-import { Player } from "../../../../core/definitions";
-import globalStyles, { circulo, colors } from "../../../../core/utils/styles";
+import { Player } from "../../../core/definitions";
+import globalStyles, { circulo, colors } from "../../../core/utils/styles";
 
 // @ts-ignore
 import BattleReady from "../../../../../../assets/icons/BattleReady.svg";
-import useInterval from "../../../../core/hooks/useInterval";
-import AvatarImage from "../../../../core/components/AvatarImage";
-import ThemedSVG from "../../../../core/components/ThemedSVG";
+import useInterval from "../../../core/hooks/useInterval";
+import AvatarImage from "../../../core/components/AvatarImage";
+import ThemedSVG from "../../../core/components/ThemedSVG";
 
 interface PlayerAvatarProps {
   player: Player;

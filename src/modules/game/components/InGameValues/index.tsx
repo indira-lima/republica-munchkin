@@ -1,9 +1,9 @@
 import { View } from "react-native";
 
-import LevelIndicatorBars from "../../../../core/components/Player/LevelIndicatorBars";
-import Name from "../../../../core/components/Player/Name";
-import { Player } from "../../../../core/definitions";
-import StrengthCounter from "./StrengthCounter";
+import LevelIndicatorBars from "../../../core/components/Player/LevelIndicatorBars";
+import Name from "../../../core/components/Player/Name";
+import { Player } from "../../../core/definitions";
+import StrengthCounter from "../../containers/StrengthCounter";
 
 import styles from "./styles";
 
