@@ -10,6 +10,17 @@ import useCrew from "../../core/hooks/useCrew";
 
 import CrewList from "../components/CrewList";
 
+/**
+ * Crew screen
+ * Renders the list of available crew members and
+ * a button to add more
+ *
+ * The ModalNewMember is used to show all the info of the new
+ * member, or one being edited
+ *
+ * It uses the CrewMemberModalContext to share values of the
+ * member through the components
+ */
 const CrewScreen = ({}) => {
   const { crew } = useCrew();
   const { isModalOpen, setIsModalOpen, currentMember, setCurrentMember } =
