@@ -1,6 +1,6 @@
 import { StyleSheet, View } from "react-native";
 
-import CrewMemberAvatar from "./Avatar";
+import CrewMemberAvatar from "../Avatar";
 import DeleteCrewMember from "./DeleteCrewMember";
 import CrewMemberGender from "../GenderRole";
 

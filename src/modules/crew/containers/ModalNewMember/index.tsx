@@ -9,12 +9,12 @@ import ModalContainer, {
 import useCrew from "../../../core/hooks/useCrew";
 
 import CrewMemberGender from "../../containers/GenderRole";
-import ChangeThemeBtn from "./ChangeThemeBtn";
+import ChangeThemeBtn from "../ChangeThemeBtn";
 
 import globalStyles from "../../../core/utils/styles";
 
 import { CrewMember } from "../../../core/definitions";
-import Avatar from "../../containers/CrewMemberPanel/Avatar";
+import Avatar from "../Avatar";
 import styles from "./styles";
 
 interface ModalNewMemberProps {

@@ -1,6 +1,6 @@
 import { useCallback, useContext } from "react";
 import MainContainer from "../../core/containers/MainContainer";
-import ModalNewMember from "../components/ModalNewMember";
+import ModalNewMember from "../containers/ModalNewMember";
 
 import CrewMemberModalContext, {
   CrewMemberModalProvider,

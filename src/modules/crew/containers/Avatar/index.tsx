@@ -4,20 +4,20 @@ import { StyleSheet, TouchableWithoutFeedback, View } from "react-native";
 
 import Animated, { FlipInEasyY, FlipOutEasyY } from "react-native-reanimated";
 
-import { CrewMember } from "../../../../core/definitions";
-import globalStyles, { circulo, colors } from "../../../../core/utils/styles";
+import { CrewMember } from "../../../core/definitions";
+import globalStyles from "../../../core/utils/styles";
 
 // @ts-ignore
 import AvatarImage, {
   LAST_AVATAR_INDEX,
-} from "../../../../core/components/AvatarImage";
+} from "../../../core/components/AvatarImage";
 
 interface CrewMemberAvatarProps {
   crewMember: CrewMember;
   enableEdit?: boolean;
   onChange?: (newAvatarIndex: number) => void;
-  width: number | string;
-  height: number | string;
+  width: number;
+  height: number;
 }
 
 /**

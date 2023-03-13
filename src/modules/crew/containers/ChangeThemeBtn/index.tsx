@@ -1,9 +1,9 @@
 import { useCallback, useMemo } from "react";
 import {TouchableOpacity} from "react-native";
 
-import ThemedSVG from "../../../../core/components/ThemedSVG";
-import { CrewMember, Theme } from "../../../../core/definitions";
-import themes from "../../../../core/utils/themes";
+import ThemedSVG from "../../../core/components/ThemedSVG";
+import { CrewMember, Theme } from "../../../core/definitions";
+import themes from "../../../core/utils/themes";
 
 // @ts-ignore
 import ChangeTheme from "../../../../../../assets/icons/ChangeTheme.svg"
