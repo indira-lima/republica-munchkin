@@ -23,11 +23,11 @@ import ThemedSVG from "../../components/ThemedSVG";
 export interface ModalContainerProps {
   openModal: boolean;
   onClose?: () => void;
-  modalViewProps: ViewProps;
-  modalViewStyle: StyleProp<ViewStyle>;
+  modalViewProps?: ViewProps;
+  modalViewStyle?: StyleProp<ViewStyle>;
   loading?: boolean;
-  theme: Theme;
-  children: React.ReactNode;
+  theme?: Theme;
+  children?: React.ReactNode;
 }
 
 const ModalContainer: React.FunctionComponent<ModalContainerProps> = ({
