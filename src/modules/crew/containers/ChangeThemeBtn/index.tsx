@@ -6,7 +6,7 @@ import { CrewMember, Theme } from "../../../core/definitions";
 import themes from "../../../core/utils/themes";
 
 // @ts-ignore
-import ChangeTheme from "../../../../../../assets/icons/ChangeTheme.svg"
+import ChangeTheme from "../../../../../assets/icons/ChangeTheme.svg"
 
 interface ChangeThemeBtnProps {
   crewMember: CrewMember;

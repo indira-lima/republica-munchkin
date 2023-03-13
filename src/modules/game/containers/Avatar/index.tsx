@@ -1,6 +1,5 @@
 import { useCallback, useState } from "react";
 import { StyleSheet, TouchableWithoutFeedback, View } from "react-native";
-import FastImage from "react-native-fast-image";
 import { useNavigation } from "@react-navigation/native";
 import Animated, {
   FadeIn,
@@ -10,10 +9,10 @@ import Animated, {
 } from "react-native-reanimated";
 
 import { Player } from "../../../core/definitions";
-import globalStyles, { circulo, colors } from "../../../core/utils/styles";
+import globalStyles, { circulo } from "../../../core/utils/styles";
 
 // @ts-ignore
-import BattleReady from "../../../../../../assets/icons/BattleReady.svg";
+import BattleReady from "../../../../../assets/icons/BattleReady.svg";
 import useInterval from "../../../core/hooks/useInterval";
 import AvatarImage from "../../../core/components/AvatarImage";
 import ThemedSVG from "../../../core/components/ThemedSVG";
