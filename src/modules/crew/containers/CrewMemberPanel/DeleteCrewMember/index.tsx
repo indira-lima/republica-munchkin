@@ -1,4 +1,4 @@
-import { useRef } from "react";
+import { useCallback, useRef } from "react";
 
 // @ts-expect-error TS(2307): Cannot find module '../../../../../assets/trash.pn... Remove this comment to see the full error message
 import imgTrash from "../../../../../../assets/icons/trash.png";
@@ -11,12 +11,28 @@ interface DeleteCrewMemberProps {
   children: React.ReactNode;
 }
 
+/**
+ * Horizontal actions used to wrap the CrewMemberPanel and add
+ * the Delete option when the user swipes the container
+ */
 const DeleteCrewMember: React.FunctionComponent<DeleteCrewMemberProps> = ({
   children,
   crewMember,
 }) => {
+
+	// get the delete function from the crew context
   const { removeCrewMember } = useCrew();
   const swipeableRef = useRef(null);
+
+	/**
+	 * Callback called when the user presses the image
+	 * rendered by the swipeable after swipeing to right 
+	 *
+	 * It deletes the associated crew member of the panel
+	 */
+	const handleOnPressSwipeable = useCallback(() => {
+		removeCrewMember(crewMember.id)
+	}, [removeCrewMember])
 
   return (
     <HorizontalSwipeableActions
@@ -24,7 +40,7 @@ const DeleteCrewMember: React.FunctionComponent<DeleteCrewMemberProps> = ({
       ref={swipeableRef}
       left={{
         image: imgTrash,
-        onPress: () => removeCrewMember(crewMember.id),
+        onPress: handleOnPressSwipeable,
       }}
     >
       {children}
