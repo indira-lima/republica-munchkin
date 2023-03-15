@@ -1,14 +1,15 @@
 import { useRoute } from "@react-navigation/native";
-import React from "react";
+import React, { useEffect } from "react";
 import { View } from "react-native";
 import MainContainer from "../../core/containers/MainContainer";
 import { Player } from "../../core/definitions";
 import globalStyles from "../../core/utils/styles";
 import PlayerBattlePanel from "../containers/PlayerBattlePanel";
+import { BattleProvider, useBattle } from "../contexts/BattleContext";
 
 /**
  * Battle screen where the action begins
- * 
+ *
  * Renders the player received by the route params (not from the props
  * for it's a Screen, not a Component), the monster and other battle
  * functionalities
@@ -25,14 +26,24 @@ const Battle: React.FunctionComponent = () => {
   const route = useRoute();
 
   const { player } = route.params as { player: Player };
+  const { setMainPlayer, setBattleState } = useBattle();
+
+  useEffect(() => {
+    setMainPlayer(player);
+    setBattleState("setting-modifiers");
+  }, []);
 
   return (
     <MainContainer>
       <View style={[globalStyles.containerBody]}>
-        <PlayerBattlePanel player={player!} />
+        <PlayerBattlePanel />
       </View>
     </MainContainer>
   );
 };
 
-export default Battle;
+export default () => (
+  <BattleProvider>
+    <Battle />
+  </BattleProvider>
+);
