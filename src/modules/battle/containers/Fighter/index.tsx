@@ -9,6 +9,7 @@ import globalStyles from "../../../core/utils/styles";
 import { GenderLabels } from "../../../core/utils/static";
 
 import { iconsSize } from "../PlayerBattlePanel/styles";
+import { battleTheme } from "../../../core/utils/themes";
 
 interface AvatarProps {
   player?: Player;
@@ -32,7 +33,7 @@ const Fighter: React.FunctionComponent<AvatarProps> = ({ player, isAlly }) => {
             width={iconsSize}
             height={iconsSize}
             index={player!.memberInfo.avatar}
-            theme={player!.memberInfo.theme}
+            theme={battleTheme}
           />
           <View style={styles.infoContainer}>
             <Text style={styles.infoText}>
