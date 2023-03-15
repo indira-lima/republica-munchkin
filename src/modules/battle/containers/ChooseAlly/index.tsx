@@ -3,21 +3,21 @@ import { Text, TouchableOpacity } from "react-native";
 import ThemedSVG from "../../../core/components/ThemedSVG";
 
 // @ts-ignore
-import CallAlly from "../../../../../assets/icons/CallAlly.svg";
-import globalStyles from "../../../core/utils/styles";
-import { battleTheme } from "../../../core/utils/themes";
-import { iconsSize } from "../PlayerBattlePanel/styles";
 import Animated, {
   interpolate,
   SlideInRight,
   SlideOutRight,
 } from "react-native-reanimated";
 import Carousel from "react-native-reanimated-carousel";
+import CallAlly from "../../../../../assets/icons/CallAlly.svg";
 import AvatarImage from "../../../core/components/AvatarImage";
-import useGame from "../../../core/hooks/useGame";
-import { useBattle } from "../../contexts/BattleContext";
 import { Player } from "../../../core/definitions";
+import useGame from "../../../core/hooks/useGame";
 import useInterval from "../../../core/hooks/useInterval";
+import globalStyles from "../../../core/utils/styles";
+import { battleTheme } from "../../../core/utils/themes";
+import { useBattle } from "../../contexts/BattleContext";
+import { frameContentHeight, iconsSize } from "../PlayerBattlePanel/styles";
 
 interface ChooseAllyProps {
   // TODO: Component props
@@ -57,12 +57,17 @@ const ChooseAlly: React.FunctionComponent<ChooseAllyProps> = () => {
    */
   useInterval(
     useCallback(() => {
-      // handleSelectAlly(availableAllies[snappedIndex]!)
+      handleSelectAlly(availableAllies[snappedIndex]!);
       setIsChoosing(false);
       setBackToIdleTimeout(null);
     }, [snappedIndex]),
     backToIdleTimeout
   );
+
+  const handleStartChoosing = useCallback(() => {
+    setIsChoosing(true);
+    setBackToIdleTimeout(BACK_TO_IDLE_TIMEOUT);
+  }, []);
 
   const handleSelectAlly = useCallback((ally: Player) => {
     setAllyPlayer(ally);
@@ -96,7 +101,7 @@ const ChooseAlly: React.FunctionComponent<ChooseAllyProps> = () => {
     <Fragment>
       {!isChoosing && (
         <Animated.View entering={SlideInRight} exiting={SlideOutRight}>
-          <TouchableOpacity onPress={() => setIsChoosing(true)}>
+          <TouchableOpacity onPress={handleStartChoosing}>
             <ThemedSVG
               SVGImage={CallAlly}
               height={iconsSize}
@@ -115,15 +120,15 @@ const ChooseAlly: React.FunctionComponent<ChooseAllyProps> = () => {
             style={{
               justifyContent: "center",
               width: iconsSize,
-              height: iconsSize * 1.4,
+              height: frameContentHeight * 0.9,
               borderRadius: 24,
             }}
-            width={iconsSize}
             pagingEnabled={false}
+            width={iconsSize}
             height={iconsSize}
             customAnimation={animationStyle}
             data={availableAllies}
-            onProgressChange={() => setBackToIdleTimeout(BACK_TO_IDLE_TIMEOUT)}
+            onScrollEnd={() => setBackToIdleTimeout(BACK_TO_IDLE_TIMEOUT)}
             onScrollBegin={() => setBackToIdleTimeout(null)}
             onSnapToItem={(index) => setSnappedIndex(index)}
             renderItem={({ item, index }) => (
