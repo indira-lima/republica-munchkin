@@ -7,7 +7,11 @@ import CallAlly from "../../../../../assets/icons/CallAlly.svg";
 import globalStyles from "../../../core/utils/styles";
 import { battleTheme } from "../../../core/utils/themes";
 import { iconsSize } from "../PlayerBattlePanel/styles";
-import { interpolate } from "react-native-reanimated";
+import Animated, {
+  interpolate,
+  SlideInRight,
+  SlideOutRight,
+} from "react-native-reanimated";
 import Carousel from "react-native-reanimated-carousel";
 import AvatarImage from "../../../core/components/AvatarImage";
 import useGame from "../../../core/hooks/useGame";
@@ -53,7 +57,7 @@ const ChooseAlly: React.FunctionComponent<ChooseAllyProps> = () => {
    */
   useInterval(
     useCallback(() => {
-			handleSelectAlly(availableAllies[snappedIndex]!)	
+      // handleSelectAlly(availableAllies[snappedIndex]!)
       setIsChoosing(false);
       setBackToIdleTimeout(null);
     }, [snappedIndex]),
@@ -91,8 +95,8 @@ const ChooseAlly: React.FunctionComponent<ChooseAllyProps> = () => {
   return (
     <Fragment>
       {!isChoosing && (
-        <Fragment>
-          <TouchableOpacity onPress={() => setIsChoosing((is) => !is)}>
+        <Animated.View entering={SlideInRight} exiting={SlideOutRight}>
+          <TouchableOpacity onPress={() => setIsChoosing(true)}>
             <ThemedSVG
               SVGImage={CallAlly}
               height={iconsSize}
@@ -101,38 +105,40 @@ const ChooseAlly: React.FunctionComponent<ChooseAllyProps> = () => {
             />
           </TouchableOpacity>
           <Text style={globalStyles.text}>Help!</Text>
-        </Fragment>
+        </Animated.View>
       )}
       {isChoosing && (
-        <Carousel
-          loop
-          vertical
-          style={{
-            justifyContent: "center",
-            width: iconsSize,
-            height: iconsSize * 1.4,
-            borderRadius: 24,
-          }}
-          width={iconsSize}
-          pagingEnabled={false}
-          height={iconsSize}
-          customAnimation={animationStyle}
-          data={availableAllies}
-          onProgressChange={() => setBackToIdleTimeout(BACK_TO_IDLE_TIMEOUT)}
-          onScrollBegin={() => setBackToIdleTimeout(null)}
-          onSnapToItem={(index) => setSnappedIndex(index)}
-          renderItem={({ item, index }) => (
-            <TouchableOpacity onPress={() => handleSelectAlly(item)}>
-              <AvatarImage
-                key={index}
-                width={iconsSize}
-                height={iconsSize}
-                theme={item.memberInfo.theme}
-                index={item.memberInfo.avatar}
-              />
-            </TouchableOpacity>
-          )}
-        />
+        <Animated.View entering={SlideInRight} exiting={SlideOutRight}>
+          <Carousel
+            loop
+            vertical
+            style={{
+              justifyContent: "center",
+              width: iconsSize,
+              height: iconsSize * 1.4,
+              borderRadius: 24,
+            }}
+            width={iconsSize}
+            pagingEnabled={false}
+            height={iconsSize}
+            customAnimation={animationStyle}
+            data={availableAllies}
+            onProgressChange={() => setBackToIdleTimeout(BACK_TO_IDLE_TIMEOUT)}
+            onScrollBegin={() => setBackToIdleTimeout(null)}
+            onSnapToItem={(index) => setSnappedIndex(index)}
+            renderItem={({ item, index }) => (
+              <TouchableOpacity onPress={() => handleSelectAlly(item)}>
+                <AvatarImage
+                  key={index}
+                  width={iconsSize}
+                  height={iconsSize}
+                  theme={item.memberInfo.theme}
+                  index={item.memberInfo.avatar}
+                />
+              </TouchableOpacity>
+            )}
+          />
+        </Animated.View>
       )}
     </Fragment>
   );
