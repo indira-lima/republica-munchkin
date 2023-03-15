@@ -84,3 +84,12 @@ const themes: Theme[] = [
 ];
 
 export default themes;
+
+export const battleTheme: Theme = {
+	name: "battle",
+	colors: {
+		text: "#fff",
+		primary: "#BB31407f",
+		secondary: "#D32325",
+	}
+}
