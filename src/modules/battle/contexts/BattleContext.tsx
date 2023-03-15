@@ -18,7 +18,7 @@ interface BattleContextValue {
   setMainPlayer: (player: Player) => void;
 
   allyPlayer?: Player;
-  setAllyPlayer: (player: Player) => void;
+  setAllyPlayer: (player?: Player) => void;
 
   monsters: Monster[];
   setMonsters: (monsters: Monster[]) => void;
