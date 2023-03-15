@@ -1,6 +1,6 @@
 # Roadmap
 
-- [ ] CRUD de players
-- [ ] Tela de jogo
+- [x] CRUD de players
+- [x] Tela de jogo
 - [ ] Batalha
 - [ ] Dados

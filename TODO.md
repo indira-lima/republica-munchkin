@@ -12,13 +12,14 @@
 	- [ ] Contexto de seleção de players
 
 - [ ] Batalha
+	- [x] Contexto
 	- [ ] Painel de Batalha para players
+		- [x] Info sobre o player
+		- [x] Escolha do aliado
 		- [ ] Painel de contagem de pontos
-		- [ ] Modal de seleção de ajuda
 	- [ ] Painel de Batalha para monstros
 		- [ ] Avatars de monstros
 		- [ ] Modal de seleção de novos mosntros
-	- [ ] Tela de Batalha
 
 - [ ] Dados
 
