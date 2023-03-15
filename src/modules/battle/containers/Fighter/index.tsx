@@ -6,11 +6,11 @@ import { Player } from "../../../core/definitions";
 import { GenderLabels } from "../../../core/utils/static";
 import globalStyles from "../../../core/utils/styles";
 
-import { frameHeight } from "../PlayerBattlePanel/styles";
 
 // @ts-ignore
 import CallAlly from "../../../../../assets/icons/CallAlly.svg";
 import {battleTheme} from "../../../core/utils/themes";
+import { iconsSize } from "../PlayerBattlePanel/styles";
 
 interface AvatarProps {
   player?: Player;
@@ -41,8 +41,8 @@ const Fighter: React.FunctionComponent<AvatarProps> = ({ player, isAlly }) => {
       {player && (
         <Fragment>
           <AvatarImage
-            width={avatarSize}
-            height={avatarSize}
+            width={iconsSize}
+            height={iconsSize}
             index={player!.memberInfo.avatar}
             theme={player!.memberInfo.theme}
           />
