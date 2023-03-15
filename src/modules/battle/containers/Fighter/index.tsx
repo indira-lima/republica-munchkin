@@ -1,15 +1,13 @@
 import React, { Fragment } from "react";
-import { StyleSheet, Text, TouchableOpacity, View } from "react-native";
-import AvatarImage from "../../../core/components/AvatarImage";
-import ThemedSVG from "../../../core/components/ThemedSVG";
+import { StyleSheet, Text, View } from "react-native";
+
 import { Player } from "../../../core/definitions";
-import { GenderLabels } from "../../../core/utils/static";
+import AvatarImage from "../../../core/components/AvatarImage";
+import ChooseAlly from "../ChooseAlly";
+
 import globalStyles from "../../../core/utils/styles";
+import { GenderLabels } from "../../../core/utils/static";
 
-
-// @ts-ignore
-import CallAlly from "../../../../../assets/icons/CallAlly.svg";
-import {battleTheme} from "../../../core/utils/themes";
 import { iconsSize } from "../PlayerBattlePanel/styles";
 
 interface AvatarProps {
@@ -17,27 +15,17 @@ interface AvatarProps {
   isAlly?: boolean;
 }
 
-const avatarSize = frameHeight * 0.36;
-
 /**
- * Avatar documentation
+ * Fighter container
+ *
+ * Renders the player info that is important for the battle
+ * If the fighter is the main fighter's ally and it's not yet set,
+ * renders the ChooseAlly component for selecting the ally
  */
 const Fighter: React.FunctionComponent<AvatarProps> = ({ player, isAlly }) => {
   return (
     <View style={styles.container}>
-      {isAlly && !player && (
-        <Fragment>
-          <TouchableOpacity>
-            <ThemedSVG
-              SVGImage={CallAlly}
-              height={avatarSize}
-              width={avatarSize}
-							theme={battleTheme}
-            />
-          </TouchableOpacity>
-          <Text style={styles.infoText}>Help!</Text>
-        </Fragment>
-      )}
+      {isAlly && !player && <ChooseAlly />}
       {player && (
         <Fragment>
           <AvatarImage
