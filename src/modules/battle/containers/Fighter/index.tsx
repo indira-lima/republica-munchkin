@@ -1,20 +1,35 @@
-import React, { Fragment } from "react";
-import { StyleSheet, Text, View } from "react-native";
+import React, { useCallback, useState } from "react";
+import { StyleSheet, Text, TouchableWithoutFeedback, View } from "react-native";
 
-import { Player } from "../../../core/definitions";
 import AvatarImage from "../../../core/components/AvatarImage";
+import { Player } from "../../../core/definitions";
 import ChooseAlly from "../ChooseAlly";
 
-import globalStyles from "../../../core/utils/styles";
 import { GenderLabels } from "../../../core/utils/static";
+import globalStyles from "../../../core/utils/styles";
 
-import { iconsSize } from "../PlayerBattlePanel/styles";
+import Animated, {
+  FadeIn,
+  FadeOut,
+  FlipInEasyY,
+  FlipOutEasyY,
+} from "react-native-reanimated";
+import ThemedSVG from "../../../core/components/ThemedSVG";
+import useInterval from "../../../core/hooks/useInterval";
 import { battleTheme } from "../../../core/utils/themes";
+import { useBattle } from "../../contexts/BattleContext";
+import { iconsSize } from "../PlayerBattlePanel/styles";
+
+// @ts-ignore
+import CallAlly from "../../../../../assets/icons/CallAlly.svg";
 
 interface AvatarProps {
   player?: Player;
   isAlly?: boolean;
 }
+
+// default time to wait to go back to idle state after the first tap
+const BACK_TO_IDLE_TIMEOUT = 2000;
 
 /**
  * Fighter container
@@ -24,23 +39,79 @@ interface AvatarProps {
  * renders the ChooseAlly component for selecting the ally
  */
 const Fighter: React.FunctionComponent<AvatarProps> = ({ player, isAlly }) => {
+  // selection state: used if the fighter is an ally
+  const [changeAllyState, setChangeAllyState] = useState<"idle" | "change">(
+    "idle"
+  );
+  const [resetChangeAllyTimeout, setResetChangeAllyTimeout] = useState<
+    number | null
+  >(null);
+
+  const { setAllyPlayer } = useBattle();
+
+  /**
+   * Set up a react interval that changes the change ally state
+   * back to false
+   *
+   * To activate the interval, set a timeout in ms
+   */
+  useInterval(() => {
+    setChangeAllyState("idle");
+    setResetChangeAllyTimeout(null);
+  }, resetChangeAllyTimeout);
+
+  /**
+   * Cycle the battle state trough idle and ready,
+   * redirecting to Battle screen when ready
+   */
+  const handleChangeAlly = useCallback(() => {
+		if (!isAlly) return;
+
+    if (changeAllyState === "idle") {
+      setChangeAllyState("change");
+      setResetChangeAllyTimeout(BACK_TO_IDLE_TIMEOUT);
+
+      return;
+    }
+
+    setChangeAllyState("idle");
+    setAllyPlayer(undefined);
+  }, [changeAllyState, player, isAlly]);
+
   return (
     <View style={styles.container}>
       {isAlly && !player && <ChooseAlly />}
       {player && (
-        <Fragment>
-          <AvatarImage
-            width={iconsSize}
-            height={iconsSize}
-            index={player!.memberInfo.avatar}
-            theme={battleTheme}
-          />
-          <View style={styles.infoContainer}>
-            <Text style={styles.infoText}>
-              lvl {player!.level} - {GenderLabels[player!.inGameGender]}
-            </Text>
+        <TouchableWithoutFeedback onPress={handleChangeAlly}>
+          <View>
+            {changeAllyState === "idle" && (
+              <Animated.View entering={FlipInEasyY} exiting={FlipOutEasyY}>
+                <AvatarImage
+                  width={iconsSize}
+                  height={iconsSize}
+                  index={player!.memberInfo.avatar}
+                  theme={battleTheme}
+                />
+                <View style={styles.infoContainer}>
+                  <Text style={styles.infoText}>
+                    lvl {player!.level} - {GenderLabels[player!.inGameGender]}
+                  </Text>
+                </View>
+              </Animated.View>
+            )}
+            {changeAllyState === "change" && (
+              <Animated.View entering={FadeIn} exiting={FadeOut}>
+                <ThemedSVG
+                  theme={battleTheme}
+                  SVGImage={CallAlly}
+                  width={iconsSize}
+                  height={iconsSize}
+                />
+                <Text style={styles.infoText}>Remove Ally</Text>
+              </Animated.View>
+            )}
           </View>
-        </Fragment>
+        </TouchableWithoutFeedback>
       )}
     </View>
   );
