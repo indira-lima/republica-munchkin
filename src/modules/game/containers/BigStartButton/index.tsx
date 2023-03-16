@@ -1,6 +1,6 @@
 import React, { useCallback, useEffect } from "react";
 import { TouchableWithoutFeedback, View } from "react-native";
-import FastImage from "react-native-fast-image";
+import { Image } from "expo-image";
 import Animated, {
   runOnJS,
   useAnimatedStyle,
@@ -60,7 +60,7 @@ const BigStartButton: React.FunctionComponent<BigStartButtonProps> = () => {
     <View>
       <Animated.View style={[globalStyles.flexCenter, animatedStyles]}>
         <TouchableWithoutFeedback onPress={handleStart}>
-          <FastImage source={buttonImg} style={{ width: 250, height: 250 }} />
+          <Image source={buttonImg} style={{ width: 250, height: 250 }} />
         </TouchableWithoutFeedback>
       </Animated.View>
     </View>

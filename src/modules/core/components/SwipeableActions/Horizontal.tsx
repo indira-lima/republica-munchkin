@@ -1,5 +1,5 @@
 import React, { useCallback } from "react";
-import FastImage, { Source } from "react-native-fast-image";
+import { Image, ImageSource } from "expo-image";
 
 import {
   GestureHandlerRootView,
@@ -9,7 +9,7 @@ import {
 import styles from "./styles";
 
 type DirectionConfig = {
-  image: number | Source | undefined;
+  image: number | ImageSource | undefined;
   onOpen?: () => void;
   onPress?: () => void;
 };
@@ -33,12 +33,11 @@ const HorizontalSwipeableActions: React.FunctionComponent<HorizontalSwipeableAct
         if (!left) return;
 
         return (
-          // @ts-expect-error TS(2322): Type '{ children: Element; style: ({ width: number... Remove this comment to see the full error message
           <RectButton
             style={[styles.swipeContainer, { flexDirection: "row-reverse" }]}
             onPress={left.onPress}
           >
-            <FastImage source={left.image} style={styles.swipeIcon} />
+            <Image source={left.image} style={styles.swipeIcon} />
           </RectButton>
         );
       }, [left]);
@@ -47,19 +46,17 @@ const HorizontalSwipeableActions: React.FunctionComponent<HorizontalSwipeableAct
         if (!right) return;
 
         return (
-          // @ts-expect-error TS(2322): Type '{ children: Element; style: ({ width: number... Remove this comment to see the full error message
           <RectButton
             style={[styles.swipeContainer, { flexDirection: "row-reverse" }]}
             onPress={right.onPress}
           >
-            <FastImage source={right.image} style={styles.swipeIcon} />
+            <Image source={right.image} style={styles.swipeIcon} />
           </RectButton>
         );
       }, [right]);
 
       return (
         <GestureHandlerRootView>
-          {/* @ts-expect-error */}
           <Swipeable
             ref={swipeableRef}
             friction={2}

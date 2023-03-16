@@ -8,13 +8,13 @@ import {
   TextStyle,
   TouchableOpacity,
 } from "react-native";
-import FastImage, { Source } from "react-native-fast-image";
+import { Image, ImageSource } from "expo-image";
 import styles, { buttonThemes, dimensions, sources } from "./styles";
 
 interface ButtonProps {
   text?: string;
   children?: React.ReactNode;
-  icon?: string | number | Source;
+  icon?: string | number | ImageSource;
   type?: "large" | "squared" | "hexagon";
   theme?: string;
   onPress?: () => void;
@@ -63,7 +63,7 @@ const Button: React.FunctionComponent<ButtonProps> = ({
       );
     } else {
       return (
-        <FastImage
+        <Image
           source={icon}
           style={{ width: typeDimensions.icon, height: typeDimensions.icon }}
         />
