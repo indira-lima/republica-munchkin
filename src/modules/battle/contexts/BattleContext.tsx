@@ -28,6 +28,9 @@ interface BattleContextValue {
 
   monsterBattlePoints: number;
   addMonsterBattlePoints: (points: number) => void;
+
+	resetPlayerModifiers: () => void,
+	resetMonsterModifiers: () => void,
 }
 
 const BattleContext = createContext<BattleContextValue>(
@@ -92,12 +95,20 @@ export const BattleProvider = ({ children }: any) => {
 		setPlayerModifiers(current => current += points)	
 	}, [])
 
+	const resetPlayerModifiers = useCallback(() => {
+		setPlayerModifiers(0)	
+	}, [])
+
 	/**
 	 * Add (or subtract if negative) modifiers points for the monster
 	 * group in this battle
 	 */
 	const addMonsterBattlePoints = useCallback((points: number) => {
 		setMonsterModifiers(current => current += points)	
+	}, [])
+
+	const resetMonsterModifiers = useCallback(() => {
+		setMonsterModifiers(0)	
 	}, [])
 
   return (
@@ -115,6 +126,8 @@ export const BattleProvider = ({ children }: any) => {
 				addPlayerBattlePoints,
 				monsterBattlePoints,
 				addMonsterBattlePoints,
+				resetPlayerModifiers,
+				resetMonsterModifiers,
       }}
     >
       {children}
