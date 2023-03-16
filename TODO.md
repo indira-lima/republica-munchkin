@@ -23,3 +23,7 @@
 
 - [ ] Dados
 
+- [ ] Expo upgrade
+	- [x] expo 48.0.0
+	- [x] fix expo dependencies
+
