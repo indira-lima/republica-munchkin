@@ -61,8 +61,8 @@ const Fighter: React.FunctionComponent<AvatarProps> = ({ player, isAlly }) => {
   }, resetChangeAllyTimeout);
 
   /**
-   * Cycle the battle state trough idle and ready,
-   * redirecting to Battle screen when ready
+   * Cycle the change ally state trough idle and ready,
+   * removing the ally when ready
    */
   const handleChangeAlly = useCallback(() => {
 		if (!isAlly) return;
@@ -76,7 +76,7 @@ const Fighter: React.FunctionComponent<AvatarProps> = ({ player, isAlly }) => {
 
     setChangeAllyState("idle");
     setAllyPlayer(undefined);
-  }, [changeAllyState, player, isAlly]);
+  }, [changeAllyState, isAlly]);
 
   return (
     <View style={styles.container}>
