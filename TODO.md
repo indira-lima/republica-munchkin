@@ -23,7 +23,9 @@
 
 - [ ] Dados
 
-- [ ] Expo upgrade
+- [x] Expo upgrade
 	- [x] expo 48.0.0
 	- [x] fix expo dependencies
+	- [x] Change to expo-image
+	- [x] Configure eas-update
 
