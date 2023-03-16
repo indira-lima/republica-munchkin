@@ -6,6 +6,7 @@ import BattleContainerPlayer from "../../../../../assets/frames/BattleContainerP
 import styles, { frameHeight, frameWidth } from "./styles";
 import Fighter from "../Fighter";
 import { useBattle } from "../../contexts/BattleContext";
+import ChangePlayerMofifiers from "../ChangeModifiers/Player";
 
 interface PlayerBattlePanelProps {}
 
@@ -29,6 +30,9 @@ const PlayerBattlePanel: React.FunctionComponent<
       <View style={styles.content}>
         {/* TODO: components for the battling player: modifiers, avatar, gender etc */}
         <Fighter player={mainPlayer!} />
+        <View style={{ flex: 1 }}>
+          <ChangePlayerMofifiers />
+        </View>
         <Fighter player={allyPlayer} isAlly />
       </View>
     </View>
