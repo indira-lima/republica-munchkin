@@ -1,4 +1,4 @@
-import { createContext, useContext, useState } from "react";
+import { createContext, useCallback, useContext, useMemo, useState } from "react";
 
 import { Player } from "../../core/definitions";
 import { Monster } from "../definitions";
@@ -20,8 +20,14 @@ interface BattleContextValue {
   allyPlayer?: Player;
   setAllyPlayer: (player?: Player) => void;
 
+  playerBattlePoints: number;
+  addPlayerBattlePoints: (points: number) => void;
+
   monsters: Monster[];
   setMonsters: (monsters: Monster[]) => void;
+
+  monsterBattlePoints: number;
+  addMonsterBattlePoints: (points: number) => void;
 }
 
 const BattleContext = createContext<BattleContextValue>(
@@ -37,9 +43,62 @@ export default BattleContext;
  */
 export const BattleProvider = ({ children }: any) => {
   const [battleState, setBattleState] = useState<BattleState>("void");
+
   const [mainPlayer, setMainPlayer] = useState<Player>();
   const [allyPlayer, setAllyPlayer] = useState<Player>();
+  const [playerModifiers, setPlayerModifiers] = useState<number>(0);
+
   const [monsters, setMonsters] = useState<Monster[]>([]);
+  const [monsterModifiers, setMonsterModifiers] = useState<number>(0);
+
+	/**
+		* Total battle points of the player group
+		*
+		* This includes the total level and items from the main and ally players
+		* plus the modifiers set for this battle
+	  */
+  const playerBattlePoints = useMemo(() => {
+    let total = playerModifiers;
+
+    if (mainPlayer) total += mainPlayer?.level + mainPlayer?.items;
+
+    if (allyPlayer) total += allyPlayer?.level + allyPlayer?.items;
+
+    return total;
+  }, [mainPlayer, allyPlayer, playerModifiers]);
+
+
+	/**
+		* Total battle points of the monster group
+		*
+		* This includes the total strength of each monster
+		* plus the modifiers set for this battle
+	  */
+  const monsterBattlePoints = useMemo(() => {
+    let total = monsterModifiers;
+
+    for (const monster of monsters) {
+      total += monster.strength;
+    }
+
+    return total;
+  }, [monsters, monsterModifiers]);
+
+	/**
+	 * Add (or subtract if negative) modifiers points for the player
+	 * group in this battle
+	 */
+	const addPlayerBattlePoints = useCallback((points: number) => {
+		setPlayerModifiers(current => current += points)	
+	}, [])
+
+	/**
+	 * Add (or subtract if negative) modifiers points for the monster
+	 * group in this battle
+	 */
+	const addMonsterBattlePoints = useCallback((points: number) => {
+		setMonsterModifiers(current => current += points)	
+	}, [])
 
   return (
     <BattleContext.Provider
@@ -52,6 +111,10 @@ export const BattleProvider = ({ children }: any) => {
         setAllyPlayer,
         monsters,
         setMonsters,
+				playerBattlePoints,
+				addPlayerBattlePoints,
+				monsterBattlePoints,
+				addMonsterBattlePoints,
       }}
     >
       {children}
@@ -60,11 +123,11 @@ export const BattleProvider = ({ children }: any) => {
 };
 
 export const useBattle = () => {
-	const battleContext = useContext(BattleContext);
+  const battleContext = useContext(BattleContext);
 
-	if (!battleContext.battleState) {
-		throw new Error('useBattle must be used within an BattleProvider');
-	}
+  if (!battleContext.battleState) {
+    throw new Error("useBattle must be used within an BattleProvider");
+  }
 
-	return battleContext;
-}
+  return battleContext;
+};
