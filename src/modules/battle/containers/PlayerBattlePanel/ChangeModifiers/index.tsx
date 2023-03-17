@@ -1,9 +1,13 @@
-import {MaterialCommunityIcons} from "@expo/vector-icons";
+import { MaterialCommunityIcons } from "@expo/vector-icons";
 import React, { useCallback } from "react";
-import { Text, TouchableOpacity, TouchableWithoutFeedback, View } from "react-native";
-import { useBattle } from "../../contexts/BattleContext";
-import { frameContentWidth } from "../PlayerBattlePanel/styles";
-import styles, {modifierSize} from "./styles";
+import {
+  Text,
+  TouchableOpacity,
+  View,
+} from "react-native";
+import { useBattle } from "../../../contexts/BattleContext";
+import { frameContentWidth } from "../styles";
+import styles, { modifierSize } from "./styles";
 
 interface ChangePlayerMofifiersProps {
   // TODO: Component props
@@ -23,7 +27,8 @@ const Y_OFFSET = frameContentWidth * 0.02;
 const ChangePlayerMofifiers: React.FunctionComponent<
   ChangePlayerMofifiersProps
 > = () => {
-  const { playerBattlePoints, addPlayerBattlePoints, resetPlayerModifiers } = useBattle();
+  const { playerBattlePoints, addPlayerBattlePoints, resetPlayerModifiers } =
+    useBattle();
 
   const handleModifier = useCallback((value: number) => {
     addPlayerBattlePoints(value);
@@ -35,7 +40,7 @@ const ChangePlayerMofifiers: React.FunctionComponent<
 
       return (
         <TouchableOpacity
-					activeOpacity={1}
+          activeOpacity={1}
           onPress={() => handleModifier(value)}
           style={[styles.modifierButton, transform]}
         >
@@ -58,9 +63,16 @@ const ChangePlayerMofifiers: React.FunctionComponent<
           {playerBattlePoints}
         </Text>
 
-				<TouchableOpacity onPress={resetPlayerModifiers} style={styles.resetButton}>
-					<MaterialCommunityIcons name="reload" color="#fff" size={modifierSize} />
-				</TouchableOpacity>
+        <TouchableOpacity
+          onPress={resetPlayerModifiers}
+          style={styles.resetButton}
+        >
+          <MaterialCommunityIcons
+            name="reload"
+            color="#fff"
+            size={modifierSize}
+          />
+        </TouchableOpacity>
       </View>
       <View style={styles.column}>
         {renderModifierButton("-1", -1, { x: -X_OFFSET, y: -Y_OFFSET })}

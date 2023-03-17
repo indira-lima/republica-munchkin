@@ -1,23 +1,24 @@
 import React, { Fragment, useCallback, useMemo, useState } from "react";
 import { Text, TouchableOpacity } from "react-native";
-import ThemedSVG from "../../../core/components/ThemedSVG";
 import Animated, {
   interpolate,
   SlideInRight,
   SlideOutRight,
 } from "react-native-reanimated";
+
 import Carousel from "react-native-reanimated-carousel";
-import AvatarImage from "../../../core/components/AvatarImage";
-import { Player } from "../../../core/definitions";
-import useGame from "../../../core/hooks/useGame";
-import useInterval from "../../../core/hooks/useInterval";
-import globalStyles from "../../../core/utils/styles";
-import { battleTheme } from "../../../core/utils/themes";
-import { useBattle } from "../../contexts/BattleContext";
-import { frameContentHeight, iconsSize } from "../PlayerBattlePanel/styles";
+import ThemedSVG from "../../../../core/components/ThemedSVG";
+import AvatarImage from "../../../../core/components/AvatarImage";
+import { Player } from "../../../../core/definitions";
+import useGame from "../../../../core/hooks/useGame";
+import useInterval from "../../../../core/hooks/useInterval";
+import globalStyles from "../../../../core/utils/styles";
+import { battleTheme } from "../../../../core/utils/themes";
+import { useBattle } from "../../../contexts/BattleContext";
+import { frameContentHeight, iconsSize } from "../styles";
 
 // @ts-ignore
-import CallAlly from "../../../../../assets/icons/CallAlly.svg";
+import CallAlly from "../../../../../../assets/icons/CallAlly.svg";
 
 interface ChooseAllyProps {
   // TODO: Component props

@@ -4,9 +4,9 @@ import { StyleSheet, View } from "react-native";
 // @ts-ignore
 import BattleContainerPlayer from "../../../../../assets/frames/BattleContainerPlayer.svg";
 import styles, { frameHeight, frameWidth } from "./styles";
-import Fighter from "../Fighter";
+import Fighter from "./Fighter";
 import { useBattle } from "../../contexts/BattleContext";
-import ChangePlayerMofifiers from "../ChangeModifiers/Player";
+import ChangePlayerMofifiers from "./ChangeModifiers";
 
 interface PlayerBattlePanelProps {}
 

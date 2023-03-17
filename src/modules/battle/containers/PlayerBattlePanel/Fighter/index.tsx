@@ -1,12 +1,12 @@
 import React, { useCallback, useState } from "react";
 import { StyleSheet, Text, TouchableWithoutFeedback, View } from "react-native";
 
-import AvatarImage from "../../../core/components/AvatarImage";
-import { Player } from "../../../core/definitions";
+import AvatarImage from "../../../../core/components/AvatarImage";
+import { Player } from "../../../../core/definitions";
 import ChooseAlly from "../ChooseAlly";
 
-import { GenderLabels } from "../../../core/utils/static";
-import globalStyles from "../../../core/utils/styles";
+import { GenderLabels } from "../../../../core/utils/static";
+import globalStyles from "../../../../core/utils/styles";
 
 import Animated, {
   FadeIn,
@@ -14,14 +14,14 @@ import Animated, {
   FlipInEasyY,
   FlipOutEasyY,
 } from "react-native-reanimated";
-import ThemedSVG from "../../../core/components/ThemedSVG";
-import useInterval from "../../../core/hooks/useInterval";
-import { battleTheme } from "../../../core/utils/themes";
-import { useBattle } from "../../contexts/BattleContext";
-import { iconsSize } from "../PlayerBattlePanel/styles";
+import ThemedSVG from "../../../../core/components/ThemedSVG";
+import useInterval from "../../../../core/hooks/useInterval";
+import { battleTheme } from "../../../../core/utils/themes";
+import { useBattle } from "../../../contexts/BattleContext";
+import { iconsSize } from "../styles";
 
 // @ts-ignore
-import CallAlly from "../../../../../assets/icons/CallAlly.svg";
+import CallAlly from "../../../../../../assets/icons/CallAlly.svg";
 
 interface AvatarProps {
   player?: Player;
@@ -65,7 +65,7 @@ const Fighter: React.FunctionComponent<AvatarProps> = ({ player, isAlly }) => {
    * removing the ally when ready
    */
   const handleChangeAlly = useCallback(() => {
-		if (!isAlly) return;
+    if (!isAlly) return;
 
     if (changeAllyState === "idle") {
       setChangeAllyState("change");
