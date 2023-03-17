@@ -11,7 +11,11 @@ import ChangePlayerMofifiers from "./ChangeModifiers";
 interface PlayerBattlePanelProps {}
 
 /**
- * TODO: PlayerBattlePanel documentation
+ * Battle panel for showing the main player and it's
+ * possible ally
+ * At the center of the panel there's the ChangeModifiers,
+ * which is used to sum/subtract battle points to the player
+ * group
  */
 const PlayerBattlePanel: React.FunctionComponent<
   PlayerBattlePanelProps
@@ -28,7 +32,6 @@ const PlayerBattlePanel: React.FunctionComponent<
         style={[StyleSheet.absoluteFillObject]}
       />
       <View style={styles.content}>
-        {/* TODO: components for the battling player: modifiers, avatar, gender etc */}
         <Fighter player={mainPlayer!} />
         <View style={{ flex: 1 }}>
           <ChangePlayerMofifiers />
