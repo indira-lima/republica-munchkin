@@ -1,22 +1,23 @@
 # TODO
 
-- [x] CRUD de players
+- [x] Tela de Crew Members
 	- [x] Listagem
 	- [x] Cadastro
 	- [x] Deleção
 	- [x] Edição
 
-- [ ] Tela de jogo
+- [x] Tela de jogo
 	- [x] Contexto de jogo (de 3 a 6 jogadores da tela de Players)
 	- [x] Design da seleção de players
-	- [ ] Contexto de seleção de players
+	- [x] Contexto de seleção de players
+	-	[ ] Levar para a tela de crew members se não houver nenhum
 
 - [ ] Batalha
 	- [x] Contexto
-	- [ ] Painel de Batalha para players
+	- [x] Painel de Batalha para players
 		- [x] Info sobre o player
 		- [x] Escolha do aliado
-		- [ ] Painel de contagem de pontos
+		- [x] Painel de contagem de pontos
 	- [ ] Painel de Batalha para monstros
 		- [ ] Avatars de monstros
 		- [ ] Modal de seleção de novos mosntros
