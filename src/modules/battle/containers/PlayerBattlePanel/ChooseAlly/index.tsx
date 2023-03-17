@@ -15,7 +15,7 @@ import useInterval from "../../../../core/hooks/useInterval";
 import globalStyles from "../../../../core/utils/styles";
 import { battleTheme } from "../../../../core/utils/themes";
 import { useBattle } from "../../../contexts/BattleContext";
-import { frameContentHeight, iconsSize } from "../styles";
+import { playerBattlePanelContentHeight, fightersSize } from "../styles";
 
 // @ts-ignore
 import CallAlly from "../../../../../../assets/icons/CallAlly.svg";
@@ -83,7 +83,7 @@ const ChooseAlly: React.FunctionComponent<ChooseAllyProps> = () => {
       const translateY = interpolate(
         value,
         [-1, 0, 1],
-        [-iconsSize, 0, iconsSize]
+        [-fightersSize, 0, fightersSize]
       );
       const right = interpolate(
         value,
@@ -105,8 +105,8 @@ const ChooseAlly: React.FunctionComponent<ChooseAllyProps> = () => {
           <TouchableOpacity onPress={handleStartChoosing}>
             <ThemedSVG
               SVGImage={CallAlly}
-              height={iconsSize}
-              width={iconsSize}
+              height={fightersSize}
+              width={fightersSize}
               theme={battleTheme}
             />
           </TouchableOpacity>
@@ -120,13 +120,13 @@ const ChooseAlly: React.FunctionComponent<ChooseAllyProps> = () => {
             vertical
             style={{
               justifyContent: "center",
-              width: iconsSize,
-              height: frameContentHeight * 0.9,
+              width: fightersSize,
+              height: playerBattlePanelContentHeight * 0.9,
               borderRadius: 24,
             }}
             pagingEnabled={false}
-            width={iconsSize}
-            height={iconsSize}
+            width={fightersSize}
+            height={fightersSize}
             customAnimation={animationStyle}
             data={availableAllies}
             onScrollEnd={() => setBackToIdleTimeout(BACK_TO_IDLE_TIMEOUT)}
@@ -136,8 +136,8 @@ const ChooseAlly: React.FunctionComponent<ChooseAllyProps> = () => {
               <TouchableOpacity onPress={() => handleSelectAlly(item)}>
                 <AvatarImage
                   key={index}
-                  width={iconsSize}
-                  height={iconsSize}
+                  width={fightersSize}
+                  height={fightersSize}
                   theme={item.memberInfo.theme}
                   index={item.memberInfo.avatar}
                 />

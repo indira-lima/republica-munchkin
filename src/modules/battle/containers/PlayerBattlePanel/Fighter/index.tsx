@@ -18,7 +18,7 @@ import ThemedSVG from "../../../../core/components/ThemedSVG";
 import useInterval from "../../../../core/hooks/useInterval";
 import { battleTheme } from "../../../../core/utils/themes";
 import { useBattle } from "../../../contexts/BattleContext";
-import { iconsSize } from "../styles";
+import { fightersSize } from "../styles";
 
 // @ts-ignore
 import CallAlly from "../../../../../../assets/icons/CallAlly.svg";
@@ -87,8 +87,8 @@ const Fighter: React.FunctionComponent<AvatarProps> = ({ player, isAlly }) => {
             {changeAllyState === "idle" && (
               <Animated.View entering={FlipInEasyY} exiting={FlipOutEasyY}>
                 <AvatarImage
-                  width={iconsSize}
-                  height={iconsSize}
+                  width={fightersSize}
+                  height={fightersSize}
                   index={player!.memberInfo.avatar}
                   theme={battleTheme}
                 />
@@ -104,8 +104,8 @@ const Fighter: React.FunctionComponent<AvatarProps> = ({ player, isAlly }) => {
                 <ThemedSVG
                   theme={battleTheme}
                   SVGImage={CallAlly}
-                  width={iconsSize}
-                  height={iconsSize}
+                  width={fightersSize}
+                  height={fightersSize}
                 />
                 <Text style={styles.infoText}>Remove Ally</Text>
               </Animated.View>

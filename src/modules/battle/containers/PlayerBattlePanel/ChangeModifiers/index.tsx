@@ -6,7 +6,7 @@ import {
   View,
 } from "react-native";
 import { useBattle } from "../../../contexts/BattleContext";
-import { frameContentWidth } from "../styles";
+import { playerBattlePanelContentWidth } from "../styles";
 import styles, { modifierSize } from "./styles";
 
 interface ChangePlayerMofifiersProps {
@@ -18,8 +18,8 @@ type TranslateModifier = {
   y: number;
 };
 
-const X_OFFSET = frameContentWidth * 0.05;
-const Y_OFFSET = frameContentWidth * 0.02;
+const X_OFFSET = playerBattlePanelContentWidth * 0.05;
+const Y_OFFSET = playerBattlePanelContentWidth * 0.02;
 
 /**
  * ChangePlayerMofifiers documentation

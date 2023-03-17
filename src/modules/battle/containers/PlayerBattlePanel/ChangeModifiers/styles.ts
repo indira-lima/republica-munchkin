@@ -1,8 +1,8 @@
 import { StyleSheet } from "react-native";
 import globalStyles from "../../../../core/utils/styles";
-import {frameContentWidth} from "../styles";
+import {playerBattlePanelContentWidth} from "../styles";
 
-export const modifierSize = frameContentWidth * 0.0645;
+export const modifierSize = playerBattlePanelContentWidth * 0.0645;
 
 const styles = StyleSheet.create({
 	container: {
@@ -12,10 +12,10 @@ const styles = StyleSheet.create({
 	},
 	column: {
 		justifyContent: "center",
-		width: frameContentWidth * 0.1,
+		width: playerBattlePanelContentWidth * 0.1,
 	},
 	mainConlumn: {
-		width: frameContentWidth * 0.25,
+		width: playerBattlePanelContentWidth * 0.25,
 		position: "relative",
 	},
 	resetButton: {
@@ -36,7 +36,7 @@ const styles = StyleSheet.create({
 	},
 	totalPoints: {
 		...globalStyles.text,
-		fontSize: frameContentWidth * 0.1,
+		fontSize: playerBattlePanelContentWidth * 0.1,
 		textAlign: 'center',
 	},
 });

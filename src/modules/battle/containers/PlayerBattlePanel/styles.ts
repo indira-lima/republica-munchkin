@@ -4,10 +4,10 @@ import { vw } from "../../../core/utils/styles";
 export const frameWidth = vw(90);
 export const frameHeight = frameWidth * 0.63;
 
-export const frameContentWidth = frameWidth * 0.96;
-export const frameContentHeight = frameHeight * 0.6;
+export const playerBattlePanelContentWidth = frameWidth * 0.96;
+export const playerBattlePanelContentHeight = frameHeight * 0.6;
 
-export const iconsSize = frameHeight * 0.36;
+export const fightersSize = frameHeight * 0.36;
 
 const styles = StyleSheet.create({
   container: {
@@ -18,8 +18,8 @@ const styles = StyleSheet.create({
     alignItems: "center",
   },
   content: {
-    width: frameContentWidth,
-    height: frameContentHeight,
+    width: playerBattlePanelContentWidth,
+    height: playerBattlePanelContentHeight,
     paddingHorizontal: 8,
     paddingVertical: 8,
     flexDirection: "row",
