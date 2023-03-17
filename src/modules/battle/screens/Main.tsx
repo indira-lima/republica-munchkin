@@ -4,6 +4,7 @@ import { View } from "react-native";
 import MainContainer from "../../core/containers/MainContainer";
 import { Player } from "../../core/definitions";
 import globalStyles from "../../core/utils/styles";
+import MonsterBattlePanel from "../containers/MonsterBattlePanel";
 import PlayerBattlePanel from "../containers/PlayerBattlePanel";
 import { BattleProvider, useBattle } from "../contexts/BattleContext";
 
@@ -37,6 +38,8 @@ const Battle: React.FunctionComponent = () => {
     <MainContainer>
       <View style={[globalStyles.containerBody]}>
         <PlayerBattlePanel />
+        <View style={{ flex: 1 }} />
+        <MonsterBattlePanel monster={{ strength: 20 }} />
       </View>
     </MainContainer>
   );
