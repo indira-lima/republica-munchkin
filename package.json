@@ -1,7 +1,7 @@
 {
   "name": "republica-munchkin",
   "version": "1.2.0",
-	"main": "./index.ts",
+  "main": "./index.js",
   "scripts": {
     "start": "expo start --dev-client",
     "android": "npx expo run:android",
