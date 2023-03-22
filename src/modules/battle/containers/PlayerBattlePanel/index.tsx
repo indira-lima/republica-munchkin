@@ -1,5 +1,5 @@
 import React from "react";
-import { StyleSheet, View } from "react-native";
+import { StyleSheet, Text, View } from "react-native";
 
 // @ts-ignore
 import BattleContainerPlayer from "../../../../../assets/frames/BattleContainerPlayer.svg";
@@ -32,11 +32,19 @@ const PlayerBattlePanel: React.FunctionComponent<
         style={[StyleSheet.absoluteFillObject]}
       />
       <View style={styles.content}>
-        <Fighter player={mainPlayer!} />
-        <View style={{ flex: 1 }}>
-          <ChangePlayerMofifiers />
+        <View style={styles.section}>
+          <Text style={styles.playerName}>
+						{mainPlayer?.memberInfo.name}
+						{allyPlayer &&  ` & ${allyPlayer?.memberInfo.name}`}
+					</Text>
         </View>
-        <Fighter player={allyPlayer} isAlly />
+        <View style={styles.mainSection}>
+          <Fighter player={mainPlayer!} />
+          <View style={{ flex: 1 }}>
+            <ChangePlayerMofifiers />
+          </View>
+          <Fighter player={allyPlayer} isAlly />
+        </View>
       </View>
     </View>
   );

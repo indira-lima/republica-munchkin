@@ -1,5 +1,5 @@
 import { StyleSheet } from "react-native";
-import { vw } from "../../../core/utils/styles";
+import globalStyles, { vw } from "../../../core/utils/styles";
 
 export const frameWidth = vw(90);
 export const frameHeight = frameWidth * 0.63;
@@ -7,7 +7,7 @@ export const frameHeight = frameWidth * 0.63;
 export const playerBattlePanelContentWidth = frameWidth * 0.96;
 export const playerBattlePanelContentHeight = frameHeight * 0.6;
 
-export const fightersSize = frameHeight * 0.36;
+export const fightersSize = frameHeight * 0.30;
 
 const styles = StyleSheet.create({
   container: {
@@ -21,12 +21,25 @@ const styles = StyleSheet.create({
     width: playerBattlePanelContentWidth,
     height: playerBattlePanelContentHeight,
     paddingHorizontal: 8,
-    paddingVertical: 8,
+    paddingVertical: 0,
+    overflow: "hidden",
+  },
+	section: {
     flexDirection: "row",
     justifyContent: "space-evenly",
     alignItems: "center",
-    overflow: "hidden",
-  },
+	},
+	playerName: {
+		...globalStyles.text,
+		marginTop: 2,
+	},
+	mainSection: {
+    flexDirection: "row",
+    justifyContent: "space-evenly",
+    alignItems: "center",
+		flex: 1,
+		paddingVertical: 4,
+	},
 });
 
 export default styles;
