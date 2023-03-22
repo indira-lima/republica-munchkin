@@ -1,0 +1,88 @@
+import { MaterialCommunityIcons } from "@expo/vector-icons";
+import React, { useCallback } from "react";
+import { Text, TouchableOpacity, View } from "react-native";
+import DoubleTapButton from "../../../../core/containers/DoubleTapButton";
+import { useBattle } from "../../../contexts/BattleContext";
+import { monsterBattlePanelContentWidth } from "../styles";
+import styles, { modifierSize, mainColumnContentSize } from "./styles";
+
+interface ChangeMonsterMofifiersProps {}
+
+type TranslateModifier = {
+  x: number;
+  y: number;
+};
+
+const X_OFFSET = monsterBattlePanelContentWidth * 0.05;
+const Y_OFFSET = monsterBattlePanelContentWidth * 0.02;
+
+/**
+ * ChangePlayerMofifiers documentation
+ */
+const ChangeMonsterMofifiers: React.FunctionComponent<
+  ChangeMonsterMofifiersProps
+> = () => {
+  const { monsterBattlePoints, addMonsterBattlePoints, resetMonsterModifiers } =
+    useBattle();
+
+  const handleModifier = useCallback((value: number) => {
+    addMonsterBattlePoints(value);
+  }, []);
+
+  const renderModifierButton = useCallback(
+    (label: string, value: number, { x, y }: TranslateModifier) => {
+      const transform = { transform: [{ translateX: x }, { translateY: y }] };
+
+      return (
+        <TouchableOpacity
+          activeOpacity={1}
+          onPress={() => handleModifier(value)}
+          style={[styles.modifierButton, transform]}
+        >
+          <Text style={styles.modifierText}>{label}</Text>
+        </TouchableOpacity>
+      );
+    },
+    []
+  );
+
+  return (
+    <View style={styles.container}>
+      <View style={styles.column}>
+        {renderModifierButton("+1", 1, { x: X_OFFSET, y: -Y_OFFSET })}
+        {renderModifierButton("+3", 3, { x: 0, y: 0 })}
+        {renderModifierButton("+5", 5, { x: X_OFFSET, y: Y_OFFSET })}
+      </View>
+      <View style={[styles.column, styles.mainConlumn]}>
+        {renderModifierButton("÷2", -monsterBattlePoints/2, { x: 0, y: -Y_OFFSET*2 })}
+        <DoubleTapButton
+          idleChildren={
+            <View style={styles.mainColumnContent}>
+              <Text style={styles.totalPoints} numberOfLines={1}>
+                {monsterBattlePoints}
+              </Text>
+            </View>
+          }
+          confirmChildren={
+            <View style={styles.mainColumnContent}>
+              <MaterialCommunityIcons
+                name="reload"
+                color="#fff"
+                size={mainColumnContentSize}
+              />
+            </View>
+          }
+          onConfirm={resetMonsterModifiers}
+        />
+        {renderModifierButton("x2", monsterBattlePoints, { x: 0, y: Y_OFFSET*2 })}
+      </View>
+      <View style={styles.column}>
+        {renderModifierButton("-1", -1, { x: -X_OFFSET, y: -Y_OFFSET })}
+        {renderModifierButton("-3", -3, { x: 0, y: 0 })}
+        {renderModifierButton("-5", -5, { x: -X_OFFSET, y: Y_OFFSET })}
+      </View>
+    </View>
+  );
+};
+
+export default ChangeMonsterMofifiers;
