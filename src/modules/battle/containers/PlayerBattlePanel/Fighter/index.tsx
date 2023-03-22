@@ -6,7 +6,7 @@ import { Player } from "../../../../core/definitions";
 import ChooseAlly from "../ChooseAlly";
 
 import { GenderLabels } from "../../../../core/utils/static";
-import globalStyles from "../../../../core/utils/styles";
+import globalStyles, {fonts} from "../../../../core/utils/styles";
 
 import Animated, {
   FadeIn,
@@ -124,6 +124,7 @@ const styles = StyleSheet.create({
   },
   infoText: {
     ...globalStyles.text,
+		fontSize: fonts.small,
   },
 });
 

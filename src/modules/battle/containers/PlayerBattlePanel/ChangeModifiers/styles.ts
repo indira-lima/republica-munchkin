@@ -2,7 +2,7 @@ import { StyleSheet } from "react-native";
 import globalStyles from "../../../../core/utils/styles";
 import {playerBattlePanelContentWidth} from "../styles";
 
-export const modifierSize = playerBattlePanelContentWidth * 0.0645;
+export const modifierSize = playerBattlePanelContentWidth * 0.06;
 
 const styles = StyleSheet.create({
 	container: {
