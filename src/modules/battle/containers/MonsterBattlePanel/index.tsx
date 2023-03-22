@@ -13,6 +13,7 @@ import CallMonster from "./CallMonster";
 
 interface MonsterBattlePanelProps {
   monster: IMonster;
+  index: number;
 }
 
 /**
@@ -20,6 +21,7 @@ interface MonsterBattlePanelProps {
  */
 const MonsterBattlePanel: React.FunctionComponent<MonsterBattlePanelProps> = ({
   monster,
+  index,
 }) => {
   const { battleState } = useBattle();
 

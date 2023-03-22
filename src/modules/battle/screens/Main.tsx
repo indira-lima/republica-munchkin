@@ -43,7 +43,7 @@ const Battle: React.FunctionComponent = () => {
 					horizontal
 					style={{ flexGrow: 0 }}
 					data={monsters}
-					renderItem={({ item, index }) => <MonsterBattlePanel monster={item} />}
+					renderItem={({ item, index }) => <MonsterBattlePanel monster={item} index={index} />}
 				/>
       </View>
     </MainContainer>
