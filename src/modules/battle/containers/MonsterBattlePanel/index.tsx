@@ -10,6 +10,7 @@ import BattleContainerMonster from "../../../../../assets/frames/BattleContainer
 import { Monster as IMonster } from "../../definitions";
 import MonsterInfo from "./MonsterInfo";
 import CallMonster from "./CallMonster";
+import DeleteMonster from "./DeleteMonster";
 
 interface MonsterBattlePanelProps {
   monster: IMonster;
@@ -37,7 +38,7 @@ const MonsterBattlePanel: React.FunctionComponent<MonsterBattlePanelProps> = ({
       <View style={styles.content}>
         <MonsterInfo info={monster} />
         <View style={{ flex: 1 }}></View>
-        <CallMonster/>
+        {index === 0 ? <CallMonster /> : <DeleteMonster index={index} />}
       </View>
     </View>
   );
