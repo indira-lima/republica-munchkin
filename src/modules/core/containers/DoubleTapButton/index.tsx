@@ -7,6 +7,7 @@ interface DoubleTapButtonProps {
   idleChildren: JSX.Element;
   confirmChildren: JSX.Element;
   onConfirm: () => void;
+	onTimeout?: () => void;
   timeout?: number;
 }
 
@@ -21,6 +22,7 @@ const DoubleTapButton: React.FunctionComponent<DoubleTapButtonProps> = ({
   idleChildren,
   confirmChildren,
   onConfirm,
+	onTimeout,
   timeout,
 }) => {
   const [tapCount, setTapCount] = useState<number>(0);
@@ -35,6 +37,7 @@ const DoubleTapButton: React.FunctionComponent<DoubleTapButtonProps> = ({
    * To activate the interval, set a timeout in ms
    */
   useInterval(() => {
+		typeof onTimeout === "function" && onTimeout();
     setTapCount(0);
     setResetCountTimeout(null);
   }, resetCountTimeout);
