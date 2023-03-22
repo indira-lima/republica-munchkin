@@ -1,6 +1,6 @@
 import { useRoute } from "@react-navigation/native";
 import React, { useEffect } from "react";
-import { View } from "react-native";
+import { FlatList, View } from "react-native";
 import MainContainer from "../../core/containers/MainContainer";
 import { Player } from "../../core/definitions";
 import globalStyles from "../../core/utils/styles";
@@ -27,7 +27,7 @@ const Battle: React.FunctionComponent = () => {
   const route = useRoute();
 
   const { player } = route.params as { player: Player };
-  const { setMainPlayer, setBattleState } = useBattle();
+  const { setMainPlayer, setBattleState, monsters } = useBattle();
 
   useEffect(() => {
     setMainPlayer(player);
@@ -39,7 +39,12 @@ const Battle: React.FunctionComponent = () => {
       <View style={[globalStyles.containerBody]}>
         <PlayerBattlePanel />
         <View style={{ flex: 1 }} />
-        <MonsterBattlePanel monster={{ strength: 20 }} />
+				<FlatList
+					horizontal
+					style={{ flexGrow: 0 }}
+					data={monsters}
+					renderItem={({ item, index }) => <MonsterBattlePanel monster={item} />}
+				/>
       </View>
     </MainContainer>
   );
