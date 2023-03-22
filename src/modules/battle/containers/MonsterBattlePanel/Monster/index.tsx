@@ -6,6 +6,7 @@ import { Monster as IMonster } from "../../../definitions";
 
 import MonsterAvatar from "../../../components/MonsterAvatar";
 import globalStyles, {fonts} from "../../../../core/utils/styles";
+import {battleTheme} from "../../../../core/utils/themes";
 
 interface MonsterProps {
   info: IMonster;
@@ -21,6 +22,7 @@ const Monster: React.FunctionComponent<MonsterProps> = ({ info }) => {
     <View>
 			<Text style={styles.infoText}>{info.levels} level{info.levels === 1 ? '' : 's'}</Text>
       <MonsterAvatar
+				theme={battleTheme}
         height={monstersSize}
         width={monstersSize}
         index={info.avatar}
