@@ -57,6 +57,12 @@ export const globalStyles = StyleSheet.create({
     fontWeight: "normal",
     textAlign: "center",
   },
+	textSmall: {
+    ...defaultText,
+    fontWeight: "normal",
+    textAlign: "center",
+		fontSize: fonts.small,
+	},
   title: {
     ...defaultText,
     fontSize: fonts.title,
