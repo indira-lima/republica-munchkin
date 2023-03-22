@@ -25,6 +25,7 @@ interface BattleContextValue {
 
   monsters: Monster[];
   addMonster: () => void;
+  deleteMonster: (index: number) => void;
 
   monsterBattlePoints: number;
   addMonsterBattlePoints: (points: number) => void;
@@ -111,6 +112,15 @@ export const BattleProvider = ({ children }: any) => {
 		setMonsterModifiers(0)	
 	}, [])
 
+	const deleteMonster = useCallback((index: number) => {
+		setMonsters(list => {
+			const newList = [...list];
+			newList.splice(index, 1);
+			return newList;
+		})
+	}, [])
+
+
 	const addMonster = useCallback(() => {
 		const monster: Monster = {
 			strength: 1,
@@ -137,6 +147,7 @@ export const BattleProvider = ({ children }: any) => {
         setAllyPlayer,
         monsters,
         addMonster,
+				deleteMonster,
 				playerBattlePoints,
 				addPlayerBattlePoints,
 				monsterBattlePoints,
