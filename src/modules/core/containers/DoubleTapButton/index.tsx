@@ -12,7 +12,7 @@ interface DoubleTapButtonProps {
 }
 
 // default time to wait to go back to idle state after the first tap
-const BACK_TO_IDLE_TIMEOUT = 2000;
+const DEFAULT_TIMEOUT = 2000;
 
 /**
  * Container for setting a button that needs a second tap to activate, showing
@@ -29,6 +29,8 @@ const DoubleTapButton: React.FunctionComponent<DoubleTapButtonProps> = ({
   const [resetCountTimeout, setResetCountTimeout] = useState<number | null>(
     null
   );
+
+	const _timeout = timeout !== undefined ? timeout : DEFAULT_TIMEOUT;
 
   /**
    * Set up a react interval that resets the tap count
@@ -50,13 +52,14 @@ const DoubleTapButton: React.FunctionComponent<DoubleTapButtonProps> = ({
   const handleTap = useCallback(() => {
 		if (tapCount === 0) {
 			setTapCount(1);
-			setResetCountTimeout(timeout || BACK_TO_IDLE_TIMEOUT);
+			setResetCountTimeout(_timeout);
 			return;
 		}
 
+		setResetCountTimeout(null);
 		setTapCount(0);
 		onConfirm();
-	}, [tapCount, timeout]);
+	}, [tapCount]);
 
   return (
     <TouchableWithoutFeedback onPress={handleTap}>
