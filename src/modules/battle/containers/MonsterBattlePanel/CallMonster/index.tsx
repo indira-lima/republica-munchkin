@@ -31,4 +31,4 @@ const CallMonster: React.FunctionComponent<CallMonsterProps> = () => {
   );
 };
 
-export default CallMonster;
+export default React.memo(CallMonster);
