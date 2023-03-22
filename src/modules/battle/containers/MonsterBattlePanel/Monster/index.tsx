@@ -1,10 +1,11 @@
 import React from "react";
-import { View } from "react-native";
+import { StyleSheet, Text, View } from "react-native";
 
 import { monstersSize } from "../styles";
 import { Monster as IMonster } from "../../../definitions";
 
 import MonsterAvatar from "../../../components/MonsterAvatar";
+import globalStyles, {fonts} from "../../../../core/utils/styles";
 
 interface MonsterProps {
   info: IMonster;
@@ -18,13 +19,26 @@ interface MonsterProps {
 const Monster: React.FunctionComponent<MonsterProps> = ({ info }) => {
   return (
     <View>
+			<Text style={styles.infoText}>{info.levels} level{info.levels === 1 ? '' : 's'}</Text>
       <MonsterAvatar
         height={monstersSize}
         width={monstersSize}
         index={info.avatar}
       />
+			<Text style={styles.infoText}>{info.treasures} treasure{info.treasures === 1 ? '' : 's'}</Text>
     </View>
   );
 };
+
+
+const styles = StyleSheet.create({
+	container: {
+		justifyContent: 'center',
+	},
+	infoText: {
+		...globalStyles.text,
+		fontSize: fonts.small,
+	}
+});
 
 export default Monster;
