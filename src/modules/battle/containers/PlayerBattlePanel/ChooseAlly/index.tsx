@@ -110,7 +110,7 @@ const ChooseAlly: React.FunctionComponent<ChooseAllyProps> = () => {
               theme={battleTheme}
             />
           </TouchableOpacity>
-          <Text style={globalStyles.text}>Help!</Text>
+          <Text style={globalStyles.textSmall}>Help!</Text>
         </Animated.View>
       )}
       {isChoosing && (

@@ -1,7 +1,7 @@
 import React from "react";
-import { StyleSheet, Text, TouchableOpacity, View } from "react-native";
+import { Text, TouchableOpacity } from "react-native";
 import ThemedSVG from "../../../../core/components/ThemedSVG";
-import globalStyles, { fonts } from "../../../../core/utils/styles";
+import globalStyles from "../../../../core/utils/styles";
 import { useBattle } from "../../../contexts/BattleContext";
 import { monstersSize } from "../styles";
 
@@ -19,23 +19,16 @@ const CallMonster: React.FunctionComponent<CallMonsterProps> = () => {
 
   return (
     <TouchableOpacity onPress={() => addMonster()}>
-      <Text style={styles.text}>{" "}</Text>
+      <Text style={globalStyles.textSmall}>{" "}</Text>
       <ThemedSVG
         height={monstersSize}
         width={monstersSize}
         SVGImage={CallMonsterSVG}
         theme={battleTheme}
       />
-      <Text style={styles.text}>Help!</Text>
+      <Text style={globalStyles.textSmall}>Help!</Text>
     </TouchableOpacity>
   );
 };
-
-const styles = StyleSheet.create({
-  text: {
-    ...globalStyles.text,
-    fontSize: fonts.small,
-  },
-});
 
 export default CallMonster;
