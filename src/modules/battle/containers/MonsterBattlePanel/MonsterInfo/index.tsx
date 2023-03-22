@@ -17,7 +17,7 @@ interface MonsterProps {
  * opens a configuration modal for setting it's info, like levels
  * and treasures earned after winning
  */
-const Monster: React.FunctionComponent<MonsterProps> = ({ info }) => {
+const MonsterInfo: React.FunctionComponent<MonsterProps> = ({ info }) => {
   return (
     <View>
 			<Text style={styles.infoText}>{info.levels} level{info.levels === 1 ? '' : 's'}</Text>
@@ -43,4 +43,4 @@ const styles = StyleSheet.create({
 	}
 });
 
-export default Monster;
+export default MonsterInfo;

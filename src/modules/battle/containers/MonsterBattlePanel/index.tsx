@@ -7,7 +7,7 @@ import { useBattle } from "../../contexts/BattleContext";
 // @ts-ignore
 import BattleContainerMonster from "../../../../../assets/frames/BattleContainerMonster.svg";
 import { Monster as IMonster } from "../../definitions";
-import Monster from "./Monster";
+import MonsterInfo from "./MonsterInfo";
 
 interface MonsterBattlePanelProps {
   monster: IMonster;
@@ -31,7 +31,7 @@ const MonsterBattlePanel: React.FunctionComponent<
         style={[StyleSheet.absoluteFillObject]}
       />
       <View style={styles.content}>
-        <Monster info={monster} />
+        <MonsterInfo info={monster} />
         <View style={{ flex: 1 }}></View>
       </View>
     </View>
