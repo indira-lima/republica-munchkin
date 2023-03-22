@@ -6,8 +6,10 @@ import { useBattle } from "../../contexts/BattleContext";
 
 // @ts-ignore
 import BattleContainerMonster from "../../../../../assets/frames/BattleContainerMonster.svg";
+
 import { Monster as IMonster } from "../../definitions";
 import MonsterInfo from "./MonsterInfo";
+import CallMonster from "./CallMonster";
 
 interface MonsterBattlePanelProps {
   monster: IMonster;
@@ -16,9 +18,9 @@ interface MonsterBattlePanelProps {
 /**
  * Battle panel for showing a monster's info
  */
-const MonsterBattlePanel: React.FunctionComponent<
-  MonsterBattlePanelProps
-> = ({ monster }) => {
+const MonsterBattlePanel: React.FunctionComponent<MonsterBattlePanelProps> = ({
+  monster,
+}) => {
   const { battleState } = useBattle();
 
   if (battleState === "void") return null;
@@ -33,6 +35,7 @@ const MonsterBattlePanel: React.FunctionComponent<
       <View style={styles.content}>
         <MonsterInfo info={monster} />
         <View style={{ flex: 1 }}></View>
+        <CallMonster/>
       </View>
     </View>
   );
