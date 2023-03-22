@@ -24,7 +24,7 @@ interface BattleContextValue {
   addPlayerBattlePoints: (points: number) => void;
 
   monsters: Monster[];
-  addMonster: (monster: Monster) => void;
+  addMonster: () => void;
 
   monsterBattlePoints: number;
   addMonsterBattlePoints: (points: number) => void;
