@@ -7,7 +7,7 @@ export const frameHeight = frameWidth * 0.63;
 export const monsterBattlePanelContentWidth = frameWidth * 0.96;
 export const monsterBattlePanelContentHeight = frameHeight * 0.6;
 
-export const monstersSize = frameHeight * 0.36;
+export const monstersSize = frameHeight * 0.30;
 
 const styles = StyleSheet.create({
   container: {

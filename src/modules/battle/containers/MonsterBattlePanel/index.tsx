@@ -9,10 +9,11 @@ import { useBattle } from "../../contexts/BattleContext";
 
 // @ts-ignore
 import BattleContainerMonster from "../../../../../assets/frames/BattleContainerMonster.svg";
-import {Monster} from "../../definitions";
+import { Monster as IMonster } from "../../definitions";
+import Monster from "./Monster";
 
 interface MonsterBattlePanelProps {
-	monster: Monster;
+  monster: IMonster;
 }
 
 /**
@@ -33,12 +34,11 @@ const MonsterBattlePanel: React.FunctionComponent<
         style={[StyleSheet.absoluteFillObject]}
       />
       <View style={styles.content}>
-        <View style={{ flex: 1 }}>
-        </View>
+        <Monster info={{ levels: 1, strength: 1, treasures: 1, avatar: 8 }} />
+        <View style={{ flex: 1 }}></View>
       </View>
     </View>
   );
 };
 
 export default MonsterBattlePanel;
-
