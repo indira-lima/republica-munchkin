@@ -1,4 +1,4 @@
-import { createContext, useCallback, useContext, useMemo, useState } from "react";
+import { createContext, useCallback, useContext, useEffect, useMemo, useState } from "react";
 
 import { Player } from "../../core/definitions";
 import { Monster } from "../definitions";
@@ -121,6 +121,10 @@ export const BattleProvider = ({ children }: any) => {
 
 		setMonsters(list => [...list, monster]);
 	}, [])
+
+	useEffect(() => {
+		addMonster();
+	}, []);
 
   return (
     <BattleContext.Provider
