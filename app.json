@@ -16,7 +16,9 @@
       "fallbackToCacheTimeout": 0,
       "url": "https://u.expo.dev/12b9b723-34ad-43e0-945c-150e8be851f1"
     },
-    "assetBundlePatterns": ["**/*"],
+    "assetBundlePatterns": [
+      "**/*"
+    ],
     "ios": {
       "supportsTablet": true,
       "bundleIdentifier": "com.munchkin.republica"
@@ -36,6 +38,9 @@
         "projectId": "12b9b723-34ad-43e0-945c-150e8be851f1"
       }
     },
-    "sdkVersion": "48.0.0"
+    "sdkVersion": "48.0.0",
+    "runtimeVersion": {
+      "policy": "sdkVersion"
+    }
   }
 }
