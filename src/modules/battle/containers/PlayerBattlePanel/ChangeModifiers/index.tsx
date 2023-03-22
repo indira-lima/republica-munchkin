@@ -1,17 +1,12 @@
 import { MaterialCommunityIcons } from "@expo/vector-icons";
 import React, { useCallback } from "react";
-import {
-  Text,
-  TouchableOpacity,
-  View,
-} from "react-native";
+import { Text, TouchableOpacity, View } from "react-native";
+import DoubleTapButton from "../../../../core/containers/DoubleTapButton";
 import { useBattle } from "../../../contexts/BattleContext";
 import { playerBattlePanelContentWidth } from "../styles";
-import styles, { modifierSize } from "./styles";
+import styles, { modifierSize, mainColumnContentSize } from "./styles";
 
-interface ChangePlayerMofifiersProps {
-  // TODO: Component props
-}
+interface ChangePlayerMofifiersProps {}
 
 type TranslateModifier = {
   x: number;
@@ -59,20 +54,25 @@ const ChangePlayerMofifiers: React.FunctionComponent<
         {renderModifierButton("+5", 5, { x: X_OFFSET, y: Y_OFFSET })}
       </View>
       <View style={[styles.column, styles.mainConlumn]}>
-        <Text style={styles.totalPoints} numberOfLines={1}>
-          {playerBattlePoints}
-        </Text>
-
-        <TouchableOpacity
-          onPress={resetPlayerModifiers}
-          style={styles.resetButton}
-        >
-          <MaterialCommunityIcons
-            name="reload"
-            color="#fff"
-            size={modifierSize}
-          />
-        </TouchableOpacity>
+        <DoubleTapButton
+          idleChildren={
+            <View style={styles.mainColumnContent}>
+              <Text style={styles.totalPoints} numberOfLines={1}>
+                {playerBattlePoints}
+              </Text>
+            </View>
+          }
+          confirmChildren={
+            <View style={styles.mainColumnContent}>
+              <MaterialCommunityIcons
+                name="reload"
+                color="#fff"
+                size={mainColumnContentSize}
+              />
+            </View>
+          }
+          onConfirm={resetPlayerModifiers}
+        />
       </View>
       <View style={styles.column}>
         {renderModifierButton("-1", -1, { x: -X_OFFSET, y: -Y_OFFSET })}

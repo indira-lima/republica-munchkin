@@ -3,6 +3,7 @@ import globalStyles from "../../../../core/utils/styles";
 import {playerBattlePanelContentWidth} from "../styles";
 
 export const modifierSize = playerBattlePanelContentWidth * 0.06;
+export const mainColumnContentSize = playerBattlePanelContentWidth * 0.1;
 
 const styles = StyleSheet.create({
 	container: {
@@ -18,13 +19,10 @@ const styles = StyleSheet.create({
 		width: playerBattlePanelContentWidth * 0.25,
 		position: "relative",
 	},
-	resetButton: {
-		position: "absolute",
-		bottom: -modifierSize/4,
-		left: "50%",
-		transform: [
-			{ translateX: -modifierSize/2 }
-		]
+	mainColumnContent: {
+		alignItems: 'center',
+		justifyContent: 'flex-start',
+		height: mainColumnContentSize,
 	},
 	modifierButton: {
 		marginVertical: 2,
@@ -36,8 +34,9 @@ const styles = StyleSheet.create({
 	},
 	totalPoints: {
 		...globalStyles.text,
-		fontSize: playerBattlePanelContentWidth * 0.1,
+		fontSize: mainColumnContentSize,
 		textAlign: 'center',
+		textAlignVertical: 'center',
 	},
 });
 
