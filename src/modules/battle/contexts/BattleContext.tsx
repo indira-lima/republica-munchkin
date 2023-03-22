@@ -24,7 +24,7 @@ interface BattleContextValue {
   addPlayerBattlePoints: (points: number) => void;
 
   monsters: Monster[];
-  setMonsters: (monsters: Monster[]) => void;
+  addMonster: (monster: Monster) => void;
 
   monsterBattlePoints: number;
   addMonsterBattlePoints: (points: number) => void;
@@ -111,6 +111,17 @@ export const BattleProvider = ({ children }: any) => {
 		setMonsterModifiers(0)	
 	}, [])
 
+	const addMonster = useCallback(() => {
+		const monster: Monster = {
+			strength: 1,
+			levels: 1,
+			treasures: 1,
+			avatar: Math.floor(Math.random() * 9), // gets one of the 9 available avatars
+		}
+
+		setMonsters(list => [...list, monster]);
+	}, [])
+
   return (
     <BattleContext.Provider
       value={{
@@ -121,7 +132,7 @@ export const BattleProvider = ({ children }: any) => {
         allyPlayer,
         setAllyPlayer,
         monsters,
-        setMonsters,
+        addMonster,
 				playerBattlePoints,
 				addPlayerBattlePoints,
 				monsterBattlePoints,
